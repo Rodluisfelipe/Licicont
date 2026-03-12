@@ -1,0 +1,15 @@
+{
+  "name": "licicont",
+  "version": "1.0.0",
+  "description": "LICICONT — Plataforma Black Box de Bróker de Licitaciones",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n client,server -c cyan,yellow \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
+    "build": "npm run build --prefix client && npm run build --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "dev:server": "npm run dev --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

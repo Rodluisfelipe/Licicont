@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════════
+   LICICONT — Modern Clean Theme (HandelBay-inspired)
+   Poppins · Dorado · Azul Marino · Fondo claro
+   ══════════════════════════════════════════════════════ */
+
+@theme {
+  --color-primary: #0A192F;
+  --color-primary-light: #112240;
+  --color-gold: #B89146;
+  --color-gold-light: #D4A853;
+  --color-gold-dark: #96763A;
+  --color-bg: #FFFFFF;
+  --color-bg-alt: #F7F8FA;
+  --color-bg-dark: #0A192F;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F7F8FA;
+  --color-border: #E5E7EB;
+  --color-text: #1F2937;
+  --color-text-secondary: #6B7280;
+  --color-text-light: #9CA3AF;
+  --color-text-inverse: #FFFFFF;
+
+  --font-sans: "Poppins", "Inter", "system-ui", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  --animate-fade-in: fade-in 0.6s ease-out forwards;
+  --animate-slide-up: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-ticker: ticker 35s linear infinite;
+  --animate-border-beam: border-beam 6s linear infinite;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+}
+
+/* ── Fonts ── */
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/poppins/v22/pxiEyp8kv8JHgFVrJJfecg.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2") format("woff2");
+}
+
+/* ── Keyframes ── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes border-beam {
+  0% { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
+/* ── Micro-interactions ── */
+.magnetic-btn {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+}
+
+.magnetic-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 30px rgba(184, 145, 70, 0.3);
+}
+
+.magnetic-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ── Base ── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #B89146 #F0F0F0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+::selection {
+  background-color: rgba(184, 145, 70, 0.2);
+  color: #0A192F;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F0F0F0; }
+::-webkit-scrollbar-thumb { background: #B89146; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #96763A; }
