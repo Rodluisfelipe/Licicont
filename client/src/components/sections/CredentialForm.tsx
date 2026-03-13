@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Send, Shield, CheckCircle, ArrowRight, ArrowLeft } from 'lucide-react';
-import { submitInvitation } from '@/services/invitation.service';
-import confetti from 'canvas-confetti';
-import type { InvitationRequest } from '@/types';
+import { X, MessageCircle, Shield, ArrowRight, ArrowLeft } from 'lucide-react';
 
 interface CredentialFormProps {
   isOpen: boolean;
@@ -22,7 +19,15 @@ const SECTORS = [
   'Otro',
 ];
 
-const initialFormState: InvitationRequest = {
+interface FormData {
+  fullName: string;
+  email: string;
+  company: string;
+  nit: string;
+  sector: string;
+}
+
+const initialFormState: FormData = {
   fullName: '',
   email: '',
   company: '',
@@ -36,30 +41,33 @@ const inputClass =
 const STEPS = [
   { title: '¿En qué sector licita?', subtitle: 'Seleccione su sector principal' },
   { title: '¿Cuál es su empresa?', subtitle: 'Datos de la compañía' },
-  { title: '¿Quién solicita el acceso?', subtitle: 'Datos de contacto' },
+  { title: '¿Con quién hablamos?', subtitle: 'Sus datos de contacto' },
 ];
 
+const WA_PHONE = '573023805967';
+
+function buildWhatsAppUrl(form: FormData): string {
+  const msg = [
+    `Hola Andrés, me interesa una asesoría en licitaciones públicas.`,
+    ``,
+    `*Mis datos:*`,
+    `• Nombre: ${form.fullName}`,
+    `• Email: ${form.email}`,
+    `• Empresa: ${form.company}`,
+    `• NIT: ${form.nit}`,
+    `• Sector: ${form.sector}`,
+    ``,
+    `¿Podemos agendar una consulta?`,
+  ].join('\n');
+  return `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
+}
+
 export default function CredentialForm({ isOpen, onClose }: CredentialFormProps) {
-  const [form, setForm] = useState<InvitationRequest>(initialFormState);
+  const [form, setForm] = useState<FormData>(initialFormState);
   const [step, setStep] = useState(0);
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [errorMsg, setErrorMsg] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const fireConfetti = () => {
-    const defaults = {
-      particleCount: 25,
-      spread: 55,
-      gravity: 1.2,
-      scalar: 0.8,
-      colors: ['#B89146', '#D4A853', '#FAF9F6'],
-      disableForReducedMotion: true,
-    };
-    confetti({ ...defaults, origin: { x: 0.4, y: 0.6 } });
-    confetti({ ...defaults, origin: { x: 0.6, y: 0.6 } });
   };
 
   const canAdvance = () => {
@@ -68,17 +76,9 @@ export default function CredentialForm({ isOpen, onClose }: CredentialFormProps)
     return form.fullName !== '' && form.email !== '';
   };
 
-  const handleSubmit = async () => {
-    setStatus('loading');
-    setErrorMsg('');
-    try {
-      await submitInvitation(form);
-      setStatus('success');
-      fireConfetti();
-    } catch (err: any) {
-      setStatus('error');
-      setErrorMsg(err.response?.data?.message || 'Error al enviar la solicitud. Intente nuevamente.');
-    }
+  const handleSubmit = () => {
+    window.open(buildWhatsAppUrl(form), '_blank', 'noopener,noreferrer');
+    handleClose();
   };
 
   const handleClose = () => {
@@ -86,8 +86,6 @@ export default function CredentialForm({ isOpen, onClose }: CredentialFormProps)
     setTimeout(() => {
       setForm(initialFormState);
       setStep(0);
-      setStatus('idle');
-      setErrorMsg('');
     }, 400);
   };
 
@@ -123,7 +121,7 @@ export default function CredentialForm({ isOpen, onClose }: CredentialFormProps)
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gold/10">
                     <Shield className="h-4 w-4 text-gold" strokeWidth={1.5} />
                   </div>
-                  <span className="text-sm font-semibold text-primary">Solicitud de Acceso</span>
+                  <span className="text-sm font-semibold text-primary">Hablar con Andrés</span>
                 </div>
                 <button
                   onClick={handleClose}
@@ -134,39 +132,17 @@ export default function CredentialForm({ isOpen, onClose }: CredentialFormProps)
               </div>
 
               {/* Progress bar */}
-              {status !== 'success' && (
-                <div className="h-1 bg-border">
-                  <motion.div
-                    className="h-full bg-gold"
-                    animate={{ width: `${((step + 1) / STEPS.length) * 100}%` }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </div>
-              )}
+              <div className="h-1 bg-border">
+                <motion.div
+                  className="h-full bg-gold"
+                  animate={{ width: `${((step + 1) / STEPS.length) * 100}%` }}
+                  transition={{ duration: 0.3 }}
+                />
+              </div>
 
               {/* Body */}
               <div className="px-7 py-6">
                 <AnimatePresence mode="wait">
-                  {status === 'success' ? (
-                    <motion.div
-                      key="success"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      className="flex flex-col items-center py-8 text-center"
-                    >
-                      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gold/10">
-                        <CheckCircle className="h-7 w-7 text-gold" strokeWidth={1.5} />
-                      </div>
-                      <h3 className="text-xl font-bold text-primary">¡Solicitud Recibida!</h3>
-                      <p className="mt-3 max-w-xs text-sm leading-relaxed text-text-secondary">
-                        Si cumple los criterios de selección, recibirá sus credenciales de acceso en las próximas horas.
-                      </p>
-                      <span className="mt-4 inline-block rounded-full bg-gold/10 px-4 py-1.5 text-xs font-medium text-gold-dark">
-                        Revise su correo electrónico
-                      </span>
-                    </motion.div>
-                  ) : (
                     <motion.div
                       key={`step-${step}`}
                       initial={{ opacity: 0, x: 30 }}
@@ -231,13 +207,6 @@ export default function CredentialForm({ isOpen, onClose }: CredentialFormProps)
                         </div>
                       )}
 
-                      {/* Error */}
-                      {status === 'error' && (
-                        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-3 text-xs text-red-500">
-                          {errorMsg}
-                        </motion.p>
-                      )}
-
                       {/* Navigation */}
                       <div className="mt-6 flex items-center justify-between gap-3">
                         {step > 0 ? (
@@ -267,29 +236,22 @@ export default function CredentialForm({ isOpen, onClose }: CredentialFormProps)
                           <button
                             type="button"
                             onClick={handleSubmit}
-                            disabled={!canAdvance() || status === 'loading'}
-                            className="flex items-center gap-1.5 rounded-xl bg-gold px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-gold-light disabled:opacity-40"
+                            disabled={!canAdvance()}
+                            className="flex items-center gap-1.5 rounded-xl bg-[#25D366] px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-[#1ebe57] disabled:opacity-40"
                           >
-                            {status === 'loading' ? (
-                              <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-                            ) : (
-                              <>
-                                <Send className="h-4 w-4" />
-                                Enviar
-                              </>
-                            )}
+                            <MessageCircle className="h-4 w-4" />
+                            Abrir WhatsApp
                           </button>
                         )}
                       </div>
                     </motion.div>
-                  )}
                 </AnimatePresence>
               </div>
 
               {/* Footer */}
               <div className="border-t border-border px-7 py-3">
                 <p className="text-center text-xs text-text-light">
-                  Su información es procesada bajo estricta confidencialidad
+                  Al enviar, se abrirá WhatsApp con tus datos para contactar a Andrés directamente
                 </p>
               </div>
             </div>

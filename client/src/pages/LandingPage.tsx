@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import HeroSection from '@/components/sections/HeroSection';
@@ -9,25 +10,30 @@ import TickerSection from '@/components/sections/TickerSection';
 import TestimonialsSection from '@/components/sections/TestimonialsSection';
 import FAQSection from '@/components/sections/FAQSection';
 import CTASection from '@/components/sections/CTASection';
+import CredentialForm from '@/components/sections/CredentialForm';
 import FloatingCTA from '@/components/sections/FloatingCTA';
 
 export default function LandingPage() {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const openForm = () => setIsFormOpen(true);
+
   return (
     <>
-      <Navbar />
+      <Navbar onContact={openForm} />
       <main>
-        <HeroSection />
+        <HeroSection onContact={openForm} />
         <LogosSection />
-        <AboutSection />
+        <AboutSection onContact={openForm} />
         <ServicesSection />
         <ProcessSection />
         <TickerSection />
         <TestimonialsSection />
         <FAQSection />
-        <CTASection />
+        <CTASection onContact={openForm} />
       </main>
       <Footer />
-      <FloatingCTA />
+      <CredentialForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
+      <FloatingCTA onContact={openForm} />
     </>
   );
 }

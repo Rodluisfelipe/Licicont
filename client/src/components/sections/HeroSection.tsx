@@ -2,8 +2,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MessageCircle, TrendingUp, FileCheck, BarChart3, MapPin } from 'lucide-react';
 
-const WA_URL = `https://wa.me/573023805967?text=${encodeURIComponent('Hola Andrés, me interesa una asesoría en licitaciones públicas con LICICONT. ¿Podemos agendar una consulta?')}`;
-
 const ROTATING_WORDS = ['licitaciones', 'subastas', 'contratos públicos', 'concursos de méritos'];
 
 const STATS = [
@@ -23,7 +21,7 @@ function useRotatingWord(words: string[], interval = 2800) {
   return words[index];
 }
 
-export default function HeroSection() {
+export default function HeroSection({ onContact }: { onContact: () => void }) {
   const word = useRotatingWord(ROTATING_WORDS);
 
   return (
@@ -91,15 +89,13 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
-            <a
-              href={WA_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={onContact}
               className="magnetic-btn group flex items-center gap-2 rounded-full bg-gold px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-gold/25 transition-all hover:bg-gold-dark hover:shadow-xl hover:shadow-gold/30 hover:scale-[1.03]"
             >
               <MessageCircle className="h-5 w-5" />
               Hablar con Andrés
-            </a>
+            </button>
             <button
               onClick={() => {
                 const el = document.querySelector('#proceso');

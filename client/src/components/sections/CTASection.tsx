@@ -1,9 +1,7 @@
 import { motion } from 'motion/react';
 import { MessageCircle, Phone } from 'lucide-react';
 
-const WA_URL = `https://wa.me/573023805967?text=${encodeURIComponent('Hola Andrés, quiero agendar una consultoría sobre licitaciones públicas. ¿Cuándo podemos hablar?')}`;
-
-export default function CTASection() {
+export default function CTASection({ onContact }: { onContact: () => void }) {
   return (
     <section className="bg-primary py-24">
       <div className="mx-auto max-w-4xl px-6 text-center">
@@ -26,15 +24,13 @@ export default function CTASection() {
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a
-              href={WA_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={onContact}
               className="inline-flex items-center gap-2 rounded-full bg-gold px-8 py-3.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:bg-gold-light hover:shadow-xl"
             >
               <MessageCircle className="h-5 w-5" />
               Escríbeme por WhatsApp
-            </a>
+            </button>
             <a
               href="https://wa.me/573023805967"
               target="_blank"

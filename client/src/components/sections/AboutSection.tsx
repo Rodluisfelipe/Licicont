@@ -2,8 +2,6 @@ import { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 import { Award, Building2, Brain, CheckCircle, MessageCircle } from 'lucide-react';
 
-const WA_URL = `https://wa.me/573023805967?text=${encodeURIComponent('Hola Andrés, me interesa una asesoría personalizada en licitaciones públicas. ¿Podemos agendar una consulta?')}`;
-
 const HIGHLIGHTS = [
   { icon: <Award className="h-5 w-5" />, label: '+10 años dedicado a licitaciones públicas' },
   { icon: <Building2 className="h-5 w-5" />, label: '+$200.000M COP en procesos participados' },
@@ -19,7 +17,7 @@ const EXPERTISE = [
   'Ejecutar y liquidar contratos a satisfacción',
 ];
 
-export default function AboutSection() {
+export default function AboutSection({ onContact }: { onContact: () => void }) {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-60px' });
 
@@ -113,15 +111,13 @@ export default function AboutSection() {
 
             {/* CTA */}
             <div className="mt-8">
-              <a
-                href={WA_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={onContact}
                 className="magnetic-btn inline-flex items-center gap-2 rounded-full bg-gold px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-gold/25 transition-all hover:bg-gold-dark hover:shadow-xl"
               >
                 <MessageCircle className="h-5 w-5" />
                 Hablemos por WhatsApp
-              </a>
+              </button>
             </div>
           </motion.div>
         </div>
