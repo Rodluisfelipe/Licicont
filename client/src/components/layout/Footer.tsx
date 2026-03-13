@@ -20,7 +20,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="mb-4 flex items-center gap-3">
-              <img src="/logo.jpeg" alt="LICICONT" className="h-16 w-auto brightness-0 invert" />
+              <img src="/logo.jpeg" alt="LICICONT Logo" className="h-16 w-auto brightness-0 invert" loading="lazy" decoding="async" width="64" height="64" />
               <span className="text-lg font-bold tracking-wider text-white">
                 LICICONT
               </span>

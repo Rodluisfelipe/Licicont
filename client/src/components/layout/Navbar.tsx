@@ -54,7 +54,7 @@ export default function Navbar({ onContact }: { onContact: () => void }) {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 no-underline">
-            <img src="/logo.jpeg" alt="LICICONT" className="h-20 w-auto" />
+            <img src="/logo.jpeg" alt="LICICONT — Asesoría en Licitaciones Públicas Colombia" className="h-20 w-auto" width="80" height="80" />
           </a>
 
           {/* Desktop nav */}

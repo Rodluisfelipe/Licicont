@@ -6,32 +6,32 @@ const FAQS = [
   {
     question: '¿Qué es un Bróker de Licitaciones?',
     answer:
-      'Un bróker de licitaciones es un intermediario especializado que gestiona todo el ciclo de contratación pública por usted: identifica oportunidades en SECOP I y II, prepara las propuestas, realiza la revisión jurídica y acompaña el proceso hasta la adjudicación. Usted se enfoca en ejecutar, nosotros en ganar.',
+      'Un bróker de licitaciones es un intermediario especializado que gestiona todo el ciclo de contratación pública por ti: identifica oportunidades en SECOP I y II, prepara las propuestas, realiza la revisión jurídica y acompaña el proceso hasta la adjudicación. Tú te enfocas en ejecutar, yo me encargo de que ganes.',
   },
   {
     question: '¿Qué tipo de empresas pueden contratar sus servicios?',
     answer:
-      'Trabajamos con MiPymes, medianas empresas y grandes contratistas de cualquier sector: infraestructura, tecnología, salud, servicios generales, consultoría, medio ambiente y más. Adaptamos nuestros planes al tamaño y necesidades de cada empresa.',
+      'Trabajamos con MiPymes, medianas empresas y grandes contratistas de cualquier sector: infraestructura, tecnología, salud, servicios generales, consultoría, medio ambiente y más. Adapto mis asesorías al tamaño y necesidades de cada empresa.',
   },
   {
     question: '¿Cuánto cuesta el servicio?',
     answer:
-      'Manejamos un modelo flexible: una tarifa base mensual según el plan elegido, más un porcentaje de éxito sobre contratos adjudicados. De esta forma alineamos nuestros incentivos con los suyos. Solicite acceso para recibir una propuesta personalizada.',
+      'Manejo un modelo flexible basado en asesorías personalizadas. Cada caso es diferente, por eso evalúo tu perfil antes de proponer un plan. Escríbeme por WhatsApp para recibir una propuesta a tu medida.',
   },
   {
     question: '¿Cuál es su tasa de adjudicación?',
     answer:
-      'Mantenemos una tasa de adjudicación del 78% en los procesos donde participamos, muy superior al promedio del mercado (20-30%). Esto se debe a nuestro análisis Go/No-Go riguroso: solo presentamos propuestas en licitaciones donde su empresa tiene probabilidad real de ganar.',
+      'Mantengo una alta tasa de adjudicación en los procesos donde participo, muy superior al promedio del mercado (20-30%). Esto se debe a un análisis Go/No-Go riguroso: solo presentamos propuestas en licitaciones donde tu empresa tiene probabilidad real de ganar.',
   },
   {
     question: '¿En qué regiones de Colombia operan?',
     answer:
-      'Tenemos cobertura en los 32 departamentos de Colombia. Monitoreamos procesos de alcaldías, gobernaciones, ministerios, institutos y entidades descentralizadas de todo el territorio nacional a través de SECOP I y II.',
+      'Tengo cobertura en los 32 departamentos de Colombia. Monitoreo procesos de alcaldías, gobernaciones, ministerios, institutos y entidades descentralizadas de todo el territorio nacional a través de SECOP I y II.',
   },
   {
     question: '¿Cómo empiezo a trabajar con LICICONT?',
     answer:
-      'Solicite acceso a nuestra plataforma. Nuestro equipo le contactará en menos de 24 horas para una reunión de diagnóstico gratuita donde evaluaremos juntos su potencial en contratación estatal y diseñaremos una estrategia a su medida.',
+      'Escríbeme por WhatsApp al +57 302 380 5967. Te contactaré para una reunión de diagnóstico gratuita donde evaluaremos juntos tu potencial en contratación estatal y diseñaremos una estrategia a tu medida.',
   },
 ];
 

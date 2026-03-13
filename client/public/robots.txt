@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /acceso/
+Disallow: /forbidden
+
+Sitemap: https://licicont.com/sitemap.xml
+
+# Crawl-delay for polite bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /

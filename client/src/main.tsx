@@ -8,3 +8,11 @@ createRoot(document.getElementById('root')!).render(
     <App />
   </StrictMode>,
 )
+
+// Register web vitals for performance monitoring
+if ('connection' in navigator) {
+  const conn = (navigator as any).connection;
+  if (conn?.saveData) {
+    document.documentElement.classList.add('save-data');
+  }
+}

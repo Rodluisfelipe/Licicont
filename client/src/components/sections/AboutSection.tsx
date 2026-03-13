@@ -39,8 +39,12 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
                   <div className="overflow-hidden rounded-xl">
                     <img
                       src="/andres.jpeg"
-                      alt="Andrés Beltrán Mora — Especialista en Licitaciones Públicas"
+                      alt="Andrés Beltrán Mora — Especialista en Licitaciones Públicas y Contratación Estatal en Colombia"
                       className="h-auto w-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                      width="320"
+                      height="400"
                     />
                   </div>
                 </div>
