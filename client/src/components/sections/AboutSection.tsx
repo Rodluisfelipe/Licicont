@@ -30,16 +30,23 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
             initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7 }}
-            className="relative"
+            className="relative flex justify-center"
           >
-            <div className="relative mx-auto max-w-md overflow-hidden rounded-2xl shadow-2xl lg:max-w-none">
-              <img
-                src="/andres.jpeg"
-                alt="Andrés Beltrán Mora — Especialista en Licitaciones Públicas"
-                className="h-auto w-full object-cover"
-              />
+            <div className="relative w-72 lg:w-80">
+              {/* Gold premium frame */}
+              <div className="rounded-2xl bg-gradient-to-br from-gold via-gold-light to-gold-dark p-[3px] shadow-xl shadow-gold/20">
+                <div className="rounded-[13px] bg-gradient-to-br from-gold-dark/20 via-transparent to-gold/20 p-[3px]">
+                  <div className="overflow-hidden rounded-xl">
+                    <img
+                      src="/andres.jpeg"
+                      alt="Andrés Beltrán Mora — Especialista en Licitaciones Públicas"
+                      className="h-auto w-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
               {/* Floating card */}
-              <div className="absolute bottom-4 left-4 right-4 rounded-xl bg-white/90 p-4 shadow-lg backdrop-blur-md">
+              <div className="absolute -bottom-5 left-4 right-4 rounded-xl border border-gold/20 bg-white/95 p-4 shadow-lg backdrop-blur-md">
                 <p className="text-sm font-bold text-primary">Andrés Beltrán Mora</p>
                 <p className="text-xs text-text-secondary">Especialista en Licitaciones Públicas & Contratación Estatal</p>
               </div>
