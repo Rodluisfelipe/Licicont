@@ -3,9 +3,8 @@ Allow: /
 Disallow: /acceso/
 Disallow: /forbidden
 
-Sitemap: https://licicont.com/sitemap.xml
+Sitemap: https://licicont.me/sitemap.xml
 
-# Crawl-delay for polite bots
 User-agent: Googlebot
 Allow: /
 
