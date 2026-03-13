@@ -1,14 +1,13 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
 
 const LINKS = {
-  Empresa: ['Sobre Nosotros', 'Equipo', 'Carreras', 'Blog'],
   Servicios: [
     'Monitoreo SECOP',
     'Preparación de Propuestas',
     'Revisión Jurídica',
-    'Formación de Consorcios',
+    'Análisis Financiero',
   ],
-  Recursos: ['Guía de Licitaciones', 'Preguntas Frecuentes', 'Términos y Condiciones', 'Política de Privacidad'],
+  'Recursos': ['Asesoría Personalizada', 'Preguntas Frecuentes', 'Términos y Condiciones', 'Política de Privacidad'],
 };
 
 export default function Footer() {
@@ -17,7 +16,7 @@ export default function Footer() {
   return (
     <footer className="bg-primary pt-16 pb-8">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="mb-4 flex items-center gap-3">
@@ -27,22 +26,22 @@ export default function Footer() {
               </span>
             </div>
             <p className="mb-6 max-w-xs text-sm leading-relaxed text-white/60">
-              Firma exclusiva de Bróker de Licitaciones en Colombia. 
-              Gestionamos contratación pública para que su empresa gane más contratos.
+              Asesoría especializada en licitaciones públicas y contratación estatal en Colombia. 
+              +10 años de experiencia. Andrés Beltrán Mora.
             </p>
             <div className="space-y-2.5">
               <div className="flex items-center gap-2 text-sm text-white/60">
                 <MapPin className="h-4 w-4 text-gold" />
                 Bogotá D.C., Colombia
               </div>
-              <div className="flex items-center gap-2 text-sm text-white/60">
+              <a href="mailto:licitacionesycontratas@gmail.com" className="flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-gold">
                 <Mail className="h-4 w-4 text-gold" />
-                contacto@licicont.com
-              </div>
-              <div className="flex items-center gap-2 text-sm text-white/60">
+                licitacionesycontratas@gmail.com
+              </a>
+              <a href="https://wa.me/573023805967" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-gold">
                 <Phone className="h-4 w-4 text-gold" />
-                +57 300 123 4567
-              </div>
+                +57 302 380 5967
+              </a>
             </div>
           </div>
 
@@ -76,15 +75,15 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-5">
             <a
-              href="https://www.tiktok.com/@licicont_"
+              href="https://wa.me/573023805967"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs text-white/40 transition-colors hover:text-gold"
             >
-              TikTok
+              WhatsApp
             </a>
             <a
-              href="https://www.instagram.com/licicont_"
+              href="https://www.instagram.com/licicont_?igsh=bHljb3B1aTB3M3p2&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs text-white/40 transition-colors hover:text-gold"
@@ -92,12 +91,12 @@ export default function Footer() {
               Instagram
             </a>
             <a
-              href="https://www.linkedin.com/company/licicont"
+              href="https://www.tiktok.com/@licicont_"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs text-white/40 transition-colors hover:text-gold"
             >
-              LinkedIn
+              TikTok
             </a>
           </div>
         </div>

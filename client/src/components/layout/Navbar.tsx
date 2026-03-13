@@ -1,19 +1,18 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, MessageCircle } from 'lucide-react';
+
+const WA_URL = `https://wa.me/573023805967?text=${encodeURIComponent('Hola Andr\u00e9s, me interesa una asesor\u00eda en licitaciones p\u00fablicas con LICICONT. \u00bfPodemos agendar una consulta?')}`;
 
 const NAV_LINKS = [
+  { label: 'Sobre Mí', href: '#sobre-mi' },
   { label: 'Servicios', href: '#servicios' },
   { label: 'Proceso', href: '#proceso' },
   { label: 'Resultados', href: '#resultados' },
   { label: 'Preguntas', href: '#faq' },
 ];
 
-interface NavbarProps {
-  onRequestAccess: () => void;
-}
-
-export default function Navbar({ onRequestAccess }: NavbarProps) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -75,12 +74,15 @@ export default function Navbar({ onRequestAccess }: NavbarProps) {
 
           {/* CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <button
-              onClick={onRequestAccess}
-              className="rounded-full bg-gold px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-gold-dark hover:shadow-lg"
+            <a
+              href={WA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-full bg-gold px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-gold-dark hover:shadow-lg"
             >
-              Solicitar Acceso
-            </button>
+              <MessageCircle className="h-4 w-4" />
+              Contactar
+            </a>
           </div>
 
           {/* Mobile hamburger */}
@@ -123,12 +125,16 @@ export default function Navbar({ onRequestAccess }: NavbarProps) {
                   </button>
                 ))}
                 <div className="my-2 h-px bg-border" />
-                <button
-                  onClick={() => { setMobileOpen(false); onRequestAccess(); }}
-                  className="rounded-xl bg-gold py-3 text-center text-sm font-semibold text-white transition-all hover:bg-gold-dark"
+                <a
+                  href={WA_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center gap-2 rounded-xl bg-gold py-3 text-center text-sm font-semibold text-white transition-all hover:bg-gold-dark"
                 >
-                  Solicitar Acceso
-                </button>
+                  <MessageCircle className="h-4 w-4" />
+                  Contactar por WhatsApp
+                </a>
               </div>
             </motion.div>
           </>

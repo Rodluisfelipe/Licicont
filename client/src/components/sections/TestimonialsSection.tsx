@@ -59,10 +59,10 @@ export default function TestimonialsSection() {
             Casos de Éxito
           </span>
           <h2 className="text-3xl font-bold text-primary sm:text-4xl">
-            Resultados reales de empresas reales
+            Resultados reales de clientes reales
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary lg:text-lg">
-            Así hemos ayudado a empresas colombianas a ganar contratos públicos.
+            Así he ayudado a empresas colombianas a ganar contratos con el Estado.
           </p>
         </motion.div>
 

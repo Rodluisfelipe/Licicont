@@ -1,11 +1,9 @@
 import { motion } from 'motion/react';
-import { ArrowRight, Phone } from 'lucide-react';
+import { MessageCircle, Phone } from 'lucide-react';
 
-interface CTASectionProps {
-  onRequestAccess: () => void;
-}
+const WA_URL = `https://wa.me/573023805967?text=${encodeURIComponent('Hola Andrés, quiero agendar una consultoría sobre licitaciones públicas. ¿Cuándo podemos hablar?')}`;
 
-export default function CTASection({ onRequestAccess }: CTASectionProps) {
+export default function CTASection() {
   return (
     <section className="bg-primary py-24">
       <div className="mx-auto max-w-4xl px-6 text-center">
@@ -19,35 +17,37 @@ export default function CTASection({ onRequestAccess }: CTASectionProps) {
             Empiece Hoy
           </span>
           <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-            ¿Listo para ganar su próxima{' '}
+            ¿Listo para ganar tu próxima{' '}
             <span className="text-gold-light">licitación</span>?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/70 lg:text-lg">
-            Solicite acceso a nuestra plataforma y reciba una consultoría de diagnóstico gratuita. 
-            Nuestro equipo le contactará en menos de 24 horas.
+            Hablemos sobre tu caso específico. Te ayudo a identificar oportunidades 
+            y estructurar propuestas ganadoras con estrategia y transparencia.
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <button
-              onClick={onRequestAccess}
+            <a
+              href={WA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-gold px-8 py-3.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:bg-gold-light hover:shadow-xl"
             >
-              Solicitar Acceso Exclusivo
-              <ArrowRight className="h-4 w-4" />
-            </button>
+              <MessageCircle className="h-5 w-5" />
+              Escríbeme por WhatsApp
+            </a>
             <a
-              href="https://wa.me/573001234567"
+              href="https://wa.me/573023805967"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10"
             >
               <Phone className="h-4 w-4" />
-              Agendar Llamada
+              +57 302 380 5967
             </a>
           </div>
 
           <p className="mt-6 text-xs text-white/50">
-            Sin compromiso · Respuesta en 24h · 100% confidencial
+            Sin compromiso · Respuesta rápida · 100% confidencial
           </p>
         </motion.div>
       </div>

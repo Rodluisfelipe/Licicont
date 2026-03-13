@@ -1,17 +1,15 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, TrendingUp, FileCheck, Users, MapPin } from 'lucide-react';
+import { MessageCircle, TrendingUp, FileCheck, BarChart3, MapPin } from 'lucide-react';
 
-interface HeroSectionProps {
-  onRequestAccess: () => void;
-}
+const WA_URL = `https://wa.me/573023805967?text=${encodeURIComponent('Hola Andrés, me interesa una asesoría en licitaciones públicas con LICICONT. ¿Podemos agendar una consulta?')}`;
 
-const ROTATING_WORDS = ['licitaciones', 'adjudicaciones', 'subastas', 'concursos de méritos'];
+const ROTATING_WORDS = ['licitaciones', 'subastas', 'contratos públicos', 'concursos de méritos'];
 
 const STATS = [
-  { value: '+350', label: 'Contratos adjudicados', icon: <FileCheck className="h-5 w-5" /> },
-  { value: '78%', label: 'Tasa de éxito', icon: <TrendingUp className="h-5 w-5" /> },
-  { value: '+140', label: 'Empresas confían en nosotros', icon: <Users className="h-5 w-5" /> },
+  { value: '+$200K', label: 'Millones COP en procesos', icon: <BarChart3 className="h-5 w-5" /> },
+  { value: '+10', label: 'Años de experiencia', icon: <TrendingUp className="h-5 w-5" /> },
+  { value: '+100', label: 'Procesos participados', icon: <FileCheck className="h-5 w-5" /> },
   { value: '32', label: 'Departamentos cubiertos', icon: <MapPin className="h-5 w-5" /> },
 ];
 
@@ -25,7 +23,7 @@ function useRotatingWord(words: string[], interval = 2800) {
   return words[index];
 }
 
-export default function HeroSection({ onRequestAccess }: HeroSectionProps) {
+export default function HeroSection() {
   const word = useRotatingWord(ROTATING_WORDS);
 
   return (
@@ -45,7 +43,7 @@ export default function HeroSection({ onRequestAccess }: HeroSectionProps) {
           >
             <span className="inline-flex items-center gap-2 rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
               <span className="h-2 w-2 rounded-full bg-gold animate-pulse" />
-              Bróker de Licitaciones N.°1 en Colombia
+              Experto en Licitaciones Públicas en Colombia
             </span>
           </motion.div>
 
@@ -82,8 +80,8 @@ export default function HeroSection({ onRequestAccess }: HeroSectionProps) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary"
           >
-            Monitoreamos, preparamos y acompañamos cada propuesta desde el análisis 
-            hasta la adjudicación. Su empresa compite — nosotros nos aseguramos de que gane.
+            Con más de 10 años de experiencia y participación en procesos que superan los $200.000 millones, 
+            te acompaño paso a paso desde el análisis del pliego hasta la adjudicación del contrato.
           </motion.p>
 
           {/* CTAs */}
@@ -93,13 +91,15 @@ export default function HeroSection({ onRequestAccess }: HeroSectionProps) {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
-            <button
-              onClick={onRequestAccess}
+            <a
+              href={WA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="magnetic-btn group flex items-center gap-2 rounded-full bg-gold px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-gold/25 transition-all hover:bg-gold-dark hover:shadow-xl hover:shadow-gold/30 hover:scale-[1.03]"
             >
-              Solicitar Acceso
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </button>
+              <MessageCircle className="h-5 w-5" />
+              Hablar con Andrés
+            </a>
             <button
               onClick={() => {
                 const el = document.querySelector('#proceso');

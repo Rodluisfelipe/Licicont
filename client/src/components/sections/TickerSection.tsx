@@ -47,11 +47,11 @@ function MetricCard({ label, value, suffix, prefix = '', decimals = 0, icon, del
 }
 
 const METRICS = [
-  { label: 'Contratos Adjudicados', value: 350, suffix: '+', icon: <FileCheck className="h-5 w-5" strokeWidth={1.5} /> },
-  { label: 'Tasa de Adjudicación', value: 78, suffix: '%', icon: <TrendingUp className="h-5 w-5" strokeWidth={1.5} /> },
-  { label: 'Empresas Activas', value: 140, suffix: '+', icon: <Users className="h-5 w-5" strokeWidth={1.5} /> },
-  { label: 'COP en Contratos', value: 2.8, suffix: 'B', prefix: '$', decimals: 1, icon: <BarChart3 className="h-5 w-5" strokeWidth={1.5} /> },
-  { label: 'Licitaciones Analizadas/Año', value: 15000, suffix: '+', icon: <Zap className="h-5 w-5" strokeWidth={1.5} /> },
+  { label: 'Procesos Participados', value: 100, suffix: '+', icon: <FileCheck className="h-5 w-5" strokeWidth={1.5} /> },
+  { label: 'Años de Experiencia', value: 10, suffix: '+', icon: <TrendingUp className="h-5 w-5" strokeWidth={1.5} /> },
+  { label: 'Empresas Asesoradas', value: 50, suffix: '+', icon: <Users className="h-5 w-5" strokeWidth={1.5} /> },
+  { label: 'COP en Procesos', value: 200, suffix: 'K M', prefix: '$', icon: <BarChart3 className="h-5 w-5" strokeWidth={1.5} /> },
+  { label: 'Licitaciones Analizadas/Año', value: 5000, suffix: '+', icon: <Zap className="h-5 w-5" strokeWidth={1.5} /> },
   { label: 'Departamentos Cubiertos', value: 32, suffix: '/32', icon: <MapPin className="h-5 w-5" strokeWidth={1.5} /> },
 ];
 
@@ -73,7 +73,7 @@ export default function TickerSection() {
             Resultados Comprobados
           </span>
           <h2 className="text-3xl font-bold text-primary sm:text-4xl">
-            Números que respaldan nuestro trabajo
+            Números que respaldan mi trabajo
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary lg:text-lg">
             Más de una década ayudando a empresas colombianas a ganar procesos de contratación estatal.
