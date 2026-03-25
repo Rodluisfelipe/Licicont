@@ -5,39 +5,39 @@ import { Quote, Star, ArrowUpRight, TrendingUp } from 'lucide-react';
 const CASE_STUDIES = [
   {
     quote:
-      'Gracias a LICICONT adjudicamos nuestro primer contrato estatal por $1.200M. Sin ellos, jamás hubiéramos pasado la evaluación técnica.',
-    name: 'Carlos Andrés Mejía',
+      'Empezamos con una licitacion de aseo institucional y en 3 meses ya teniamos 2 contratos mas de papeleria. LICICONT nos abrio la puerta al SECOP.',
+    name: 'Laura Gutierrez',
+    role: 'Gerente Comercial',
+    company: 'Suministros Avanza SAS',
+    sector: 'Papeleria y Aseo',
+    challenge: 'No sabian como participar en SECOP II',
+    solution: 'Acompanamiento completo desde el registro hasta la primera propuesta',
+    result: '3 contratos de suministros en 3 meses',
+    metric: '3 contratos',
+  },
+  {
+    quote:
+      'Gracias al analisis Go/No-Go solo licitamos donde teniamos chance real. Ganamos un contrato de infraestructura TI por $2.800M con una gobernacion.',
+    name: 'Ricardo Vargas',
+    role: 'Director de Tecnologia',
+    company: 'DataNet Colombia SAS',
+    sector: 'Tecnologia',
+    challenge: 'Invertian en propuestas de TI con baja probabilidad de ganar',
+    solution: 'Analisis Go/No-Go + propuesta tecnica especializada en TI',
+    result: 'Contrato adjudicado por $2.800M COP',
+    metric: '+$2.800M',
+  },
+  {
+    quote:
+      'LICICONT detecto un riesgo en el pliego que nadie mas vio. Ganamos la licitacion de la terminal de transporte sin una sola observacion.',
+    name: 'Carlos Andres Mejia',
     role: 'Gerente General',
-    company: 'Constructora Mejía & Asociados',
-    sector: 'Infraestructura',
-    challenge: 'Perdían por fallos en documentación técnica',
-    solution: 'Revisión jurídica + estructuración de propuesta integral',
+    company: 'Constructora Mejia & Asociados',
+    sector: 'Obras Civiles',
+    challenge: 'Perdian por fallos en documentacion tecnica y juridica',
+    solution: 'Revision juridica profunda + estructuracion de propuesta integral de obra',
     result: 'Contrato adjudicado por $1.200M COP',
     metric: '+$1.200M',
-  },
-  {
-    quote:
-      'En 6 meses triplicamos nuestro portafolio de contratos públicos. Su análisis Go/No-Go nos ahorró millones en procesos que no valían la pena.',
-    name: 'María Fernanda López',
-    role: 'Directora Comercial',
-    company: 'SolTech Colombia SAS',
-    sector: 'Tecnología',
-    challenge: 'Presentaban propuestas en licitaciones con baja probabilidad',
-    solution: 'Análisis Go/No-Go + monitoreo inteligente SECOP II',
-    result: '3x portafolio de contratos en 6 meses',
-    metric: '3x contratos',
-  },
-  {
-    quote:
-      'Lo que más valoro es su revisión jurídica. Detectaron un riesgo en el pliego que ningún otro asesor vio. Ganamos la licitación sin observaciones.',
-    name: 'Jorge Enrique Patiño',
-    role: 'Director de Proyectos',
-    company: 'GreenServ Ambiental',
-    sector: 'Medio Ambiente',
-    challenge: 'Riesgo jurídico oculto en pliego no detectado ante',
-    solution: 'Revisión jurídica profunda + impugnación preventiva',
-    result: 'Adjudicación sin observaciones de evaluadores',
-    metric: '0 riesgos',
   },
 ];
 

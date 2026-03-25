@@ -11,7 +11,7 @@ const FAQS = [
   {
     question: '¿Qué tipo de empresas pueden contratar sus servicios?',
     answer:
-      'Trabajamos con MiPymes, medianas empresas y grandes contratistas de cualquier sector: infraestructura, tecnología, salud, servicios generales, consultoría, medio ambiente y más. Adapto mis asesorías al tamaño y necesidades de cada empresa.',
+      'Trabajo con MiPymes, medianas empresas y contratistas enfocados en 5 nichos clave: papelería, cafetería, aseo, tecnología y obras civiles. Si tu empresa vende suministros o ejecuta proyectos de infraestructura o TI, puedo ayudarte a ganar contratos con el Estado.',
   },
   {
     question: '¿Cuánto cuesta el servicio?',
@@ -19,9 +19,9 @@ const FAQS = [
       'Manejo un modelo flexible basado en asesorías personalizadas. Cada caso es diferente, por eso evalúo tu perfil antes de proponer un plan. Escríbeme por WhatsApp para recibir una propuesta a tu medida.',
   },
   {
-    question: '¿Cuál es su tasa de adjudicación?',
+    question: '¿Por qué empezar con papelería, cafetería o aseo?',
     answer:
-      'Mantengo una alta tasa de adjudicación en los procesos donde participo, muy superior al promedio del mercado (20-30%). Esto se debe a un análisis Go/No-Go riguroso: solo presentamos propuestas en licitaciones donde tu empresa tiene probabilidad real de ganar.',
+      'Los contratos de suministros como papelería, cafetería y aseo son la puerta de entrada perfecta a la contratación estatal. Son procesos de menor cuantía, con requisitos más simples y competencia manejable. Te permiten acumular experiencia en SECOP y escalar a contratos de tecnología u obras civiles donde están las comisiones grandes.',
   },
   {
     question: '¿En qué regiones de Colombia operan?',

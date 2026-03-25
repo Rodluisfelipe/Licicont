@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MessageCircle, TrendingUp, FileCheck, BarChart3, MapPin } from 'lucide-react';
 
-const ROTATING_WORDS = ['licitaciones', 'subastas', 'contratos públicos', 'concursos de méritos'];
+const ROTATING_WORDS = ['suministros', 'obras civiles', 'tecnología', 'papelería y aseo'];
 
 const STATS = [
   { value: '+$200K', label: 'Millones COP en procesos', icon: <BarChart3 className="h-5 w-5" /> },
@@ -41,7 +41,7 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
           >
             <span className="inline-flex items-center gap-2 rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
               <span className="h-2 w-2 rounded-full bg-gold animate-pulse" />
-              Experto en Licitaciones Públicas en Colombia
+              Especialista en Suministros, Obras Civiles y Tecnología
             </span>
           </motion.div>
 
@@ -52,23 +52,30 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl font-bold leading-tight text-primary sm:text-5xl lg:text-6xl"
           >
-            Transformamos{' '}
-            <span className="relative inline-block">
+            Transformamos
+            <br />
+            <span className="relative inline-grid h-[1.2em] items-center overflow-hidden">
+              {/* Invisible sizer — reserves width of longest word */}
+              {ROTATING_WORDS.map((w) => (
+                <span key={w} className="invisible col-start-1 row-start-1 text-gold" aria-hidden="true">
+                  {w}
+                </span>
+              ))}
               <AnimatePresence mode="wait">
                 <motion.span
                   key={word}
-                  initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
-                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, y: -20, filter: 'blur(4px)' }}
+                  initial={{ opacity: 0, y: '30%', filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, y: '0%', filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, y: '-30%', filter: 'blur(4px)' }}
                   transition={{ duration: 0.35 }}
-                  className="inline-block text-gold"
+                  className="col-start-1 row-start-1 text-gold"
                 >
                   {word}
                 </motion.span>
               </AnimatePresence>
             </span>
-            <br className="hidden sm:block" />
-            {' '}en contratos ganados
+            <br />
+            en contratos ganados
           </motion.h1>
 
           {/* Subtitle */}
@@ -78,8 +85,8 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary"
           >
-            Con más de 10 años de experiencia y participación en procesos que superan los $200.000 millones, 
-            te acompaño paso a paso desde el análisis del pliego hasta la adjudicación del contrato.
+            Especializado en papelería, cafetería, aseo, tecnología y obras civiles. 
+            +10 años ganando licitaciones en SECOP II con estrategia, análisis financiero e Inteligencia Artificial.
           </motion.p>
 
           {/* CTAs */}

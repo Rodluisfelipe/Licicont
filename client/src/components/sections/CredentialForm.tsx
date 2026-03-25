@@ -8,14 +8,13 @@ interface CredentialFormProps {
 }
 
 const SECTORS = [
-  'Infraestructura & Obra Civil',
+  'Papelería & Útiles de Oficina',
+  'Cafetería & Alimentos',
+  'Aseo & Servicios Generales',
   'Tecnología & Software',
+  'Obras Civiles & Infraestructura',
   'Consultoría & Servicios Profesionales',
   'Salud & Farmacéutica',
-  'Alimentos & Suministros',
-  'Seguridad & Defensa',
-  'Educación & Capacitación',
-  'Transporte & Logística',
   'Otro',
 ];
 

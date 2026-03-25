@@ -3,18 +3,18 @@ import { motion, useInView } from 'motion/react';
 import { Award, Building2, Brain, CheckCircle, MessageCircle } from 'lucide-react';
 
 const HIGHLIGHTS = [
-  { icon: <Award className="h-5 w-5" />, label: '+10 años dedicado a licitaciones públicas' },
+  { icon: <Award className="h-5 w-5" />, label: '+10 a\u00f1os en licitaciones: obras civiles, suministros y tecnolog\u00eda' },
   { icon: <Building2 className="h-5 w-5" />, label: '+$200.000M COP en procesos participados' },
-  { icon: <Brain className="h-5 w-5" />, label: 'Inteligencia Artificial aplicada a SECOP II' },
+  { icon: <Brain className="h-5 w-5" />, label: 'IA aplicada a an\u00e1lisis de pliegos y SECOP II' },
 ];
 
 const EXPERTISE = [
-  'Identificar oportunidades en SECOP II',
+  'Licitar en papeler\u00eda, cafeter\u00eda y aseo',
+  'Ganar contratos de tecnolog\u00eda y software',
+  'Competir en obras civiles e infraestructura',
   'Analizar pliegos de condiciones',
-  'Cumplir requisitos habilitantes y financieros',
-  'Estructurar ofertas competitivas',
-  'Presentar propuestas estratégicas',
-  'Ejecutar y liquidar contratos a satisfacción',
+  'Estructurar ofertas econ\u00f3micas ganadoras',
+  'Ejecutar y liquidar contratos a satisfacci\u00f3n',
 ];
 
 export default function AboutSection({ onContact }: { onContact: () => void }) {
@@ -84,12 +84,14 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
                 con la Secretaría Distrital — sumando aproximadamente <strong className="text-primary">$103.000 millones</strong> en contratación pública.
               </p>
               <p>
-                Posteriormente amplié mi experiencia al <strong className="text-primary">sector de suministros</strong>{' '}
-                — tecnología, aseo, cafetería, papelería — donde llevo más de 4 años participando en procesos
-                que también superan los <strong className="text-primary">$100.000 millones</strong> en contratos.
+                Posteriormente amplié mi experiencia al <strong className="text-primary">sector de suministros</strong>:{' '}
+                <strong className="text-primary">papelería, cafetería, aseo y tecnología</strong> — donde llevo más de 4 años participando en procesos
+                que también superan los <strong className="text-primary">$100.000 millones</strong> en contratos. Estos nichos son la puerta de entrada
+                perfecta para empresas que quieren empezar en SECOP de forma segura.
               </p>
               <p>
-                Hoy trabajo de forma independiente integrando <strong className="text-primary">Inteligencia Artificial</strong>{' '}
+                Hoy me especializo en <strong className="text-primary">5 nichos clave</strong>: papelería, cafetería, aseo,
+                tecnología y obras civiles. Integro <strong className="text-primary">Inteligencia Artificial</strong>{' '}
                 al análisis de pliegos y la estructuración de propuestas. Mi enfoque no es vender cursos grabados:
                 es <strong className="text-primary">acompañarte con casos reales, paso a paso</strong>, hasta que ganes.
               </p>

@@ -13,74 +13,74 @@ import {
 
 const CATEGORIES = [
   {
-    key: 'inteligencia',
-    label: 'Inteligencia',
+    key: 'suministros',
+    label: 'Suministros',
     services: [
       {
         icon: <Radar className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Monitoreo de Licitaciones',
+        title: 'Papeleria, Cafeteria y Aseo',
         description:
-          'Rastreamos SECOP I y II en tiempo real, filtrando por sector, entidad y presupuesto. Alertas diarias con oportunidades relevantes.',
+          'Tu puerta de entrada a la contratacion publica. Nichos simples, de bajo riesgo, ideales para empezar en SECOP II. Te acompaño desde el primer pliego hasta la adjudicacion.',
       },
       {
         icon: <FolderSearch className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Análisis de Competencia',
+        title: 'Analisis de Precios y Competencia',
         description:
-          'Inteligencia sobre adjudicaciones históricas, precios de referencia y probabilidad real de ganar cada proceso.',
+          'Inteligencia sobre precios de referencia, historicos de adjudicacion y competidores en suministros. Estructuramos ofertas economicas ganadoras.',
       },
     ],
   },
   {
-    key: 'propuestas',
-    label: 'Propuestas',
+    key: 'tecnologia',
+    label: 'Tecnologia',
     services: [
-      {
-        icon: <FileText className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Preparación de Propuestas',
-        description:
-          'Estructuramos su propuesta completa: documentación técnica, financiera y narrativa estratégica diferenciadora.',
-      },
       {
         icon: <BarChart3 className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Evaluación Go / No-Go',
+        title: 'Licitaciones de Tecnologia',
         description:
-          'Análisis cuantitativo de cada licitación: probabilidad de éxito, competencia esperada y ROI estimado.',
-      },
-    ],
-  },
-  {
-    key: 'juridico',
-    label: 'Jurídico',
-    services: [
-      {
-        icon: <Scale className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Revisión Jurídica',
-        description:
-          'Revisión legal de cada pliego, identificación de riesgos, preparación de impugnaciones y cumplimiento normativo.',
+          'Software, hardware, infraestructura TI, telecomunicaciones. Procesos de alto valor con MinTIC, gobernaciones y entidades que requieren soluciones tecnologicas.',
       },
       {
         icon: <ShieldCheck className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Gestión Documental',
+        title: 'Propuestas Tecnicas Especializadas',
         description:
-          'RUP, certificaciones, pólizas y documentación actualizada. Navegamos SECOP II por usted.',
+          'Estructuramos la narrativa tecnica y el cumplimiento de requerimientos funcionales que los evaluadores buscan en licitaciones de TI.',
       },
     ],
   },
   {
-    key: 'alianzas',
-    label: 'Alianzas',
+    key: 'obras',
+    label: 'Obras Civiles',
+    services: [
+      {
+        icon: <Scale className="h-7 w-7" strokeWidth={1.5} />,
+        title: 'Infraestructura y Construccion',
+        description:
+          'Vias, edificaciones, terminales, hospitales. Los contratos de mayor valor en SECOP. +$103.000 millones en experiencia participada en obras civiles.',
+      },
+      {
+        icon: <FileText className="h-7 w-7" strokeWidth={1.5} />,
+        title: 'Consorcios y AIU Estrategico',
+        description:
+          'Formacion de consorcios competitivos, estructuracion de AIU, analisis de precios unitarios y presupuestos de obra para licitar con ventaja.',
+      },
+    ],
+  },
+  {
+    key: 'estrategia',
+    label: 'Estrategia',
     services: [
       {
         icon: <Users className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Formación de Consorcios',
+        title: 'Evaluacion Go / No-Go',
         description:
-          'Conectamos con socios estratégicos para formar consorcios y uniones temporales competitivas.',
+          'Analisis cuantitativo de cada licitacion: probabilidad de exito, competencia esperada y ROI estimado. Solo licitas donde puedes ganar.',
       },
       {
         icon: <GraduationCap className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Capacitación Continua',
+        title: 'Mentoria y Capacitacion',
         description:
-          'Talleres de estrategia, actualizaciones normativas y coaching para que su equipo licite con autonomía.',
+          'Acompañamiento personalizado con casos reales. Te enseño paso a paso a identificar, analizar, estructurar y ganar licitaciones en SECOP II.',
       },
     ],
   },
@@ -89,7 +89,7 @@ const CATEGORIES = [
 export default function ServicesSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-60px' });
-  const [activeTab, setActiveTab] = useState('inteligencia');
+  const [activeTab, setActiveTab] = useState('suministros');
   const active = CATEGORIES.find((c) => c.key === activeTab)!;
 
   return (
@@ -103,13 +103,13 @@ export default function ServicesSection() {
           className="mx-auto mb-12 max-w-2xl text-center"
         >
           <span className="mb-4 inline-block rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
-            Nuestros Servicios
+            Nichos de Especializacion
           </span>
           <h2 className="text-3xl font-bold text-primary sm:text-4xl">
-            Todo lo que necesita para ganar licitaciones
+            Suministros para empezar, tecnologia y obras para escalar
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary lg:text-lg">
-            Desde la identificación de la oportunidad hasta la adjudicación del contrato.
+            Desde papeleria y aseo hasta contratos de infraestructura de miles de millones.
           </p>
         </motion.div>
 
