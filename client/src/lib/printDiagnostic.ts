@@ -56,44 +56,59 @@ export function buildDiagnosticHtml(
 <title>Diagnóstico Licicont — ${escapeHtml(primary.name)}</title>
 <style>
   @page { size: A4; margin: 16mm; }
+  /* Misma tipografía de marca que la web: el iframe resuelve estas rutas. */
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("/fonts/inter-latin.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Playfair Display";
+    font-style: normal;
+    font-weight: 400 900;
+    font-display: swap;
+    src: url("/fonts/playfair-latin.woff2") format("woff2");
+  }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
-    color: #1F2937;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: #23262E;
     font-size: 11px;
     line-height: 1.55;
   }
-  h1, h2, h3 { margin: 0; color: #0A192F; }
+  h1, h2, h3 { margin: 0; color: #0A192F; font-family: "Playfair Display", Georgia, serif; }
   .brand {
     display: flex; justify-content: space-between; align-items: baseline;
     border-bottom: 1px solid #E5E7EB; padding-bottom: 8px; margin-bottom: 18px;
     font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
-    color: #96763A;
+    color: #8A6D3F;
   }
   .brand span:last-child { color: #9CA3AF; font-weight: 500; letter-spacing: .02em; text-transform: none; }
-  .kicker { font-size: 9px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #96763A; }
+  .kicker { font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #8A6D3F; }
   .plan { display: flex; align-items: center; gap: 16px; margin: 4px 0 6px; }
-  .plan h1 { font-size: 22px; }
+  .plan h1 { font-size: 23px; letter-spacing: -0.015em; }
   .ring {
-    width: 62px; height: 62px; flex: 0 0 62px; border: 4px solid #B89146; border-radius: 50%;
+    width: 62px; height: 62px; flex: 0 0 62px; border: 3px solid #B08D57; border-radius: 50%;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
   }
-  .ring strong { font-size: 16px; color: #0A192F; line-height: 1; }
+  .ring strong { font-size: 17px; color: #0A192F; line-height: 1; font-family: "Playfair Display", Georgia, serif; }
   .ring small { font-size: 6px; letter-spacing: .08em; text-transform: uppercase; color: #6B7280; }
   .tagline { color: #6B7280; margin: 0 0 16px; }
   .meta { color: #6B7280; margin: 2px 0 0; font-size: 10px; }
   .grid { display: flex; gap: 22px; }
   .grid > div { flex: 1; }
-  h3 { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: #96763A; margin-bottom: 6px; }
+  h3 { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: #8A6D3F; margin-bottom: 6px; }
   ul { list-style: none; margin: 0 0 14px; padding: 0; }
   li { margin-bottom: 4px; padding-left: 14px; text-indent: -14px; }
   li.muted { color: #9CA3AF; }
   .box { border: 1px solid #E5E7EB; border-radius: 8px; padding: 10px 12px; margin-bottom: 14px; }
-  .price { font-size: 15px; font-weight: 700; color: #96763A; }
+  .price { font-size: 16px; font-weight: 600; color: #8A6D3F; font-family: "Playfair Display", Georgia, serif; }
   .steps { display: flex; gap: 10px; margin-bottom: 14px; }
   .steps div { flex: 1; border: 1px solid #E5E7EB; border-radius: 8px; padding: 9px 10px; }
-  .steps b { display: block; color: #96763A; margin-bottom: 3px; }
+  .steps b { display: block; color: #8A6D3F; margin-bottom: 3px; }
   .profile { border-top: 1px solid #E5E7EB; padding-top: 10px; }
   .profile span { display: inline-block; margin: 0 14px 3px 0; color: #6B7280; }
   .profile b { color: #1F2937; font-weight: 600; }
@@ -101,7 +116,7 @@ export function buildDiagnosticHtml(
     margin-top: 18px; border-top: 1px solid #E5E7EB; padding-top: 10px;
     font-size: 9px; color: #6B7280;
   }
-  footer a { color: #96763A; text-decoration: none; }
+  footer a { color: #8A6D3F; text-decoration: none; }
 </style>
 </head>
 <body>

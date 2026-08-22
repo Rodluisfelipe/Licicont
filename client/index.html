@@ -42,8 +42,21 @@
     <meta name="twitter:image" content="https://licicont.me/logo.jpeg" />
 
     <!-- Preconnect (Performance) -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <!-- Fuentes autoalojadas: sin terceros y sin salto de maquetación -->
+    <link
+      rel="preload"
+      href="/fonts/inter-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/playfair-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="/logo.jpeg" />

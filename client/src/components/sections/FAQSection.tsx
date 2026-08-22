@@ -42,7 +42,7 @@ function FAQItem({ question, answer, isOpen, onToggle }: {
   onToggle: () => void;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-white transition-all duration-300 hover:border-gold/30">
+    <div className="rounded-lg border border-border bg-white transition-all duration-300 hover:border-gold/30">
       <button
         onClick={onToggle}
         className="flex w-full items-center justify-between px-6 py-5 text-left"
@@ -81,22 +81,20 @@ export default function FAQSection() {
       <div className="mx-auto max-w-3xl px-6">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <span className="mb-4 inline-block rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
-            Preguntas Frecuentes
-          </span>
-          <h2 className="text-3xl font-bold text-primary sm:text-4xl">
+          <span className="eyebrow eyebrow-center mb-4">Preguntas Frecuentes</span>
+          <h2 className="display-2 text-primary">
             ¿Tiene preguntas? Tenemos respuestas
           </h2>
         </motion.div>
 
         {/* Accordion */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.15 }}
           className="space-y-3"

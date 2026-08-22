@@ -97,18 +97,16 @@ export default function ServicesSection() {
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mx-auto mb-10 max-w-2xl text-center"
         >
-          <span className="mb-4 inline-block rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
-            Nichos de Especialización
-          </span>
-          <h2 className="text-3xl font-bold text-primary sm:text-4xl">
+          <span className="eyebrow eyebrow-center mb-4">Nichos de Especialización</span>
+          <h2 className="display-2 text-primary">
             Suministros para empezar, tecnología y obras para escalar
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-text-secondary lg:text-lg">
+          <p className="lede mt-4">
             Desde papelería y aseo hasta contratos de infraestructura de miles de millones.
           </p>
         </motion.div>
@@ -118,16 +116,16 @@ export default function ServicesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="mx-auto mb-10 flex max-w-lg flex-wrap justify-center gap-2"
+          className="mx-auto mb-10 flex max-w-xl flex-wrap justify-center gap-1 rounded-lg border border-border bg-white p-1"
         >
           {CATEGORIES.map((cat) => (
             <button
               key={cat.key}
               onClick={() => setActiveTab(cat.key)}
-              className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-300 ${
+              className={`flex-1 rounded-md px-4 py-2 text-sm font-medium transition-all duration-300 ${
                 activeTab === cat.key
-                  ? 'bg-gold text-white shadow-md shadow-gold/25'
-                  : 'bg-white text-text-secondary border border-border hover:border-gold/30 hover:text-primary'
+                  ? 'bg-primary text-white shadow-sm'
+                  : 'text-text-secondary hover:bg-bg-alt hover:text-primary'
               }`}
             >
               {cat.label}
@@ -148,12 +146,12 @@ export default function ServicesSection() {
             {active.services.map((service) => (
               <div
                 key={service.title}
-                className="group rounded-2xl border border-border bg-white p-7 shadow-sm transition-all duration-300 hover:border-gold/30 hover:shadow-lg"
+                className="group card card-hover p-7"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gold/10 text-gold transition-colors group-hover:bg-gold group-hover:text-white">
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-gold/10 text-gold transition-colors group-hover:bg-gold group-hover:text-white">
                   {service.icon}
                 </div>
-                <h3 className="mb-2 text-lg font-bold text-primary">{service.title}</h3>
+                <h3 className="display-3 mb-2 text-primary">{service.title}</h3>
                 <p className="text-sm leading-relaxed text-text-secondary">
                   {service.description}
                 </p>

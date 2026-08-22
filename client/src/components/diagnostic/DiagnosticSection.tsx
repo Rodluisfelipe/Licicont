@@ -1,14 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import {
-  ArrowLeft,
-  ArrowRight,
-  Clock,
-  Compass,
-  History,
-  Loader2,
-  ShieldCheck,
-} from 'lucide-react';
+import { ArrowLeft, ArrowRight, Clock, History, Loader2, ShieldCheck } from 'lucide-react';
 import { QUESTIONS } from '@/data/diagnostic';
 import { SERVICES, type ServiceId } from '@/data/services';
 import { computeRecommendation, isComplete, type Answers } from '@/lib/recommendation';
@@ -222,7 +214,8 @@ export default function DiagnosticSection() {
       ref={sectionRef}
       className="relative scroll-mt-20 overflow-hidden bg-primary py-16 sm:py-20"
     >
-      {/* Fondos difusos */}
+      {/* Ambiente: rejilla tenue y luces doradas */}
+      <div className="grid-texture pointer-events-none absolute inset-0" aria-hidden="true" />
       <div className="pointer-events-none absolute -top-32 right-0 h-[500px] w-[500px] rounded-full bg-gold/10 blur-3xl" />
       <div className="pointer-events-none absolute bottom-0 -left-32 h-[400px] w-[400px] rounded-full bg-gold/5 blur-3xl" />
 
@@ -232,22 +225,22 @@ export default function DiagnosticSection() {
           {phase === 'intro' && (
             <motion.div
               key="intro"
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.4 }}
               className="mx-auto max-w-3xl text-center"
             >
-              <span className="mb-6 inline-flex items-center gap-2 rounded-full bg-gold/15 px-4 py-1.5 text-sm font-medium text-gold-light">
-                <Compass className="h-4 w-4" />
+              <span className="eyebrow eyebrow-center eyebrow-light mb-6">
                 Diagnóstico gratuito · 6 preguntas
               </span>
 
-              <h2 className="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-                ¿Cuál de mis <span className="text-gold-light">6 servicios</span> es el tuyo?
+              <h2 className="display-1 text-white">
+                ¿Cuál de mis <span className="text-gold-light italic">6 servicios</span> es el
+                tuyo?
               </h2>
 
-              <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/70 lg:text-lg">
+              <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/65 sm:text-[1.0625rem]">
                 Respóndeme seis preguntas y te digo con cuál empezar, qué incluye, cuánto
                 cuesta y cómo arrancamos. Sin llamadas de descubrimiento ni cotizaciones a
                 ciegas.
@@ -255,7 +248,7 @@ export default function DiagnosticSection() {
 
               {/* Diagnóstico anterior guardado en este navegador */}
               {saved?.serviceName && (
-                <div className="mx-auto mt-8 flex max-w-xl flex-col items-center gap-3 rounded-2xl border border-gold/25 bg-white/[0.04] px-6 py-5 sm:flex-row sm:justify-between sm:text-left">
+                <div className="mx-auto mt-8 flex max-w-xl flex-col items-center gap-3 rounded-lg border border-gold/25 bg-white/[0.04] px-6 py-5 sm:flex-row sm:justify-between sm:text-left">
                   <div className="flex items-center gap-3">
                     <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gold/15 text-gold-light">
                       <History className="h-4 w-4" />
@@ -268,7 +261,7 @@ export default function DiagnosticSection() {
                   <button
                     type="button"
                     onClick={resume}
-                    className="shrink-0 rounded-full bg-gold px-5 py-2 text-xs font-semibold text-white transition-colors hover:bg-gold-light"
+                    className="btn btn-primary shrink-0 px-5 py-2 text-xs"
                   >
                     Ver mi plan
                   </button>
@@ -279,10 +272,10 @@ export default function DiagnosticSection() {
                 <button
                   type="button"
                   onClick={() => start()}
-                  className="magnetic-btn inline-flex items-center gap-2 rounded-full bg-gold px-9 py-4 text-base font-semibold text-white shadow-lg"
+                  className="btn btn-lg btn-primary magnetic-btn px-8"
                 >
                   {saved?.serviceName ? 'Hacer el diagnóstico de nuevo' : 'Empezar mi diagnóstico'}
-                  <ArrowRight className="h-5 w-5" />
+                  <ArrowRight className="h-[18px] w-[18px]" />
                 </button>
 
                 <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-white/45">
@@ -297,16 +290,14 @@ export default function DiagnosticSection() {
 
               {/* Atajos: las frases del cliente del menú de servicios */}
               <div className="mt-12">
-                <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/35">
-                  O ubícate directo
-                </p>
+                <p className="eyebrow eyebrow-center mb-4 text-white/35">O ubícate directo</p>
                 <div className="flex flex-wrap justify-center gap-2.5">
                   {SERVICES.map((service) => (
                     <button
                       key={service.id}
                       type="button"
                       onClick={() => start(VOICE_SHORTCUT[service.id])}
-                      className="rounded-full border border-white/12 bg-white/5 px-4 py-2 text-xs font-medium text-white/70 transition-all hover:border-gold/40 hover:bg-gold/10 hover:text-white sm:text-sm"
+                      className="rounded-md border border-white/12 bg-white/[0.04] px-4 py-2 text-xs font-medium text-white/70 transition-all hover:border-gold/40 hover:bg-gold/10 hover:text-white"
                     >
                       “{service.clientVoice}”
                     </button>
@@ -320,7 +311,7 @@ export default function DiagnosticSection() {
           {phase === 'quiz' && question && (
             <motion.div
               key="quiz"
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.35 }}
@@ -352,10 +343,8 @@ export default function DiagnosticSection() {
                   exit={{ opacity: 0, x: -28 }}
                   transition={{ duration: 0.28 }}
                 >
-                  <h3 className="text-2xl font-bold leading-snug text-white sm:text-3xl">
-                    {question.title}
-                  </h3>
-                  <p className="mt-2.5 text-sm text-white/55 sm:text-base">{question.subtitle}</p>
+                  <h3 className="display-2 text-white">{question.title}</h3>
+                  <p className="mt-3 text-sm text-white/55 sm:text-base">{question.subtitle}</p>
 
                   <div
                     className={`mt-8 grid gap-3 ${
@@ -369,10 +358,10 @@ export default function DiagnosticSection() {
                           key={option.value}
                           type="button"
                           onClick={() => answer(option.value)}
-                          className={`group flex w-full items-start gap-4 rounded-2xl border px-5 py-4 text-left transition-all duration-200 ${
+                          className={`group flex w-full items-start gap-4 rounded-lg border px-5 py-4 text-left transition-all duration-200 ${
                             selected
-                              ? 'border-gold bg-gold/15 shadow-lg shadow-gold/10'
-                              : 'border-white/12 bg-white/[0.03] hover:border-gold/40 hover:bg-white/[0.07]'
+                              ? 'border-gold bg-gold/12 shadow-md'
+                              : 'border-white/10 bg-white/[0.03] hover:border-gold/40 hover:bg-white/[0.06]'
                           }`}
                         >
                           <span className="text-xl leading-none" aria-hidden="true">
@@ -389,7 +378,7 @@ export default function DiagnosticSection() {
                             )}
                           </span>
                           <span
-                            className={`hidden h-6 w-6 shrink-0 items-center justify-center rounded-md border text-[11px] font-semibold transition-colors sm:flex ${
+                            className={`tnum hidden h-6 w-6 shrink-0 items-center justify-center rounded border text-[11px] font-semibold transition-colors sm:flex ${
                               selected
                                 ? 'border-gold bg-gold text-white'
                                 : 'border-white/15 text-white/35 group-hover:border-gold/40 group-hover:text-gold-light'
@@ -409,7 +398,7 @@ export default function DiagnosticSection() {
                 <button
                   type="button"
                   onClick={goBack}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-white/12 px-5 py-2.5 text-sm font-medium text-white/60 transition-colors hover:bg-white/5 hover:text-white"
+                  className="btn btn-outline-invert"
                 >
                   <ArrowLeft className="h-4 w-4" />
                   Atrás

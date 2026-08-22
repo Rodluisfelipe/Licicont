@@ -50,18 +50,16 @@ export default function TestimonialsSection() {
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mx-auto mb-12 max-w-2xl text-center"
         >
-          <span className="mb-4 inline-block rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
-            Casos de Éxito
-          </span>
-          <h2 className="text-3xl font-bold text-primary sm:text-4xl">
+          <span className="eyebrow eyebrow-center mb-4">Casos de Éxito</span>
+          <h2 className="display-2 text-primary">
             Resultados reales de clientes reales
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-text-secondary lg:text-lg">
+          <p className="lede mt-4">
             Así he ayudado a empresas colombianas a ganar contratos con el Estado.
           </p>
         </motion.div>
@@ -71,10 +69,10 @@ export default function TestimonialsSection() {
           {CASE_STUDIES.map((c, i) => (
             <motion.div
               key={c.name}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group flex flex-col rounded-2xl border border-border bg-white shadow-sm transition-all duration-300 hover:border-gold/30 hover:shadow-lg"
+              transition={{ duration: 0.5, delay: i * 0.06 }}
+              className="group flex flex-col rounded-lg border border-border bg-white shadow-sm transition-all duration-300 hover:border-gold/30 hover:shadow-lg"
             >
               {/* Metric banner */}
               <div className="flex items-center justify-between rounded-t-2xl bg-primary px-6 py-3">
@@ -120,7 +118,7 @@ export default function TestimonialsSection() {
                 <div className="border-t border-border pt-4">
                   <p className="text-sm font-semibold text-primary">{c.name}</p>
                   <p className="text-xs text-text-secondary">{c.role} — {c.company}</p>
-                  <span className="mt-2 inline-block rounded-full bg-bg-alt px-2.5 py-0.5 text-[11px] font-medium text-text-secondary">
+                  <span className="mt-2 inline-block rounded border border-border bg-bg-alt px-2 py-0.5 text-[11px] font-medium text-text-secondary">
                     {c.sector}
                   </span>
                 </div>

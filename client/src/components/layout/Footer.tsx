@@ -31,7 +31,7 @@ export default function Footer() {
                 width="44"
                 height="44"
               />
-              <span className="text-lg font-bold tracking-wider text-white">
+              <span className="text-[15px] font-semibold tracking-[0.16em] text-white">
                 LICICONT
               </span>
             </div>
@@ -58,7 +58,7 @@ export default function Footer() {
           {/* Link columns */}
           {Object.entries(LINKS).map(([title, links]) => (
             <div key={title}>
-              <h4 className="mb-3.5 text-sm font-semibold text-white">{title}</h4>
+              <h4 className="eyebrow eyebrow-light mb-4">{title}</h4>
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.label}>
@@ -76,7 +76,7 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="my-8 h-px bg-white/10" />
+        <div className="rule-gold my-8" />
 
         {/* Bottom */}
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">

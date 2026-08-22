@@ -29,11 +29,11 @@ function PlanCard({ service, delay }: { service: Service; delay: number }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.45, delay }}
-      className={`flex flex-col rounded-2xl border p-7 transition-all duration-300 ${
+      className={`flex flex-col rounded-lg border p-7 transition-all duration-300 ${
         featured
           ? 'border-gold bg-primary text-white shadow-xl shadow-gold/10'
           : 'border-border bg-white shadow-sm hover:border-gold/30 hover:shadow-lg'
@@ -50,8 +50,10 @@ function PlanCard({ service, delay }: { service: Service; delay: number }) {
         </span>
         {service.badge && (
           <span
-            className={`rounded-full px-3 py-1 text-[11px] font-semibold ${
-              featured ? 'bg-gold text-white' : 'bg-gold/10 text-gold-dark'
+            className={`rounded border px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] uppercase ${
+              featured
+                ? 'border-gold/60 bg-gold/15 text-gold-light'
+                : 'border-gold/30 text-gold-dark'
             }`}
           >
             {service.badge}
@@ -59,7 +61,11 @@ function PlanCard({ service, delay }: { service: Service; delay: number }) {
         )}
       </div>
 
-      <p className={`text-xs italic ${featured ? 'text-white/50' : 'text-text-light'}`}>
+      <p
+        className={`font-display text-[13px] italic ${
+          featured ? 'text-gold-light/80' : 'text-gold-dark/80'
+        }`}
+      >
         “{service.clientVoice}”
       </p>
       <h3
@@ -83,7 +89,11 @@ function PlanCard({ service, delay }: { service: Service; delay: number }) {
           featured ? 'border-white/15 bg-white/5' : 'border-border bg-bg-alt'
         }`}
       >
-        <p className={`text-base font-bold ${featured ? 'text-gold-light' : 'text-primary'}`}>
+        <p
+          className={`font-display tnum text-lg font-semibold ${
+            featured ? 'text-gold-light' : 'text-primary'
+          }`}
+        >
           {service.price}
         </p>
         {service.priceNote && (
@@ -187,11 +197,7 @@ function PlanCard({ service, delay }: { service: Service; delay: number }) {
         href={whatsappUrl(buildServiceMessage(service.name, service.price))}
         target="_blank"
         rel="noopener noreferrer"
-        className={`mt-auto inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 pt-3 text-sm font-semibold transition-all ${
-          featured
-            ? 'bg-gold text-white hover:bg-gold-light'
-            : 'border border-border text-primary hover:border-gold hover:bg-gold hover:text-white'
-        }`}
+        className={`btn mt-auto ${featured ? 'btn-primary' : 'btn-outline'}`}
       >
         <MessageCircle className="h-4 w-4" />
         Me interesa este servicio
@@ -209,25 +215,23 @@ export default function PlansSection() {
       <div className="mx-auto max-w-7xl px-6">
         {/* Encabezado */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mx-auto mb-10 max-w-2xl text-center"
         >
-          <span className="mb-4 inline-block rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
-            El menú completo
-          </span>
-          <h2 className="text-3xl font-bold text-primary sm:text-4xl">
+          <span className="eyebrow eyebrow-center mb-4">El menú completo</span>
+          <h2 className="display-2 text-primary">
             Seis formas de trabajar conmigo
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-text-secondary lg:text-lg">
+          <p className="lede mt-4">
             Desde aprender a licitar hasta que yo licite contigo cada mes. Cada servicio
             dice qué incluye, qué no y cuánto cuesta.
           </p>
 
           <a
             href="#diagnostico"
-            className="mt-6 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-white px-5 py-2.5 text-sm font-semibold text-gold-dark transition-all hover:border-gold hover:bg-gold hover:text-white"
+            className="btn btn-outline mt-7 text-gold-dark hover:text-primary"
           >
             <Compass className="h-4 w-4" />
             ¿No sabes cuál? Haz el diagnóstico
@@ -248,24 +252,25 @@ export default function PlansSection() {
 
         {/* Diferenciadores */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.5 }}
           className="mt-16"
         >
-          <h3 className="mb-10 text-center text-2xl font-bold text-primary sm:text-3xl">
-            Por qué Licicont y no otro
-          </h3>
+          <div className="mb-10 text-center">
+            <span className="eyebrow eyebrow-center mb-3">La diferencia</span>
+            <h3 className="display-2 text-primary">Por qué Licicont y no otro</h3>
+          </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {DIFFERENTIATORS.map((diff) => {
               const Icon = DIFF_ICONS[diff.icon];
               return (
                 <div
                   key={diff.title}
-                  className="rounded-2xl border border-border bg-white p-6 transition-all duration-300 hover:border-gold/30 hover:shadow-lg"
+                  className="card card-hover p-6"
                 >
-                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gold/10 text-gold">
+                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-gold/10 text-gold">
                     <Icon className="h-5 w-5" strokeWidth={1.5} />
                   </span>
                   <h4 className="mb-2 text-base font-bold text-primary">{diff.title}</h4>

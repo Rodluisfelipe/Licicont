@@ -35,7 +35,7 @@ const initialFormState: FormData = {
 };
 
 const inputClass =
-  'w-full rounded-xl border border-border bg-bg-alt px-4 py-3.5 text-sm text-primary placeholder:text-text-light transition-all focus:border-gold focus:ring-2 focus:ring-gold/20 focus:outline-none';
+  'w-full rounded-md border border-border bg-bg-alt px-4 py-3 text-sm text-primary transition-all placeholder:text-text-light focus:border-gold focus:bg-white focus:ring-2 focus:ring-gold/20 focus:outline-none';
 
 const STEPS = [
   { title: '¿En qué sector licitas?', subtitle: 'Elige tu sector principal' },
@@ -111,16 +111,18 @@ export default function CredentialForm({ isOpen, onClose }: CredentialFormProps)
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
           >
             <div
-              className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/20 bg-white/95 shadow-2xl backdrop-blur-xl"
+              className="relative w-full max-w-lg overflow-hidden rounded-xl border border-border bg-white shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
               <div className="flex items-center justify-between border-b border-border px-7 py-5">
                 <div className="flex items-center gap-2.5">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gold/10">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-md bg-gold/10">
                     <Shield className="h-4 w-4 text-gold" strokeWidth={1.5} />
                   </div>
-                  <span className="text-sm font-semibold text-primary">Hablar con Andrés</span>
+                  <span className="font-display text-[15px] font-semibold text-primary">
+                    Hablar con Andrés
+                  </span>
                 </div>
                 <button
                   onClick={handleClose}
@@ -151,10 +153,10 @@ export default function CredentialForm({ isOpen, onClose }: CredentialFormProps)
                     >
                       {/* Step header */}
                       <div className="mb-6">
-                        <p className="text-xs font-medium text-gold-dark">
+                        <p className="eyebrow">
                           Paso {step + 1} de {STEPS.length}
                         </p>
-                        <h3 className="mt-1 text-lg font-bold text-primary">{STEPS[step].title}</h3>
+                        <h3 className="display-3 mt-2 text-primary">{STEPS[step].title}</h3>
                         <p className="text-sm text-text-secondary">{STEPS[step].subtitle}</p>
                       </div>
 
@@ -166,10 +168,10 @@ export default function CredentialForm({ isOpen, onClose }: CredentialFormProps)
                               key={s}
                               type="button"
                               onClick={() => setForm({ ...form, sector: s })}
-                              className={`rounded-xl border px-3 py-2.5 text-left text-xs font-medium transition-all ${
+                              className={`rounded-md border px-3 py-2.5 text-left text-xs font-medium transition-all ${
                                 form.sector === s
-                                  ? 'border-gold bg-gold/10 text-gold-dark shadow-sm'
-                                  : 'border-border bg-white text-text-secondary hover:border-gold/30'
+                                  ? 'border-gold bg-gold/10 text-gold-dark shadow-xs'
+                                  : 'border-border bg-white text-text-secondary hover:border-gold/40'
                               }`}
                             >
                               {s}
@@ -212,7 +214,7 @@ export default function CredentialForm({ isOpen, onClose }: CredentialFormProps)
                           <button
                             type="button"
                             onClick={() => setStep(step - 1)}
-                            className="flex items-center gap-1.5 rounded-xl border border-border px-4 py-2.5 text-sm font-medium text-text-secondary transition-colors hover:bg-bg-alt"
+                            className="btn btn-outline"
                           >
                             <ArrowLeft className="h-4 w-4" />
                             Atrás
@@ -226,7 +228,7 @@ export default function CredentialForm({ isOpen, onClose }: CredentialFormProps)
                             type="button"
                             onClick={() => canAdvance() && setStep(step + 1)}
                             disabled={!canAdvance()}
-                            className="flex items-center gap-1.5 rounded-xl bg-gold px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-gold-light disabled:opacity-40"
+                            className="btn btn-primary"
                           >
                             Siguiente
                             <ArrowRight className="h-4 w-4" />
@@ -236,7 +238,7 @@ export default function CredentialForm({ isOpen, onClose }: CredentialFormProps)
                             type="button"
                             onClick={handleSubmit}
                             disabled={!canAdvance()}
-                            className="flex items-center gap-1.5 rounded-xl bg-[#25D366] px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-[#1ebe57] disabled:opacity-40"
+                            className="btn btn-whatsapp"
                           >
                             <MessageCircle className="h-4 w-4" />
                             Abrir WhatsApp

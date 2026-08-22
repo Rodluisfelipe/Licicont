@@ -38,7 +38,7 @@ interface Props {
 const emptyLead: LeadContact = { fullName: '', company: '', phone: '', email: '' };
 
 const inputClass =
-  'w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/35 transition-all focus:border-gold focus:bg-white/10 focus:ring-2 focus:ring-gold/25 focus:outline-none';
+  'w-full rounded-md border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white transition-all placeholder:text-white/30 focus:border-gold focus:bg-white/[0.08] focus:ring-2 focus:ring-gold/20 focus:outline-none';
 
 /** Anillo de afinidad — el número sube mientras el usuario lee. */
 function AffinityRing({ value }: { value: number }) {
@@ -169,36 +169,34 @@ export default function DiagnosticResult({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       className="mx-auto max-w-5xl"
     >
       {/* ── Encabezado del resultado ── */}
       <div className="mb-8 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full bg-gold/15 px-4 py-1.5 text-sm font-medium text-gold-light">
-          <Sparkles className="h-4 w-4" />
+        <span className="eyebrow eyebrow-center eyebrow-light">
+          <Sparkles className="h-3.5 w-3.5" />
           Tu diagnóstico está listo
         </span>
       </div>
 
       {/* ── Plan recomendado ── */}
-      <div className="overflow-hidden rounded-3xl border border-gold/30 bg-white/[0.04] shadow-2xl backdrop-blur-sm">
+      <div className="overflow-hidden rounded-xl border border-gold/25 bg-white/[0.035] shadow-2xl backdrop-blur-sm">
         <div className="border-b border-white/10 bg-gradient-to-r from-gold/15 to-transparent px-6 py-7 sm:px-9">
           <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
             <AffinityRing value={affinity} />
 
             <div className="flex-1">
-              <p className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-gold-light">
-                Tu plan recomendado
-              </p>
-              <h3 className="flex flex-wrap items-center gap-3 text-2xl font-bold text-white sm:text-3xl">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold text-white">
+              <p className="eyebrow eyebrow-light mb-2">Tu plan recomendado</p>
+              <h3 className="display-2 flex flex-wrap items-center gap-3 text-white">
+                <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-gold text-white">
                   <ServiceIcon name={primary.icon} />
                 </span>
                 {primary.name}
               </h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-white/70 sm:text-base">
+              <p className="mt-3 text-sm leading-relaxed text-white/65 sm:text-base">
                 {primary.tagline}
               </p>
             </div>
@@ -208,7 +206,7 @@ export default function DiagnosticResult({
         <div className="grid gap-8 px-6 py-8 sm:px-9 lg:grid-cols-2">
           {/* Por qué este plan */}
           <div>
-            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-gold-light">
+            <h4 className="eyebrow eyebrow-light mb-4">
               Por qué este plan es el tuyo
             </h4>
             <ul className="space-y-3">
@@ -220,11 +218,11 @@ export default function DiagnosticResult({
               ))}
             </ul>
 
-            <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-              <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-white/45">
-                Inversión estimada
+            <div className="mt-6 rounded-lg border border-white/10 bg-white/[0.03] p-5">
+              <p className="eyebrow mb-1.5 text-white/40">Inversión estimada</p>
+              <p className="font-display tnum text-2xl font-semibold text-gold-light">
+                {primary.price}
               </p>
-              <p className="text-xl font-bold text-gold-light">{primary.price}</p>
               {primary.priceNote && (
                 <p className="mt-0.5 text-xs text-white/50">{primary.priceNote}</p>
               )}
@@ -236,7 +234,7 @@ export default function DiagnosticResult({
 
           {/* Qué incluye */}
           <div>
-            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-gold-light">
+            <h4 className="eyebrow eyebrow-light mb-4">
               Qué incluye
             </h4>
             <ul className="space-y-2.5">
@@ -250,9 +248,7 @@ export default function DiagnosticResult({
 
             {primary.notIncludes.length > 0 && (
               <>
-                <h4 className="mt-6 mb-3 text-sm font-semibold uppercase tracking-wider text-white/40">
-                  No incluye
-                </h4>
+                <h4 className="eyebrow mt-6 mb-3 text-white/35">No incluye</h4>
                 <ul className="space-y-2">
                   {primary.notIncludes.map((item) => (
                     <li key={item} className="flex gap-3 text-sm leading-relaxed text-white/45">
@@ -268,13 +264,13 @@ export default function DiagnosticResult({
 
         {/* Ruta de arranque */}
         <div className="border-t border-white/10 px-6 py-8 sm:px-9">
-          <h4 className="mb-5 text-sm font-semibold uppercase tracking-wider text-gold-light">
+          <h4 className="eyebrow eyebrow-light mb-5">
             Cómo arrancamos
           </h4>
           <div className="grid gap-4 sm:grid-cols-3">
             {nextSteps.map((step, i) => (
-              <div key={step} className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <span className="mb-3 flex h-7 w-7 items-center justify-center rounded-full bg-gold/20 text-xs font-bold text-gold-light">
+              <div key={step} className="rounded-lg border border-white/10 bg-white/[0.03] p-5">
+                <span className="font-display mb-3 flex h-7 w-7 items-center justify-center rounded-full bg-gold/20 text-xs font-semibold text-gold-light">
                   {i + 1}
                 </span>
                 <p className="text-sm leading-relaxed text-white/70">{step}</p>
@@ -295,7 +291,7 @@ export default function DiagnosticResult({
             {complements.map((service) => (
               <div
                 key={service.id}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-gold/30"
+                className="rounded-lg border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-gold/30"
               >
                 <div className="mb-3 flex items-center gap-3">
                   <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gold/15 text-gold-light">
@@ -312,8 +308,8 @@ export default function DiagnosticResult({
       )}
 
       {/* ── Captura del lead ── */}
-      <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-9">
-        <h4 className="text-xl font-bold text-white">
+      <div className="mt-8 rounded-xl border border-white/10 bg-white/[0.04] p-6 sm:p-9">
+        <h4 className="display-3 text-white">
           {sent ? '¡Listo! Te escribo enseguida' : 'Recibe tu propuesta personalizada'}
         </h4>
         <p className="mt-2 text-sm leading-relaxed text-white/60">
@@ -385,7 +381,7 @@ export default function DiagnosticResult({
             type="button"
             onClick={handleSend}
             disabled={!canSend}
-            className="magnetic-btn inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-8 py-3.5 text-sm font-semibold text-white shadow-lg transition-all hover:bg-[#1ebe57] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:transform-none"
+            className="btn btn-lg btn-whatsapp magnetic-btn"
           >
             <MessageCircle className="h-5 w-5" />
             {sent ? 'Reabrir WhatsApp' : 'Recibir mi propuesta por WhatsApp'}
@@ -394,7 +390,7 @@ export default function DiagnosticResult({
           <button
             type="button"
             onClick={onRestart}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-3.5 text-sm font-medium text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+            className="btn btn-lg btn-outline-invert"
           >
             <RefreshCw className="h-4 w-4" />
             Repetir diagnóstico
@@ -402,7 +398,7 @@ export default function DiagnosticResult({
 
           <a
             href="#planes"
-            className="inline-flex items-center justify-center gap-1.5 px-2 py-3.5 text-sm font-medium text-gold-light transition-colors hover:text-gold"
+            className="btn btn-lg text-gold-light hover:text-gold"
           >
             Ver los 6 servicios
             <ArrowRight className="h-4 w-4" />
@@ -420,7 +416,7 @@ export default function DiagnosticResult({
           <button
             type="button"
             onClick={() => printDiagnostic(recommendation, lead, shareUrl)}
-            className="inline-flex items-center gap-2 rounded-full border border-white/12 px-4 py-2 text-xs font-medium text-white/60 transition-colors hover:border-gold/40 hover:text-white"
+            className="inline-flex items-center gap-2 rounded-md border border-white/12 px-4 py-2 text-xs font-medium text-white/60 transition-colors hover:border-gold/40 hover:text-white"
           >
             <Printer className="h-3.5 w-3.5" />
             Guardar en PDF
@@ -429,7 +425,7 @@ export default function DiagnosticResult({
           <button
             type="button"
             onClick={handleShare}
-            className="inline-flex items-center gap-2 rounded-full border border-white/12 px-4 py-2 text-xs font-medium text-white/60 transition-colors hover:border-gold/40 hover:text-white"
+            className="inline-flex items-center gap-2 rounded-md border border-white/12 px-4 py-2 text-xs font-medium text-white/60 transition-colors hover:border-gold/40 hover:text-white"
           >
             {copied ? (
               <>
@@ -446,7 +442,7 @@ export default function DiagnosticResult({
 
           <a
             href={mailtoUrl(`Diagnóstico Licicont — ${primary.name}`, message)}
-            className="inline-flex items-center gap-2 rounded-full border border-white/12 px-4 py-2 text-xs font-medium text-white/60 transition-colors hover:border-gold/40 hover:text-white"
+            className="inline-flex items-center gap-2 rounded-md border border-white/12 px-4 py-2 text-xs font-medium text-white/60 transition-colors hover:border-gold/40 hover:text-white"
           >
             <Mail className="h-3.5 w-3.5" />
             Prefiero por correo

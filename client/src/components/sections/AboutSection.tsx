@@ -29,16 +29,16 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Photo side */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -24 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7 }}
             className="relative flex justify-center lg:sticky lg:top-24"
           >
             <div className="relative w-72 lg:w-80">
               {/* Gold premium frame */}
-              <div className="rounded-2xl bg-gradient-to-br from-gold via-gold-light to-gold-dark p-[3px] shadow-xl shadow-gold/20">
-                <div className="rounded-[13px] bg-gradient-to-br from-gold-dark/20 via-transparent to-gold/20 p-[3px]">
-                  <div className="overflow-hidden rounded-xl">
+              <div className="rounded-xl bg-gradient-to-br from-gold-light via-gold to-gold-dark p-[2px] shadow-lg">
+                <div className="rounded-[11px] bg-white p-[3px]">
+                  <div className="overflow-hidden rounded-lg">
                     <img
                       src="/andres.jpeg"
                       alt="Andrés Beltrán Mora — Especialista en Licitaciones Públicas y Contratación Estatal en Colombia"
@@ -52,33 +52,37 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
                 </div>
               </div>
               {/* Floating card */}
-              <div className="absolute -bottom-5 left-4 right-4 rounded-xl border border-gold/20 bg-white/95 p-4 shadow-lg backdrop-blur-md">
-                <p className="text-sm font-bold text-primary">Andrés Beltrán Mora</p>
-                <p className="text-xs text-text-secondary">Especialista en Licitaciones Públicas & Contratación Estatal</p>
+              <div className="absolute right-4 -bottom-6 left-4 rounded-lg border border-border bg-white/95 px-4 py-3.5 shadow-md backdrop-blur-md">
+                <p className="font-display text-[15px] font-semibold text-primary">
+                  Andrés Beltrán Mora
+                </p>
+                <p className="mt-0.5 text-[11px] leading-snug text-text-secondary">
+                  Especialista en licitaciones públicas y contratación estatal
+                </p>
               </div>
             </div>
           </motion.div>
 
           {/* Text side */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: 24 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
-            <span className="mb-4 inline-block rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
-              Sobre Mí
-            </span>
-            <h2 className="text-3xl font-bold text-primary sm:text-4xl">
+            <span className="eyebrow mb-4">Sobre mí</span>
+            <h2 className="display-2 text-primary">
               Más de una década ganando{' '}
-              <span className="text-gold">licitaciones públicas</span>
+              <span className="text-gold italic">licitaciones públicas</span>
             </h2>
 
             {/* Credenciales rápidas */}
             <div className="mt-6 grid grid-cols-3 gap-3">
               {CREDENTIALS.map((c) => (
-                <div key={c.label} className="rounded-xl border border-border bg-bg-alt px-3 py-3 text-center">
-                  <p className="text-base font-bold text-gold-dark sm:text-lg">{c.value}</p>
-                  <p className="mt-0.5 text-[11px] leading-tight text-text-secondary">{c.label}</p>
+                <div key={c.label} className="rounded-lg border border-border bg-bg-alt px-3 py-3.5 text-center">
+                  <p className="font-display tnum text-base font-semibold text-gold-dark sm:text-lg">
+                    {c.value}
+                  </p>
+                  <p className="mt-1 text-[11px] leading-tight text-text-secondary">{c.label}</p>
                 </div>
               ))}
             </div>
@@ -138,8 +142,8 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
             </button>
 
             {/* What you'll learn */}
-            <div className="mt-7 rounded-2xl border border-border bg-bg-alt p-5">
-              <p className="mb-4 text-sm font-semibold text-primary">En mis asesorías aprenderás a:</p>
+            <div className="mt-7 rounded-lg border border-border bg-bg-alt p-6">
+              <p className="eyebrow mb-4">En mis asesorías aprenderás a</p>
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {EXPERTISE.map((item) => (
                   <div key={item} className="flex items-start gap-2">
@@ -158,16 +162,16 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
                     .querySelector('#diagnostico')
                     ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
                 }
-                className="magnetic-btn inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-gold/25 transition-all hover:bg-gold-dark hover:shadow-xl"
+                className="btn btn-lg btn-primary magnetic-btn"
               >
-                <Compass className="h-5 w-5" />
+                <Compass className="h-[18px] w-[18px]" />
                 Ver qué servicio me corresponde
               </button>
               <button
                 onClick={onContact}
-                className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3.5 text-base font-semibold text-primary transition-all hover:border-gold/50 hover:bg-bg-alt"
+                className="btn btn-lg btn-outline"
               >
-                <MessageCircle className="h-5 w-5" />
+                <MessageCircle className="h-[18px] w-[18px]" />
                 Hablemos
               </button>
             </div>

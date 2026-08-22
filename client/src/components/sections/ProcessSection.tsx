@@ -46,18 +46,16 @@ export default function ProcessSection() {
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mx-auto mb-12 max-w-2xl text-center"
         >
-          <span className="mb-4 inline-block rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
-            Metodología
-          </span>
-          <h2 className="text-3xl font-bold text-primary sm:text-4xl">
+          <span className="eyebrow eyebrow-center mb-4">Metodología</span>
+          <h2 className="display-2 text-primary">
             De la oportunidad al contrato firmado
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-text-secondary lg:text-lg">
+          <p className="lede mt-4">
             El mismo método en más de 100 procesos participados. Cuatro fases que
             maximizan tu probabilidad de ganar.
           </p>
@@ -68,23 +66,21 @@ export default function ProcessSection() {
           {STEPS.map((step, i) => (
             <motion.div
               key={step.num}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group relative rounded-2xl border border-border bg-white p-6 shadow-sm transition-all duration-300 hover:border-gold/30 hover:shadow-lg"
+              transition={{ duration: 0.5, delay: i * 0.06 }}
+              className="group relative card card-hover p-6"
             >
               {/* Step number */}
-              <span className="absolute -top-3 left-6 rounded-full bg-gold px-3 py-0.5 text-xs font-bold text-white shadow-sm">
+              <span className="absolute -top-2.5 left-6 rounded border border-gold/30 bg-white px-2.5 py-0.5 text-[10px] font-semibold tracking-[0.14em] text-gold-dark uppercase">
                 Paso {step.num}
               </span>
 
-              <div className="mb-4 mt-2 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/5 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+              <div className="mt-2 mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-primary/[0.06] text-primary transition-colors group-hover:bg-primary group-hover:text-white">
                 {step.icon}
               </div>
 
-              <h3 className="mb-2 text-lg font-bold text-primary">
-                {step.title}
-              </h3>
+              <h3 className="display-3 mb-2 text-primary">{step.title}</h3>
               <p className="mb-4 text-sm leading-relaxed text-text-secondary">
                 {step.description}
               </p>
@@ -94,7 +90,7 @@ export default function ProcessSection() {
                 {step.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-bg-alt px-2.5 py-0.5 text-[11px] font-medium text-text-secondary"
+                    className="rounded border border-border bg-bg-alt px-2 py-0.5 text-[11px] font-medium text-text-secondary"
                   >
                     {tag}
                   </span>

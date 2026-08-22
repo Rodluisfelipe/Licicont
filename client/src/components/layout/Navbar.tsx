@@ -90,7 +90,7 @@ export default function Navbar({ onContact }: { onContact: () => void }) {
               width="44"
               height="44"
             />
-            <span className="hidden text-base font-bold tracking-wide text-primary sm:block">
+            <span className="hidden text-[15px] font-semibold tracking-[0.14em] text-primary sm:block">
               LICICONT
             </span>
           </a>
@@ -104,7 +104,7 @@ export default function Navbar({ onContact }: { onContact: () => void }) {
                   key={link.href}
                   onClick={() => handleNavClick(link.href)}
                   aria-current={active ? 'true' : undefined}
-                  className={`relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
+                  className={`relative rounded-md px-3.5 py-2 text-sm font-medium transition-colors ${
                     active ? 'text-primary' : 'text-text-secondary hover:text-primary'
                   }`}
                 >
@@ -127,14 +127,14 @@ export default function Navbar({ onContact }: { onContact: () => void }) {
               href={WA_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium text-text-secondary transition-colors hover:text-primary xl:flex"
+              className="btn btn-ghost hidden text-sm xl:inline-flex"
             >
               <Phone className="h-3.5 w-3.5" />
               302 380 5967
             </a>
             <button
               onClick={goToDiagnostic}
-              className="flex items-center gap-1.5 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-gold-dark hover:shadow-md"
+              className="btn btn-primary"
             >
               <Compass className="h-4 w-4" />
               Diagnóstico gratis
@@ -145,7 +145,7 @@ export default function Navbar({ onContact }: { onContact: () => void }) {
           <div className="flex items-center gap-2 md:hidden">
             <button
               onClick={goToDiagnostic}
-              className="rounded-full bg-gold px-4 py-2 text-xs font-semibold text-white shadow-sm"
+              className="btn btn-primary px-3.5 py-2 text-xs"
             >
               Diagnóstico gratis
             </button>
@@ -184,7 +184,7 @@ export default function Navbar({ onContact }: { onContact: () => void }) {
                   <button
                     key={link.href}
                     onClick={() => handleNavClick(link.href)}
-                    className={`rounded-xl px-4 py-2.5 text-left text-base font-medium transition-colors ${
+                    className={`rounded-lg px-4 py-2.5 text-left text-base font-medium transition-colors ${
                       activeSection === link.href
                         ? 'bg-gold/10 text-gold-dark'
                         : 'text-text hover:bg-bg-alt'
@@ -199,7 +199,7 @@ export default function Navbar({ onContact }: { onContact: () => void }) {
                     setMobileOpen(false);
                     onContact();
                   }}
-                  className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3 text-sm font-semibold text-white transition-all"
+                  className="btn btn-whatsapp w-full"
                 >
                   <MessageCircle className="h-4 w-4" />
                   Escríbeme por WhatsApp

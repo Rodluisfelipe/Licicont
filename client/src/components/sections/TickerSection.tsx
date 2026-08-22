@@ -26,20 +26,20 @@ function MetricCard({ label, value, suffix, prefix = '', decimals = 0, icon, del
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: delay * 0.08 }}
-      className="rounded-2xl border border-border bg-white p-6 text-center shadow-sm transition-all duration-300 hover:border-gold/30 hover:shadow-lg"
+      transition={{ duration: 0.5, delay: delay * 0.05 }}
+      className="card card-hover p-6 text-center"
     >
-      <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-gold/10 text-gold">
+      <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-gold/10 text-gold">
         {icon}
       </div>
       <div className="mb-1">
-        <span className="text-sm text-gold">{prefix}</span>
-        <span className="text-3xl font-bold tabular-nums text-primary lg:text-4xl">
+        <span className="font-display text-lg text-gold">{prefix}</span>
+        <span className="font-display tnum text-3xl font-semibold text-primary lg:text-[2.25rem]">
           {decimals > 0 ? animatedValue.toFixed(decimals) : animatedValue.toLocaleString('es-CO')}
         </span>
-        <span className="ml-0.5 text-sm font-semibold text-gold">{suffix}</span>
+        <span className="font-display ml-0.5 text-lg font-semibold text-gold">{suffix}</span>
       </div>
       <p className="text-sm text-text-secondary">{label}</p>
     </motion.div>
@@ -64,18 +64,16 @@ export default function TickerSection() {
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mx-auto mb-12 max-w-2xl text-center"
         >
-          <span className="mb-4 inline-block rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
-            Resultados Comprobados
-          </span>
-          <h2 className="text-3xl font-bold text-primary sm:text-4xl">
+          <span className="eyebrow eyebrow-center mb-4">Resultados Comprobados</span>
+          <h2 className="display-2 text-primary">
             Números que respaldan mi trabajo
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-text-secondary lg:text-lg">
+          <p className="lede mt-4">
             Más de una década ayudando a empresas colombianas a ganar procesos de contratación estatal.
           </p>
         </motion.div>

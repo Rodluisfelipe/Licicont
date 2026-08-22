@@ -39,28 +39,27 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
             transition={{ duration: 0.5 }}
             className="mb-5"
           >
-            <span className="inline-flex items-center gap-2 rounded-full bg-gold/10 px-4 py-1.5 text-xs font-medium text-gold-dark sm:text-sm">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-gold" />
-              <span className="sm:hidden">Suministros · Obras Civiles · Tecnología</span>
+            <span className="eyebrow eyebrow-center">
+              <span className="sm:hidden">Suministros · Obras · Tecnología</span>
               <span className="hidden sm:inline">
-                Especialista en Suministros, Obras Civiles y Tecnología
+                Especialista en suministros, obras civiles y tecnología
               </span>
             </span>
           </motion.div>
 
           {/* Headline with rotating word */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-balance text-[2rem] font-bold leading-[1.12] text-primary sm:text-5xl lg:text-[3.4rem]"
+            className="display-1 text-primary"
           >
             Transformamos
             <br />
             <span className="relative inline-grid h-[1.2em] items-center overflow-hidden">
               {/* Invisible sizer — reserves width of longest word */}
               {ROTATING_WORDS.map((w) => (
-                <span key={w} className="invisible col-start-1 row-start-1 text-gold" aria-hidden="true">
+                <span key={w} className="invisible col-start-1 row-start-1 text-gold italic" aria-hidden="true">
                   {w}
                 </span>
               ))}
@@ -71,7 +70,7 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
                   animate={{ opacity: 1, y: '0%', filter: 'blur(0px)' }}
                   exit={{ opacity: 0, y: '-30%', filter: 'blur(4px)' }}
                   transition={{ duration: 0.35 }}
-                  className="col-start-1 row-start-1 text-gold"
+                  className="col-start-1 row-start-1 text-gold italic"
                 >
                   {word}
                 </motion.span>
@@ -86,7 +85,7 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-text-secondary sm:text-lg"
+            className="lede mx-auto mt-6 max-w-xl"
           >
             Te acompaño a venderle al Estado en SECOP II: papelería, cafetería, aseo,
             tecnología y obras civiles. +10 años, análisis financiero e IA propia — y
@@ -105,16 +104,16 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
                 const el = document.querySelector('#diagnostico');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="magnetic-btn group flex items-center gap-2 rounded-full bg-gold px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-gold/25 transition-all hover:bg-gold-dark hover:shadow-xl hover:shadow-gold/30 hover:scale-[1.03]"
+              className="btn btn-lg btn-primary magnetic-btn"
             >
-              <Compass className="h-5 w-5" />
+              <Compass className="h-[18px] w-[18px]" />
               Descubre tu plan ideal
             </button>
             <button
               onClick={onContact}
-              className="flex items-center gap-2 rounded-full border border-border px-8 py-3.5 text-base font-semibold text-primary transition-all hover:border-gold/50 hover:bg-bg-alt"
+              className="btn btn-lg btn-outline"
             >
-              <MessageCircle className="h-5 w-5" />
+              <MessageCircle className="h-[18px] w-[18px]" />
               Hablar con Andrés
             </button>
           </motion.div>
@@ -125,7 +124,7 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
             transition={{ duration: 0.6, delay: 0.45 }}
             className="mt-5 flex flex-col items-center gap-2"
           >
-            <div className="flex items-center gap-2.5 rounded-full border border-border bg-white/70 py-1.5 pr-4 pl-1.5 shadow-sm">
+            <div className="flex items-center gap-2.5 rounded-full border border-border bg-white py-1.5 pr-4 pl-1.5 shadow-xs">
               <img
                 src="/andres.jpeg"
                 alt="Andrés Beltrán Mora"
@@ -145,24 +144,26 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
 
         {/* Stats bar */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
           className="mx-auto mt-14 max-w-5xl"
         >
-          <div className="grid grid-cols-2 gap-4 rounded-2xl border border-border bg-white/80 p-6 shadow-lg backdrop-blur-md sm:p-8 lg:grid-cols-4">
+          <div className="card grid grid-cols-2 gap-y-7 bg-white/85 p-7 backdrop-blur-md sm:p-9 lg:grid-cols-4">
             {STATS.map((stat, i) => (
               <div
                 key={stat.label}
-                className={`flex flex-col items-center text-center ${
+                className={`flex flex-col items-center px-2 text-center ${
                   i < STATS.length - 1 ? 'lg:border-r lg:border-border' : ''
                 }`}
               >
-                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-gold/10 text-gold">
+                <div className="mb-2.5 flex h-9 w-9 items-center justify-center rounded-lg bg-gold/10 text-gold">
                   {stat.icon}
                 </div>
-                <p className="text-2xl font-bold text-primary sm:text-3xl">{stat.value}</p>
-                <p className="mt-1 text-xs text-text-secondary sm:text-sm">{stat.label}</p>
+                <p className="font-display tnum text-2xl font-semibold text-primary sm:text-[1.75rem]">
+                  {stat.value}
+                </p>
+                <p className="mt-1.5 text-xs leading-snug text-text-secondary">{stat.label}</p>
               </div>
             ))}
           </div>
