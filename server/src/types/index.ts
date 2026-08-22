@@ -11,15 +11,3 @@ export interface ValidateResponse {
   fullName?: string;
   message?: string;
 }
-
-export interface CreateLeadDTO {
-  fullName: string;
-  company: string;
-  phone: string;
-  email?: string;
-  answers: Record<string, string>;
-  recommendedService: string;
-  recommendedServiceName: string;
-  complements: string[];
-  affinity: number;
-}

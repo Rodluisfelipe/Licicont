@@ -24,7 +24,11 @@ export interface TikTokMetric {
   icon?: string;
 }
 
-export interface DiagnosticLeadRequest {
+/**
+ * Diagnóstico completado. Se guarda en el navegador del visitante y, si se
+ * configura un recolector externo (VITE_LEAD_WEBHOOK_URL), se envía también ahí.
+ */
+export interface DiagnosticLeadPayload {
   fullName: string;
   company: string;
   phone: string;
@@ -35,4 +39,7 @@ export interface DiagnosticLeadRequest {
   recommendedServiceName: string;
   complements: string[];
   affinity: number;
+  /** Enlace que reabre este mismo resultado. */
+  shareUrl: string;
+  submittedAt: string;
 }

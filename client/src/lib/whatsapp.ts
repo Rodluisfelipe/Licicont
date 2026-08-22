@@ -1,6 +1,7 @@
 import type { Recommendation } from '@/lib/recommendation';
 
 export const WA_PHONE = '573023805967';
+export const CONTACT_EMAIL = 'licitacionesycontratas@gmail.com';
 
 export interface LeadContact {
   fullName: string;
@@ -57,4 +58,12 @@ export function buildServiceMessage(serviceName: string, price: string): string 
     '',
     '¿Me cuentas cómo funciona y si aplica para mi empresa?',
   ].join('\n');
+}
+
+/** Alternativa al WhatsApp: el mismo mensaje por correo, sin el formato de WhatsApp. */
+export function mailtoUrl(subject: string, body: string): string {
+  const plain = body.replace(/\*/g, '');
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(plain)}`;
 }

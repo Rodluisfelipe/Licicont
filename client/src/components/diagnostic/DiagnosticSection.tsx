@@ -1,9 +1,23 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowLeft, ArrowRight, Clock, Compass, Loader2, ShieldCheck } from 'lucide-react';
+import {
+  ArrowLeft,
+  ArrowRight,
+  Clock,
+  Compass,
+  History,
+  Loader2,
+  ShieldCheck,
+} from 'lucide-react';
 import { QUESTIONS } from '@/data/diagnostic';
 import { SERVICES, type ServiceId } from '@/data/services';
-import { computeRecommendation, type Answers } from '@/lib/recommendation';
+import { computeRecommendation, isComplete, type Answers } from '@/lib/recommendation';
+import {
+  loadDiagnostic,
+  saveDiagnostic,
+  type StoredDiagnostic,
+} from '@/lib/diagnosticStorage';
+import { clearUrl, readAnswersFromUrl, syncUrl } from '@/lib/shareLink';
 import DiagnosticResult from './DiagnosticResult';
 
 type Phase = 'intro' | 'quiz' | 'analyzing' | 'result';
@@ -21,6 +35,34 @@ const VOICE_SHORTCUT: Record<ServiceId, string> = {
   rup: 'rup-listo',
 };
 
+interface InitialState {
+  phase: Phase;
+  answers: Answers;
+  index: number;
+  fromUrl: boolean;
+}
+
+/**
+ * Un enlace compartido reabre el diagnóstico: completo va directo al resultado,
+ * incompleto retoma en la primera pregunta pendiente.
+ */
+function readInitialState(): InitialState {
+  const fromUrl = readAnswersFromUrl();
+  if (!fromUrl) return { phase: 'intro', answers: {}, index: 0, fromUrl: false };
+
+  if (isComplete(fromUrl)) {
+    return { phase: 'result', answers: fromUrl, index: 0, fromUrl: true };
+  }
+
+  const firstPending = QUESTIONS.findIndex((q) => !fromUrl[q.id]);
+  return {
+    phase: 'quiz',
+    answers: fromUrl,
+    index: firstPending === -1 ? 0 : firstPending,
+    fromUrl: true,
+  };
+}
+
 const ANALYZING_STEPS = [
   'Leyendo tu perfil de contratación…',
   'Cruzando tus respuestas con los 6 servicios…',
@@ -30,10 +72,13 @@ const ANALYZING_STEPS = [
 
 export default function DiagnosticSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [phase, setPhase] = useState<Phase>('intro');
-  const [answers, setAnswers] = useState<Answers>({});
-  const [index, setIndex] = useState(0);
+  const [initialState] = useState(readInitialState);
+  const [phase, setPhase] = useState<Phase>(initialState.phase);
+  const [answers, setAnswers] = useState<Answers>(initialState.answers);
+  const [index, setIndex] = useState(initialState.index);
   const [analyzingStep, setAnalyzingStep] = useState(0);
+  // Diagnóstico previo de este navegador: permite volver al plan sin repetir.
+  const [saved, setSaved] = useState<StoredDiagnostic | null>(() => loadDiagnostic());
 
   const question = QUESTIONS[index];
   const progress = ((index + 1) / QUESTIONS.length) * 100;
@@ -92,6 +137,29 @@ export default function DiagnosticSection() {
     setIndex(index - 1);
   }, [index]);
 
+  // ── Al llegar por un enlace compartido, la vista aterriza en el diagnóstico ──
+  useEffect(() => {
+    if (!initialState.fromUrl) return;
+
+    // El navegador ya salta al ancla; se reafirma por el scroll suave de Lenis.
+    const timer = window.setTimeout(focusSection, 300);
+    return () => window.clearTimeout(timer);
+  }, [initialState.fromUrl, focusSection]);
+
+  // ── El resultado se guarda en el navegador y se refleja en la URL ──
+  useEffect(() => {
+    if (phase !== 'result' || !recommendation) return;
+
+    saveDiagnostic({
+      answers,
+      contact: saved?.contact,
+      serviceId: recommendation.primary.id,
+      serviceName: recommendation.primary.name,
+      affinity: recommendation.affinity,
+    });
+    syncUrl(answers);
+  }, [phase, recommendation, answers, saved]);
+
   // ── Atajos de teclado: 1–6 selecciona, Backspace retrocede ──
   useEffect(() => {
     if (phase !== 'quiz') return;
@@ -135,8 +203,18 @@ export default function DiagnosticSection() {
     setAnswers({});
     setIndex(0);
     setPhase('intro');
+    setSaved(null);
+    clearUrl();
     focusSection();
   }, [focusSection]);
+
+  /** Volver al plan ya calculado en este navegador. */
+  const resume = useCallback(() => {
+    if (!saved) return;
+    setAnswers(saved.answers);
+    setPhase('result');
+    focusSection();
+  }, [saved, focusSection]);
 
   return (
     <section
@@ -175,13 +253,35 @@ export default function DiagnosticSection() {
                 ciegas.
               </p>
 
+              {/* Diagnóstico anterior guardado en este navegador */}
+              {saved?.serviceName && (
+                <div className="mx-auto mt-8 flex max-w-xl flex-col items-center gap-3 rounded-2xl border border-gold/25 bg-white/[0.04] px-6 py-5 sm:flex-row sm:justify-between sm:text-left">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gold/15 text-gold-light">
+                      <History className="h-4 w-4" />
+                    </span>
+                    <p className="text-sm text-white/70">
+                      Ya tienes un diagnóstico:{' '}
+                      <span className="font-semibold text-white">{saved.serviceName}</span>
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={resume}
+                    className="shrink-0 rounded-full bg-gold px-5 py-2 text-xs font-semibold text-white transition-colors hover:bg-gold-light"
+                  >
+                    Ver mi plan
+                  </button>
+                </div>
+              )}
+
               <div className="mt-9 flex flex-col items-center gap-4">
                 <button
                   type="button"
                   onClick={() => start()}
                   className="magnetic-btn inline-flex items-center gap-2 rounded-full bg-gold px-9 py-4 text-base font-semibold text-white shadow-lg"
                 >
-                  Empezar mi diagnóstico
+                  {saved?.serviceName ? 'Hacer el diagnóstico de nuevo' : 'Empezar mi diagnóstico'}
                   <ArrowRight className="h-5 w-5" />
                 </button>
 
@@ -355,6 +455,7 @@ export default function DiagnosticSection() {
                 recommendation={recommendation}
                 answers={answers}
                 onRestart={restart}
+                initialContact={saved?.contact}
               />
             </motion.div>
           )}

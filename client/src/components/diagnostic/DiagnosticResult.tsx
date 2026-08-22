@@ -4,22 +4,35 @@ import confetti from 'canvas-confetti';
 import {
   ArrowRight,
   Check,
+  Copy,
   Info,
+  Link2,
+  Mail,
   MessageCircle,
+  Printer,
   RefreshCw,
   Sparkles,
   X,
 } from 'lucide-react';
-import type { Recommendation } from '@/lib/recommendation';
-import { buildDiagnosticMessage, whatsappUrl, type LeadContact } from '@/lib/whatsapp';
-import { submitDiagnosticLead } from '@/services/lead.service';
-import type { Answers } from '@/lib/recommendation';
+import type { Answers, Recommendation } from '@/lib/recommendation';
+import {
+  buildDiagnosticMessage,
+  mailtoUrl,
+  whatsappUrl,
+  type LeadContact,
+} from '@/lib/whatsapp';
+import { markContacted } from '@/lib/diagnosticStorage';
+import { buildShareUrl } from '@/lib/shareLink';
+import { deliverLead } from '@/lib/leadDelivery';
+import { printDiagnostic } from '@/lib/printDiagnostic';
 import ServiceIcon from './ServiceIcon';
 
 interface Props {
   recommendation: Recommendation;
   answers: Answers;
   onRestart: () => void;
+  /** Datos ya guardados en este navegador, para no pedirlos dos veces. */
+  initialContact?: LeadContact;
 }
 
 const emptyLead: LeadContact = { fullName: '', company: '', phone: '', email: '' };
@@ -76,10 +89,16 @@ function AffinityRing({ value }: { value: number }) {
   );
 }
 
-export default function DiagnosticResult({ recommendation, answers, onRestart }: Props) {
+export default function DiagnosticResult({
+  recommendation,
+  answers,
+  onRestart,
+  initialContact,
+}: Props) {
   const { primary, complements, reasons, nextSteps, affinity } = recommendation;
-  const [lead, setLead] = useState<LeadContact>(emptyLead);
+  const [lead, setLead] = useState<LeadContact>(initialContact ?? emptyLead);
   const [sent, setSent] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const canSend = lead.fullName.trim() !== '' && lead.company.trim() !== '' && lead.phone.trim() !== '';
 
@@ -88,14 +107,16 @@ export default function DiagnosticResult({ recommendation, answers, onRestart }:
     [recommendation, lead]
   );
 
+  const shareUrl = useMemo(() => buildShareUrl(answers), [answers]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLead((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSend = async () => {
+  const handleSend = () => {
     if (!canSend) return;
 
-    // La conversión no espera al backend: primero WhatsApp, el registro va aparte.
+    // Primero la conversión: el resto ocurre después de abrir WhatsApp.
     window.open(whatsappUrl(message), '_blank', 'noopener,noreferrer');
     setSent(true);
 
@@ -106,7 +127,8 @@ export default function DiagnosticResult({ recommendation, answers, onRestart }:
       colors: ['#B89146', '#D4A853', '#FFFFFF'],
     });
 
-    void submitDiagnosticLead({
+    markContacted(lead);
+    deliverLead({
       fullName: lead.fullName,
       company: lead.company,
       phone: lead.phone,
@@ -116,7 +138,33 @@ export default function DiagnosticResult({ recommendation, answers, onRestart }:
       recommendedServiceName: primary.name,
       complements: complements.map((c) => c.id),
       affinity,
+      shareUrl,
+      submittedAt: new Date().toISOString(),
     });
+  };
+
+  /** Copiar el enlace, o compartirlo con la hoja nativa del móvil si existe. */
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `Mi plan en Licicont: ${primary.name}`,
+          text: `Hice el diagnóstico de Licicont y mi plan es ${primary.name}.`,
+          url: shareUrl,
+        });
+        return;
+      } catch {
+        // Compartir cancelado: se cae al copiado.
+      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2500);
+    } catch {
+      window.prompt('Copia el enlace de tu diagnóstico:', shareUrl);
+    }
   };
 
   return (
@@ -365,6 +413,49 @@ export default function DiagnosticResult({ recommendation, answers, onRestart }:
           {canSend
             ? 'Sin compromiso · Respuesta el mismo día · 100% confidencial'
             : 'Completa nombre, empresa y WhatsApp para recibir tu propuesta.'}
+        </p>
+
+        {/* Alternativas: guardarlo, compartirlo o escribir por correo */}
+        <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-white/10 pt-5">
+          <button
+            type="button"
+            onClick={() => printDiagnostic(recommendation, lead, shareUrl)}
+            className="inline-flex items-center gap-2 rounded-full border border-white/12 px-4 py-2 text-xs font-medium text-white/60 transition-colors hover:border-gold/40 hover:text-white"
+          >
+            <Printer className="h-3.5 w-3.5" />
+            Guardar en PDF
+          </button>
+
+          <button
+            type="button"
+            onClick={handleShare}
+            className="inline-flex items-center gap-2 rounded-full border border-white/12 px-4 py-2 text-xs font-medium text-white/60 transition-colors hover:border-gold/40 hover:text-white"
+          >
+            {copied ? (
+              <>
+                <Copy className="h-3.5 w-3.5 text-gold-light" />
+                Enlace copiado
+              </>
+            ) : (
+              <>
+                <Link2 className="h-3.5 w-3.5" />
+                Copiar enlace de mi diagnóstico
+              </>
+            )}
+          </button>
+
+          <a
+            href={mailtoUrl(`Diagnóstico Licicont — ${primary.name}`, message)}
+            className="inline-flex items-center gap-2 rounded-full border border-white/12 px-4 py-2 text-xs font-medium text-white/60 transition-colors hover:border-gold/40 hover:text-white"
+          >
+            <Mail className="h-3.5 w-3.5" />
+            Prefiero por correo
+          </a>
+        </div>
+
+        <p className="mt-3 text-xs text-white/30">
+          Tu diagnóstico queda guardado en este navegador y en el enlace, para que puedas
+          volver a él cuando quieras.
         </p>
       </div>
     </motion.div>
