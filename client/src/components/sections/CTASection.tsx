@@ -15,7 +15,7 @@ export default function CTASection({ onContact }: { onContact: () => void }) {
           <span className="eyebrow eyebrow-center eyebrow-light mb-6">Empieza hoy</span>
           <h2 className="display-1 text-white">
             ¿Listo para ganar tu próxima{' '}
-            <span className="text-gold-light italic">licitación</span>?
+            <span className="text-gold-light">licitación</span>?
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/65 sm:text-[1.0625rem]">
             Si no sabes por dónde empezar, haz el diagnóstico: en 45 segundos sabes qué

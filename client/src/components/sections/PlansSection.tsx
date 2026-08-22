@@ -62,8 +62,8 @@ function PlanCard({ service, delay }: { service: Service; delay: number }) {
       </div>
 
       <p
-        className={`font-display text-[13px] italic ${
-          featured ? 'text-gold-light/80' : 'text-gold-dark/80'
+        className={`text-[13px] font-medium ${
+          featured ? 'text-gold-light/85' : 'text-gold-dark/85'
         }`}
       >
         “{service.clientVoice}”
@@ -90,7 +90,7 @@ function PlanCard({ service, delay }: { service: Service; delay: number }) {
         }`}
       >
         <p
-          className={`font-display tnum text-lg font-semibold ${
+          className={`tnum text-lg font-semibold ${
             featured ? 'text-gold-light' : 'text-primary'
           }`}
         >

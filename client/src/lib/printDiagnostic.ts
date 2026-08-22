@@ -64,13 +64,6 @@ export function buildDiagnosticHtml(
     font-display: swap;
     src: url("/fonts/inter-latin.woff2") format("woff2");
   }
-  @font-face {
-    font-family: "Playfair Display";
-    font-style: normal;
-    font-weight: 400 900;
-    font-display: swap;
-    src: url("/fonts/playfair-latin.woff2") format("woff2");
-  }
   * { box-sizing: border-box; }
   body {
     margin: 0;
@@ -79,7 +72,7 @@ export function buildDiagnosticHtml(
     font-size: 11px;
     line-height: 1.55;
   }
-  h1, h2, h3 { margin: 0; color: #0A192F; font-family: "Playfair Display", Georgia, serif; }
+  h1, h2, h3 { margin: 0; color: #0A192F; letter-spacing: -0.02em; }
   .brand {
     display: flex; justify-content: space-between; align-items: baseline;
     border-bottom: 1px solid #E5E7EB; padding-bottom: 8px; margin-bottom: 18px;
@@ -89,12 +82,12 @@ export function buildDiagnosticHtml(
   .brand span:last-child { color: #9CA3AF; font-weight: 500; letter-spacing: .02em; text-transform: none; }
   .kicker { font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #8A6D3F; }
   .plan { display: flex; align-items: center; gap: 16px; margin: 4px 0 6px; }
-  .plan h1 { font-size: 23px; letter-spacing: -0.015em; }
+  .plan h1 { font-size: 23px; font-weight: 700; letter-spacing: -0.025em; }
   .ring {
     width: 62px; height: 62px; flex: 0 0 62px; border: 3px solid #B08D57; border-radius: 50%;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
   }
-  .ring strong { font-size: 17px; color: #0A192F; line-height: 1; font-family: "Playfair Display", Georgia, serif; }
+  .ring strong { font-size: 17px; color: #0A192F; line-height: 1; font-weight: 700; }
   .ring small { font-size: 6px; letter-spacing: .08em; text-transform: uppercase; color: #6B7280; }
   .tagline { color: #6B7280; margin: 0 0 16px; }
   .meta { color: #6B7280; margin: 2px 0 0; font-size: 10px; }
@@ -105,7 +98,7 @@ export function buildDiagnosticHtml(
   li { margin-bottom: 4px; padding-left: 14px; text-indent: -14px; }
   li.muted { color: #9CA3AF; }
   .box { border: 1px solid #E5E7EB; border-radius: 8px; padding: 10px 12px; margin-bottom: 14px; }
-  .price { font-size: 16px; font-weight: 600; color: #8A6D3F; font-family: "Playfair Display", Georgia, serif; }
+  .price { font-size: 16px; font-weight: 700; color: #8A6D3F; letter-spacing: -0.01em; }
   .steps { display: flex; gap: 10px; margin-bottom: 14px; }
   .steps div { flex: 1; border: 1px solid #E5E7EB; border-radius: 8px; padding: 9px 10px; }
   .steps b { display: block; color: #8A6D3F; margin-bottom: 3px; }

@@ -120,7 +120,7 @@ export default function CredentialForm({ isOpen, onClose }: CredentialFormProps)
                   <div className="flex h-8 w-8 items-center justify-center rounded-md bg-gold/10">
                     <Shield className="h-4 w-4 text-gold" strokeWidth={1.5} />
                   </div>
-                  <span className="font-display text-[15px] font-semibold text-primary">
+                  <span className="text-[15px] font-semibold text-primary">
                     Hablar con Andrés
                   </span>
                 </div>

@@ -35,11 +35,11 @@ function MetricCard({ label, value, suffix, prefix = '', decimals = 0, icon, del
         {icon}
       </div>
       <div className="mb-1">
-        <span className="font-display text-lg text-gold">{prefix}</span>
-        <span className="font-display tnum text-3xl font-semibold text-primary lg:text-[2.25rem]">
+        <span className="text-lg font-semibold text-gold">{prefix}</span>
+        <span className="tnum text-3xl font-semibold text-primary lg:text-[2.25rem]">
           {decimals > 0 ? animatedValue.toFixed(decimals) : animatedValue.toLocaleString('es-CO')}
         </span>
-        <span className="font-display ml-0.5 text-lg font-semibold text-gold">{suffix}</span>
+        <span className="ml-0.5 text-lg font-semibold text-gold">{suffix}</span>
       </div>
       <p className="text-sm text-text-secondary">{label}</p>
     </motion.div>

@@ -59,7 +59,7 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
             <span className="relative inline-grid h-[1.2em] items-center overflow-hidden">
               {/* Invisible sizer — reserves width of longest word */}
               {ROTATING_WORDS.map((w) => (
-                <span key={w} className="invisible col-start-1 row-start-1 text-gold italic" aria-hidden="true">
+                <span key={w} className="invisible col-start-1 row-start-1 text-gold" aria-hidden="true">
                   {w}
                 </span>
               ))}
@@ -70,7 +70,7 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
                   animate={{ opacity: 1, y: '0%', filter: 'blur(0px)' }}
                   exit={{ opacity: 0, y: '-30%', filter: 'blur(4px)' }}
                   transition={{ duration: 0.35 }}
-                  className="col-start-1 row-start-1 text-gold italic"
+                  className="col-start-1 row-start-1 text-gold"
                 >
                   {word}
                 </motion.span>
@@ -160,7 +160,7 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
                 <div className="mb-2.5 flex h-9 w-9 items-center justify-center rounded-lg bg-gold/10 text-gold">
                   {stat.icon}
                 </div>
-                <p className="font-display tnum text-2xl font-semibold text-primary sm:text-[1.75rem]">
+                <p className="tnum text-2xl font-semibold text-primary sm:text-[1.75rem]">
                   {stat.value}
                 </p>
                 <p className="mt-1.5 text-xs leading-snug text-text-secondary">{stat.label}</p>

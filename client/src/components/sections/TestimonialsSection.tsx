@@ -102,7 +102,7 @@ export default function TestimonialsSection() {
                 {/* Quote */}
                 <div className="relative mb-5 flex-1">
                   <Quote className="absolute -top-1 -left-1 h-7 w-7 text-gold/15" />
-                  <p className="pl-5 text-sm leading-relaxed text-text-secondary italic">
+                  <p className="pl-5 text-sm leading-relaxed text-text-secondary">
                     &ldquo;{c.quote}&rdquo;
                   </p>
                 </div>

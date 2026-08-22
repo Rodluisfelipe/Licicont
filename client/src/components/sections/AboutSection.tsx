@@ -53,7 +53,7 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
               </div>
               {/* Floating card */}
               <div className="absolute right-4 -bottom-6 left-4 rounded-lg border border-border bg-white/95 px-4 py-3.5 shadow-md backdrop-blur-md">
-                <p className="font-display text-[15px] font-semibold text-primary">
+                <p className="text-[15px] font-semibold text-primary">
                   Andrés Beltrán Mora
                 </p>
                 <p className="mt-0.5 text-[11px] leading-snug text-text-secondary">
@@ -72,14 +72,14 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
             <span className="eyebrow mb-4">Sobre mí</span>
             <h2 className="display-2 text-primary">
               Más de una década ganando{' '}
-              <span className="text-gold italic">licitaciones públicas</span>
+              <span className="text-gold">licitaciones públicas</span>
             </h2>
 
             {/* Credenciales rápidas */}
             <div className="mt-6 grid grid-cols-3 gap-3">
               {CREDENTIALS.map((c) => (
                 <div key={c.label} className="rounded-lg border border-border bg-bg-alt px-3 py-3.5 text-center">
-                  <p className="font-display tnum text-base font-semibold text-gold-dark sm:text-lg">
+                  <p className="tnum text-base font-semibold text-gold-dark sm:text-lg">
                     {c.value}
                   </p>
                   <p className="mt-1 text-[11px] leading-tight text-text-secondary">{c.label}</p>

@@ -220,7 +220,7 @@ export default function DiagnosticResult({
 
             <div className="mt-6 rounded-lg border border-white/10 bg-white/[0.03] p-5">
               <p className="eyebrow mb-1.5 text-white/40">Inversión estimada</p>
-              <p className="font-display tnum text-2xl font-semibold text-gold-light">
+              <p className="tnum text-2xl font-semibold text-gold-light">
                 {primary.price}
               </p>
               {primary.priceNote && (
@@ -270,7 +270,7 @@ export default function DiagnosticResult({
           <div className="grid gap-4 sm:grid-cols-3">
             {nextSteps.map((step, i) => (
               <div key={step} className="rounded-lg border border-white/10 bg-white/[0.03] p-5">
-                <span className="font-display mb-3 flex h-7 w-7 items-center justify-center rounded-full bg-gold/20 text-xs font-semibold text-gold-light">
+                <span className="mb-3 flex h-7 w-7 items-center justify-center rounded-full bg-gold/20 text-xs font-semibold text-gold-light">
                   {i + 1}
                 </span>
                 <p className="text-sm leading-relaxed text-white/70">{step}</p>

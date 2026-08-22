@@ -236,7 +236,7 @@ export default function DiagnosticSection() {
               </span>
 
               <h2 className="display-1 text-white">
-                ¿Cuál de mis <span className="text-gold-light italic">6 servicios</span> es el
+                ¿Cuál de mis <span className="text-gold-light">6 servicios</span> es el
                 tuyo?
               </h2>
 
