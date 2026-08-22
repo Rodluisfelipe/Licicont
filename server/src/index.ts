@@ -6,6 +6,7 @@ import { env } from './config/env.js';
 import { verifyEmailTransport } from './services/email.service.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import invitationRoutes from './routes/invitation.routes.js';
+import leadRoutes from './routes/lead.routes.js';
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json({ limit: '10kb' }));
 
 // ── Routes ──
 app.use('/api/invitations', invitationRoutes);
+app.use('/api/leads', leadRoutes);
 
 // ── Health Check ──
 app.get('/api/health', (_req, res) => {

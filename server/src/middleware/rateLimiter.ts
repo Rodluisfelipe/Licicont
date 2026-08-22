@@ -1,5 +1,9 @@
 import rateLimit from 'express-rate-limit';
-import { RATE_LIMIT_WINDOW_MS, RATE_LIMIT_MAX } from '../config/constants.js';
+import {
+  RATE_LIMIT_WINDOW_MS,
+  RATE_LIMIT_MAX,
+  LEAD_RATE_LIMIT_MAX,
+} from '../config/constants.js';
 
 export const invitationRateLimiter = rateLimit({
   windowMs: RATE_LIMIT_WINDOW_MS,
@@ -7,6 +11,17 @@ export const invitationRateLimiter = rateLimit({
   message: {
     success: false,
     message: 'Demasiadas solicitudes. Intente nuevamente en 15 minutos.',
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+export const leadRateLimiter = rateLimit({
+  windowMs: RATE_LIMIT_WINDOW_MS,
+  max: LEAD_RATE_LIMIT_MAX,
+  message: {
+    success: false,
+    message: 'Demasiados envíos. Intente nuevamente en 15 minutos.',
   },
   standardHeaders: true,
   legacyHeaders: false,

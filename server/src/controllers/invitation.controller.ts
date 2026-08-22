@@ -52,7 +52,7 @@ export async function create(req: Request, res: Response): Promise<void> {
  */
 export async function send(req: Request, res: Response): Promise<void> {
   try {
-    const { id } = req.params;
+    const id = String(req.params.id);
     const invitation = await invitationService.sendInvitation(id);
 
     res.json({
@@ -84,7 +84,7 @@ export async function send(req: Request, res: Response): Promise<void> {
  */
 export async function validate(req: Request, res: Response): Promise<void> {
   try {
-    const { code } = req.params;
+    const code = String(req.params.code);
     const result = await invitationService.validateCode(code);
 
     if (!result.valid) {

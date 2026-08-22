@@ -4,9 +4,9 @@ import { Menu, X, MessageCircle } from 'lucide-react';
 
 const NAV_LINKS = [
   { label: 'Sobre Mí', href: '#sobre-mi' },
-  { label: 'Servicios', href: '#servicios' },
+  { label: 'Mi Plan Ideal', href: '#diagnostico' },
+  { label: 'Servicios', href: '#planes' },
   { label: 'Proceso', href: '#proceso' },
-  { label: 'Resultados', href: '#resultados' },
   { label: 'Preguntas', href: '#faq' },
 ];
 

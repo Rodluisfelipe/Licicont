@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MessageCircle, TrendingUp, FileCheck, BarChart3, MapPin } from 'lucide-react';
+import { MessageCircle, TrendingUp, FileCheck, BarChart3, MapPin, Compass } from 'lucide-react';
 
 const ROTATING_WORDS = ['suministros', 'obras civiles', 'tecnología', 'papelería y aseo'];
 
@@ -97,22 +97,32 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
             className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
             <button
-              onClick={onContact}
+              onClick={() => {
+                const el = document.querySelector('#diagnostico');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="magnetic-btn group flex items-center gap-2 rounded-full bg-gold px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-gold/25 transition-all hover:bg-gold-dark hover:shadow-xl hover:shadow-gold/30 hover:scale-[1.03]"
+            >
+              <Compass className="h-5 w-5" />
+              Descubre tu plan ideal
+            </button>
+            <button
+              onClick={onContact}
+              className="flex items-center gap-2 rounded-full border border-border px-8 py-3.5 text-base font-semibold text-primary transition-all hover:border-gold/50 hover:bg-bg-alt"
             >
               <MessageCircle className="h-5 w-5" />
               Hablar con Andrés
             </button>
-            <button
-              onClick={() => {
-                const el = document.querySelector('#proceso');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="rounded-full border border-border px-8 py-3.5 text-base font-semibold text-primary transition-all hover:border-gold/50 hover:bg-bg-alt"
-            >
-              ¿Cómo funciona?
-            </button>
           </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.45 }}
+            className="mt-4 text-xs text-text-light"
+          >
+            6 preguntas · 45 segundos · te digo qué servicio necesitas y cuánto cuesta
+          </motion.p>
         </div>
 
         {/* Stats bar */}

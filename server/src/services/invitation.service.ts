@@ -89,6 +89,6 @@ export async function validateCode(code: string): Promise<ValidateResponse> {
 /**
  * Listar todas las invitaciones (admin).
  */
-export async function listInvitations(): Promise<IInvitation[]> {
+export async function listInvitations() {
   return Invitation.find().sort({ createdAt: -1 }).lean();
 }

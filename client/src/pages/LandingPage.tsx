@@ -5,6 +5,8 @@ import HeroSection from '@/components/sections/HeroSection';
 import LogosSection from '@/components/sections/LogosSection';
 import AboutSection from '@/components/sections/AboutSection';
 import ServicesSection from '@/components/sections/ServicesSection';
+import DiagnosticSection from '@/components/diagnostic/DiagnosticSection';
+import PlansSection from '@/components/sections/PlansSection';
 import ProcessSection from '@/components/sections/ProcessSection';
 import TickerSection from '@/components/sections/TickerSection';
 import TestimonialsSection from '@/components/sections/TestimonialsSection';
@@ -24,6 +26,8 @@ export default function LandingPage() {
         <HeroSection onContact={openForm} />
         <LogosSection />
         <AboutSection onContact={openForm} />
+        <DiagnosticSection />
+        <PlansSection />
         <ServicesSection />
         <ProcessSection />
         <TickerSection />
