@@ -1,31 +1,41 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
+import { SERVICES } from '@/data/services';
 
-const LINKS = {
-  Servicios: [
-    'Monitoreo SECOP',
-    'Preparación de Propuestas',
-    'Revisión Jurídica',
-    'Análisis Financiero',
+/** El footer navega de verdad: cada enlace lleva a su sección. */
+const LINKS: Record<string, { label: string; href: string }[]> = {
+  Servicios: SERVICES.map((s) => ({ label: s.name, href: '#planes' })),
+  'Empieza aquí': [
+    { label: 'Diagnóstico gratuito', href: '#diagnostico' },
+    { label: 'Cómo trabajo', href: '#proceso' },
+    { label: 'Casos de éxito', href: '#resultados' },
+    { label: 'Preguntas frecuentes', href: '#faq' },
   ],
-  'Recursos': ['Asesoría Personalizada', 'Preguntas Frecuentes', 'Términos y Condiciones', 'Política de Privacidad'],
 };
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary pt-16 pb-8">
+    <footer className="bg-primary pt-12 pb-24 md:pb-6">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="mb-4 flex items-center gap-3">
-              <img src="/logo.jpeg" alt="LICICONT Logo" className="h-16 w-auto brightness-0 invert" loading="lazy" decoding="async" width="64" height="64" />
+              <img
+                src="/logo.jpeg"
+                alt="LICICONT"
+                className="h-11 w-11 rounded-full object-cover ring-1 ring-white/20"
+                loading="lazy"
+                decoding="async"
+                width="44"
+                height="44"
+              />
               <span className="text-lg font-bold tracking-wider text-white">
                 LICICONT
               </span>
             </div>
-            <p className="mb-6 max-w-xs text-sm leading-relaxed text-white/60">
+            <p className="mb-5 max-w-xs text-sm leading-relaxed text-white/60">
               Asesoría especializada en licitaciones públicas y contratación estatal en Colombia. 
               +10 años de experiencia. Andrés Beltrán Mora.
             </p>
@@ -48,15 +58,15 @@ export default function Footer() {
           {/* Link columns */}
           {Object.entries(LINKS).map(([title, links]) => (
             <div key={title}>
-              <h4 className="mb-4 text-sm font-semibold text-white">{title}</h4>
-              <ul className="space-y-2.5">
+              <h4 className="mb-3.5 text-sm font-semibold text-white">{title}</h4>
+              <ul className="space-y-2">
                 {links.map((link) => (
-                  <li key={link}>
+                  <li key={link.label}>
                     <a
-                      href="#"
+                      href={link.href}
                       className="text-sm text-white/50 transition-colors hover:text-gold"
                     >
-                      {link}
+                      {link.label}
                     </a>
                   </li>
                 ))}
@@ -66,7 +76,7 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="my-10 h-px bg-white/10" />
+        <div className="my-8 h-px bg-white/10" />
 
         {/* Bottom */}
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">

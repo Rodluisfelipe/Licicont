@@ -77,7 +77,7 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" ref={ref} className="bg-bg-alt py-24">
+    <section id="faq" ref={ref} className="bg-bg-alt py-16 sm:py-20">
       <div className="mx-auto max-w-3xl px-6">
         {/* Header */}
         <motion.div

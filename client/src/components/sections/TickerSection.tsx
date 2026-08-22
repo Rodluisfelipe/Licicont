@@ -37,7 +37,7 @@ function MetricCard({ label, value, suffix, prefix = '', decimals = 0, icon, del
       <div className="mb-1">
         <span className="text-sm text-gold">{prefix}</span>
         <span className="text-3xl font-bold tabular-nums text-primary lg:text-4xl">
-          {decimals > 0 ? animatedValue.toFixed(decimals) : animatedValue.toLocaleString()}
+          {decimals > 0 ? animatedValue.toFixed(decimals) : animatedValue.toLocaleString('es-CO')}
         </span>
         <span className="ml-0.5 text-sm font-semibold text-gold">{suffix}</span>
       </div>
@@ -60,14 +60,14 @@ export default function TickerSection() {
   const isInView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
-    <section id="resultados" ref={ref} className="bg-bg-alt py-24">
+    <section id="resultados" ref={ref} className="bg-bg-alt py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mx-auto mb-16 max-w-2xl text-center"
+          className="mx-auto mb-12 max-w-2xl text-center"
         >
           <span className="mb-4 inline-block rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
             Resultados Comprobados

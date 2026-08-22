@@ -62,11 +62,15 @@ function PlanCard({ service, delay }: { service: Service; delay: number }) {
       <p className={`text-xs italic ${featured ? 'text-white/50' : 'text-text-light'}`}>
         “{service.clientVoice}”
       </p>
-      <h3 className={`mt-1.5 text-lg font-bold ${featured ? 'text-white' : 'text-primary'}`}>
+      <h3
+        className={`mt-1.5 text-lg leading-snug font-bold sm:min-h-[3.5rem] ${
+          featured ? 'text-white' : 'text-primary'
+        }`}
+      >
         {service.name}
       </h3>
       <p
-        className={`mt-2.5 text-sm leading-relaxed ${
+        className={`mt-2 text-sm leading-relaxed sm:min-h-[3.75rem] ${
           featured ? 'text-white/70' : 'text-text-secondary'
         }`}
       >
@@ -75,7 +79,7 @@ function PlanCard({ service, delay }: { service: Service; delay: number }) {
 
       {/* Precio */}
       <div
-        className={`my-5 rounded-xl border px-4 py-3.5 ${
+        className={`my-4 rounded-xl border px-4 py-3.5 ${
           featured ? 'border-white/15 bg-white/5' : 'border-border bg-bg-alt'
         }`}
       >
@@ -201,14 +205,14 @@ export default function PlansSection() {
   const isInView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
-    <section id="planes" ref={ref} className="scroll-mt-24 bg-bg-alt py-24">
+    <section id="planes" ref={ref} className="scroll-mt-20 bg-bg-alt py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         {/* Encabezado */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mx-auto mb-12 max-w-2xl text-center"
+          className="mx-auto mb-10 max-w-2xl text-center"
         >
           <span className="mb-4 inline-block rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
             El menú completo
@@ -248,7 +252,7 @@ export default function PlansSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.5 }}
-          className="mt-20"
+          className="mt-16"
         >
           <h3 className="mb-10 text-center text-2xl font-bold text-primary sm:text-3xl">
             Por qué Licicont y no otro

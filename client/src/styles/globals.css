@@ -112,6 +112,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Las anclas no deben quedar debajo del header fijo. */
+  scroll-padding-top: 76px;
 }
 
 body {
@@ -133,3 +135,31 @@ body {
 ::-webkit-scrollbar-track { background: #F0F0F0; }
 ::-webkit-scrollbar-thumb { background: #B89146; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #96763A; }
+
+/* ── Accesibilidad ── */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Nadie debería marearse leyendo una landing. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Tipografía de titulares ── */
+.text-balance {
+  text-wrap: balance;
+}

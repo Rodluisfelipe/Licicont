@@ -1,11 +1,12 @@
-import { useRef } from 'react';
-import { motion, useInView } from 'motion/react';
-import { Award, Building2, Brain, CheckCircle, MessageCircle } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { motion, useInView, AnimatePresence } from 'motion/react';
+import { CheckCircle, ChevronDown, Compass, MessageCircle } from 'lucide-react';
 
-const HIGHLIGHTS = [
-  { icon: <Award className="h-5 w-5" />, label: '+10 a\u00f1os en licitaciones: obras civiles, suministros y tecnolog\u00eda' },
-  { icon: <Building2 className="h-5 w-5" />, label: '+$200.000M COP en procesos participados' },
-  { icon: <Brain className="h-5 w-5" />, label: 'IA aplicada a an\u00e1lisis de pliegos y SECOP II' },
+/** Credenciales de un vistazo, antes de que nadie lea un párrafo. */
+const CREDENTIALS = [
+  { value: '+$200.000M', label: 'en procesos participados' },
+  { value: '10 años', label: 'en contratación estatal' },
+  { value: '5 nichos', label: 'de especialización' },
 ];
 
 const EXPERTISE = [
@@ -20,17 +21,18 @@ const EXPERTISE = [
 export default function AboutSection({ onContact }: { onContact: () => void }) {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-60px' });
+  const [expanded, setExpanded] = useState(false);
 
   return (
-    <section id="sobre-mi" ref={ref} className="bg-white py-24">
+    <section id="sobre-mi" ref={ref} className="bg-white py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Photo side */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7 }}
-            className="relative flex justify-center"
+            className="relative flex justify-center lg:sticky lg:top-24"
           >
             <div className="relative w-72 lg:w-80">
               {/* Gold premium frame */}
@@ -71,6 +73,16 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
               <span className="text-gold">licitaciones públicas</span>
             </h2>
 
+            {/* Credenciales rápidas */}
+            <div className="mt-6 grid grid-cols-3 gap-3">
+              {CREDENTIALS.map((c) => (
+                <div key={c.label} className="rounded-xl border border-border bg-bg-alt px-3 py-3 text-center">
+                  <p className="text-base font-bold text-gold-dark sm:text-lg">{c.value}</p>
+                  <p className="mt-0.5 text-[11px] leading-tight text-text-secondary">{c.label}</p>
+                </div>
+              ))}
+            </div>
+
             <div className="mt-6 space-y-4 text-base leading-relaxed text-text-secondary">
               <p>
                 Desde 2015 descubrí mi pasión por la contratación pública y desde entonces he construido
@@ -83,6 +95,19 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
                 con la Gobernación de Boyacá, y el <strong className="text-primary">Hospital de Perros y Gatos de Bogotá</strong>{' '}
                 con la Secretaría Distrital — sumando aproximadamente <strong className="text-primary">$103.000 millones</strong> en contratación pública.
               </p>
+            </div>
+
+            {/* Trayectoria completa — a un clic, sin muro de texto */}
+            <AnimatePresence initial={false}>
+              {expanded && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.35 }}
+                  className="overflow-hidden"
+                >
+                  <div className="space-y-4 pt-4 text-base leading-relaxed text-text-secondary">
               <p>
                 Posteriormente amplié mi experiencia al <strong className="text-primary">sector de suministros</strong>:{' '}
                 <strong className="text-primary">papelería, cafetería, aseo y tecnología</strong> — donde llevo más de 4 años participando en procesos
@@ -95,22 +120,25 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
                 al análisis de pliegos y la estructuración de propuestas. Mi enfoque no es vender cursos grabados:
                 es <strong className="text-primary">acompañarte con casos reales, paso a paso</strong>, hasta que ganes.
               </p>
-            </div>
-
-            {/* Highlights */}
-            <div className="mt-8 space-y-3">
-              {HIGHLIGHTS.map((h) => (
-                <div key={h.label} className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gold/10 text-gold">
-                    {h.icon}
                   </div>
-                  <span className="text-sm font-medium text-primary">{h.label}</span>
-                </div>
-              ))}
-            </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <button
+              type="button"
+              onClick={() => setExpanded((v) => !v)}
+              aria-expanded={expanded}
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-dark transition-colors hover:text-gold"
+            >
+              {expanded ? 'Ver menos' : 'Leer mi trayectoria completa'}
+              <ChevronDown
+                className={`h-4 w-4 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}
+              />
+            </button>
 
             {/* What you'll learn */}
-            <div className="mt-8 rounded-2xl border border-border bg-bg-alt p-6">
+            <div className="mt-7 rounded-2xl border border-border bg-bg-alt p-5">
               <p className="mb-4 text-sm font-semibold text-primary">En mis asesorías aprenderás a:</p>
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {EXPERTISE.map((item) => (
@@ -123,13 +151,24 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
             </div>
 
             {/* CTA */}
-            <div className="mt-8">
+            <div className="mt-8 flex flex-wrap gap-3">
+              <button
+                onClick={() =>
+                  document
+                    .querySelector('#diagnostico')
+                    ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+                className="magnetic-btn inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-gold/25 transition-all hover:bg-gold-dark hover:shadow-xl"
+              >
+                <Compass className="h-5 w-5" />
+                Ver qué servicio me corresponde
+              </button>
               <button
                 onClick={onContact}
-                className="magnetic-btn inline-flex items-center gap-2 rounded-full bg-gold px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-gold/25 transition-all hover:bg-gold-dark hover:shadow-xl"
+                className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3.5 text-base font-semibold text-primary transition-all hover:border-gold/50 hover:bg-bg-alt"
               >
                 <MessageCircle className="h-5 w-5" />
-                Hablemos por WhatsApp
+                Hablemos
               </button>
             </div>
           </motion.div>

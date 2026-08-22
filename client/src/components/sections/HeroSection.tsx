@@ -25,7 +25,7 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
   const word = useRotatingWord(ROTATING_WORDS);
 
   return (
-    <section className="relative overflow-hidden bg-white pt-32 pb-0">
+    <section className="relative overflow-hidden bg-white pt-24 pb-0 sm:pt-28">
       {/* Background blurs */}
       <div className="pointer-events-none absolute top-0 right-0 -z-10 h-[600px] w-[600px] rounded-full bg-gold/5 blur-3xl" />
       <div className="pointer-events-none absolute bottom-0 left-0 -z-10 h-[400px] w-[400px] rounded-full bg-primary/5 blur-3xl" />
@@ -37,11 +37,14 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-6"
+            className="mb-5"
           >
-            <span className="inline-flex items-center gap-2 rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
-              <span className="h-2 w-2 rounded-full bg-gold animate-pulse" />
-              Especialista en Suministros, Obras Civiles y Tecnología
+            <span className="inline-flex items-center gap-2 rounded-full bg-gold/10 px-4 py-1.5 text-xs font-medium text-gold-dark sm:text-sm">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-gold" />
+              <span className="sm:hidden">Suministros · Obras Civiles · Tecnología</span>
+              <span className="hidden sm:inline">
+                Especialista en Suministros, Obras Civiles y Tecnología
+              </span>
             </span>
           </motion.div>
 
@@ -50,7 +53,7 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl font-bold leading-tight text-primary sm:text-5xl lg:text-6xl"
+            className="text-balance text-[2rem] font-bold leading-[1.12] text-primary sm:text-5xl lg:text-[3.4rem]"
           >
             Transformamos
             <br />
@@ -83,10 +86,11 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary"
+            className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-text-secondary sm:text-lg"
           >
-            Especializado en papelería, cafetería, aseo, tecnología y obras civiles. 
-            +10 años ganando licitaciones en SECOP II con estrategia, análisis financiero e Inteligencia Artificial.
+            Te acompaño a venderle al Estado en SECOP II: papelería, cafetería, aseo,
+            tecnología y obras civiles. +10 años, análisis financiero e IA propia — y
+            cobro por resultado cuando ganas.
           </motion.p>
 
           {/* CTAs */}
@@ -94,7 +98,7 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-10 flex flex-wrap items-center justify-center gap-4"
+            className="mt-8 flex flex-wrap items-center justify-center gap-3"
           >
             <button
               onClick={() => {
@@ -115,14 +119,28 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
             </button>
           </motion.div>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.45 }}
-            className="mt-4 text-xs text-text-light"
+            className="mt-5 flex flex-col items-center gap-2"
           >
-            6 preguntas · 45 segundos · te digo qué servicio necesitas y cuánto cuesta
-          </motion.p>
+            <div className="flex items-center gap-2.5 rounded-full border border-border bg-white/70 py-1.5 pr-4 pl-1.5 shadow-sm">
+              <img
+                src="/andres.jpeg"
+                alt="Andrés Beltrán Mora"
+                className="h-7 w-7 rounded-full object-cover"
+                width="28"
+                height="28"
+              />
+              <span className="text-xs font-medium text-text-secondary">
+                Te responde <strong className="text-primary">Andrés Beltrán</strong>, no un bot
+              </span>
+            </div>
+            <p className="text-xs text-text-light">
+              Respuesta el mismo día · 6 preguntas · 45 segundos · sin registro
+            </p>
+          </motion.div>
         </div>
 
         {/* Stats bar */}
@@ -130,7 +148,7 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
-          className="mx-auto mt-20 max-w-5xl"
+          className="mx-auto mt-14 max-w-5xl"
         >
           <div className="grid grid-cols-2 gap-4 rounded-2xl border border-border bg-white/80 p-6 shadow-lg backdrop-blur-md sm:p-8 lg:grid-cols-4">
             {STATS.map((stat, i) => (

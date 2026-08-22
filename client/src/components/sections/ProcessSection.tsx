@@ -8,7 +8,7 @@ const STEPS = [
     icon: <Search className="h-7 w-7" strokeWidth={1.5} />,
     title: 'Diagnóstico',
     description:
-      'Evaluamos su empresa: experiencia, RUP, capacidad financiera, equipo y sectores de interés. Definimos su perfil competitivo.',
+      'Evaluamos tu empresa: experiencia, RUP, capacidad financiera, equipo y sectores de interés. Definimos tu perfil competitivo.',
     tags: ['Análisis de capacidad', 'Revisión RUP', 'Perfil competitivo'],
   },
   {
@@ -16,7 +16,7 @@ const STEPS = [
     icon: <Crosshair className="h-7 w-7" strokeWidth={1.5} />,
     title: 'Inteligencia',
     description:
-      'Identificamos licitaciones alineadas con su perfil. Analizamos competencia y precios de referencia. Decision conjunta: Go o No-Go.',
+      'Identificamos licitaciones alineadas con tu perfil. Analizamos competencia y precios de referencia. Decisión conjunta: Go o No-Go.',
     tags: ['Monitoreo SECOP', 'Análisis Go/No-Go', 'Benchmark precios'],
   },
   {
@@ -32,7 +32,7 @@ const STEPS = [
     icon: <Trophy className="h-7 w-7" strokeWidth={1.5} />,
     title: 'Adjudicación',
     description:
-      'Acompañamos post-entrega: subsanaciones, aclaraciones, audiencias. Defendemos su propuesta hasta lograr la adjudicación.',
+      'Acompañamos post-entrega: subsanaciones, aclaraciones, audiencias. Defendemos tu propuesta hasta lograr la adjudicación.',
     tags: ['Subsanaciones', 'Seguimiento', 'Defensa evaluadores'],
   },
 ];
@@ -42,14 +42,14 @@ export default function ProcessSection() {
   const isInView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
-    <section id="proceso" ref={ref} className="bg-white py-24">
+    <section id="proceso" ref={ref} className="bg-white py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mx-auto mb-16 max-w-2xl text-center"
+          className="mx-auto mb-12 max-w-2xl text-center"
         >
           <span className="mb-4 inline-block rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
             Metodología
@@ -58,8 +58,8 @@ export default function ProcessSection() {
             De la oportunidad al contrato firmado
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary lg:text-lg">
-            Un proceso probado en más de 350 contratos adjudicados. Cuatro fases que 
-            maximizan su probabilidad de éxito.
+            El mismo método en más de 100 procesos participados. Cuatro fases que
+            maximizan tu probabilidad de ganar.
           </p>
         </motion.div>
 

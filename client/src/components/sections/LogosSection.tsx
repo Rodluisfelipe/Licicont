@@ -8,7 +8,7 @@ const ENTITIES = [
 
 export default function LogosSection() {
   return (
-    <section className="overflow-hidden border-y border-border bg-bg-alt py-10">
+    <section className="overflow-hidden border-y border-border bg-bg-alt py-8">
       <motion.p
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}

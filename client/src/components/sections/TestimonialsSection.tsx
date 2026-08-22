@@ -5,37 +5,37 @@ import { Quote, Star, ArrowUpRight, TrendingUp } from 'lucide-react';
 const CASE_STUDIES = [
   {
     quote:
-      'Empezamos con una licitacion de aseo institucional y en 3 meses ya teniamos 2 contratos mas de papeleria. LICICONT nos abrio la puerta al SECOP.',
-    name: 'Laura Gutierrez',
+      'Empezamos con una licitación de aseo institucional y en 3 meses ya teníamos 2 contratos más de papelería. LICICONT nos abrió la puerta al SECOP.',
+    name: 'Laura Gutiérrez',
     role: 'Gerente Comercial',
     company: 'Suministros Avanza SAS',
-    sector: 'Papeleria y Aseo',
-    challenge: 'No sabian como participar en SECOP II',
-    solution: 'Acompanamiento completo desde el registro hasta la primera propuesta',
+    sector: 'Papelería y Aseo',
+    challenge: 'No sabían cómo participar en SECOP II',
+    solution: 'Acompañamiento completo desde el registro hasta la primera propuesta',
     result: '3 contratos de suministros en 3 meses',
     metric: '3 contratos',
   },
   {
     quote:
-      'Gracias al analisis Go/No-Go solo licitamos donde teniamos chance real. Ganamos un contrato de infraestructura TI por $2.800M con una gobernacion.',
+      'Gracias al análisis Go/No-Go solo licitamos donde teníamos opción real. Ganamos un contrato de infraestructura TI por $2.800M con una gobernación.',
     name: 'Ricardo Vargas',
-    role: 'Director de Tecnologia',
+    role: 'Director de Tecnología',
     company: 'DataNet Colombia SAS',
-    sector: 'Tecnologia',
-    challenge: 'Invertian en propuestas de TI con baja probabilidad de ganar',
-    solution: 'Analisis Go/No-Go + propuesta tecnica especializada en TI',
+    sector: 'Tecnología',
+    challenge: 'Invertían en propuestas de TI con baja probabilidad de ganar',
+    solution: 'Análisis Go/No-Go + propuesta técnica especializada en TI',
     result: 'Contrato adjudicado por $2.800M COP',
     metric: '+$2.800M',
   },
   {
     quote:
-      'LICICONT detecto un riesgo en el pliego que nadie mas vio. Ganamos la licitacion de la terminal de transporte sin una sola observacion.',
-    name: 'Carlos Andres Mejia',
+      'LICICONT detectó un riesgo en el pliego que nadie más vio. Ganamos la licitación de la terminal de transporte sin una sola observación.',
+    name: 'Carlos Andrés Mejía',
     role: 'Gerente General',
-    company: 'Constructora Mejia & Asociados',
+    company: 'Constructora Mejía & Asociados',
     sector: 'Obras Civiles',
-    challenge: 'Perdian por fallos en documentacion tecnica y juridica',
-    solution: 'Revision juridica profunda + estructuracion de propuesta integral de obra',
+    challenge: 'Perdían por fallos en documentación técnica y jurídica',
+    solution: 'Revisión jurídica profunda + estructuración de propuesta integral de obra',
     result: 'Contrato adjudicado por $1.200M COP',
     metric: '+$1.200M',
   },
@@ -46,14 +46,14 @@ export default function TestimonialsSection() {
   const isInView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
-    <section ref={ref} className="bg-white py-24">
+    <section ref={ref} className="bg-white py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mx-auto mb-16 max-w-2xl text-center"
+          className="mx-auto mb-12 max-w-2xl text-center"
         >
           <span className="mb-4 inline-block rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
             Casos de Éxito

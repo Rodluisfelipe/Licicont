@@ -115,9 +115,9 @@ export const SERVICES: Service[] = [
     ],
     pricingType: 'fijo',
     pricingModel:
-      'Por entregable (fijo) + opción de comisión por éxito sobre la adjudicación',
-    price: 'Análisis $150.000 – $400.000 · Estructuración $400.000 – $900.000',
-    priceNote: 'por proceso',
+      'Por entregable: análisis $150.000 – $400.000 · estructuración $400.000 – $900.000. Opción de comisión por éxito sobre la adjudicación.',
+    price: 'Desde $150.000',
+    priceNote: 'por proceso, según alcance',
     differentiator:
       'Detección de direccionamiento: sabes si el pliego está amarrado ANTES de gastar en presentarte.',
     commitment: 3,

@@ -18,33 +18,33 @@ const CATEGORIES = [
     services: [
       {
         icon: <Radar className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Papeleria, Cafeteria y Aseo',
+        title: 'Papelería, Cafetería y Aseo',
         description:
-          'Tu puerta de entrada a la contratacion publica. Nichos simples, de bajo riesgo, ideales para empezar en SECOP II. Te acompaño desde el primer pliego hasta la adjudicacion.',
+          'Tu puerta de entrada a la contratación pública. Nichos simples, de bajo riesgo, ideales para empezar en SECOP II. Te acompaño desde el primer pliego hasta la adjudicación.',
       },
       {
         icon: <FolderSearch className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Analisis de Precios y Competencia',
+        title: 'Análisis de Precios y Competencia',
         description:
-          'Inteligencia sobre precios de referencia, historicos de adjudicacion y competidores en suministros. Estructuramos ofertas economicas ganadoras.',
+          'Inteligencia sobre precios de referencia, históricos de adjudicación y competidores en suministros. Estructuramos ofertas económicas ganadoras.',
       },
     ],
   },
   {
     key: 'tecnologia',
-    label: 'Tecnologia',
+    label: 'Tecnología',
     services: [
       {
         icon: <BarChart3 className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Licitaciones de Tecnologia',
+        title: 'Licitaciones de Tecnología',
         description:
-          'Software, hardware, infraestructura TI, telecomunicaciones. Procesos de alto valor con MinTIC, gobernaciones y entidades que requieren soluciones tecnologicas.',
+          'Software, hardware, infraestructura TI, telecomunicaciones. Procesos de alto valor con MinTIC, gobernaciones y entidades que requieren soluciones tecnológicas.',
       },
       {
         icon: <ShieldCheck className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Propuestas Tecnicas Especializadas',
+        title: 'Propuestas Técnicas Especializadas',
         description:
-          'Estructuramos la narrativa tecnica y el cumplimiento de requerimientos funcionales que los evaluadores buscan en licitaciones de TI.',
+          'Estructuramos la narrativa técnica y el cumplimiento de requerimientos funcionales que los evaluadores buscan en licitaciones de TI.',
       },
     ],
   },
@@ -54,15 +54,15 @@ const CATEGORIES = [
     services: [
       {
         icon: <Scale className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Infraestructura y Construccion',
+        title: 'Infraestructura y Construcción',
         description:
-          'Vias, edificaciones, terminales, hospitales. Los contratos de mayor valor en SECOP. +$103.000 millones en experiencia participada en obras civiles.',
+          'Vías, edificaciones, terminales, hospitales. Los contratos de mayor valor en SECOP. +$103.000 millones en experiencia participada en obras civiles.',
       },
       {
         icon: <FileText className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Consorcios y AIU Estrategico',
+        title: 'Consorcios y AIU Estratégico',
         description:
-          'Formacion de consorcios competitivos, estructuracion de AIU, analisis de precios unitarios y presupuestos de obra para licitar con ventaja.',
+          'Formación de consorcios competitivos, estructuración de AIU, análisis de precios unitarios y presupuestos de obra para licitar con ventaja.',
       },
     ],
   },
@@ -72,13 +72,13 @@ const CATEGORIES = [
     services: [
       {
         icon: <Users className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Evaluacion Go / No-Go',
+        title: 'Evaluación Go / No-Go',
         description:
-          'Analisis cuantitativo de cada licitacion: probabilidad de exito, competencia esperada y ROI estimado. Solo licitas donde puedes ganar.',
+          'Análisis cuantitativo de cada licitación: probabilidad de éxito, competencia esperada y ROI estimado. Solo licitas donde puedes ganar.',
       },
       {
         icon: <GraduationCap className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Mentoria y Capacitacion',
+        title: 'Mentoría y Capacitación',
         description:
           'Acompañamiento personalizado con casos reales. Te enseño paso a paso a identificar, analizar, estructurar y ganar licitaciones en SECOP II.',
       },
@@ -93,23 +93,23 @@ export default function ServicesSection() {
   const active = CATEGORIES.find((c) => c.key === activeTab)!;
 
   return (
-    <section id="servicios" ref={ref} className="bg-bg-alt py-24">
+    <section id="servicios" ref={ref} className="bg-bg-alt py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mx-auto mb-12 max-w-2xl text-center"
+          className="mx-auto mb-10 max-w-2xl text-center"
         >
           <span className="mb-4 inline-block rounded-full bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold-dark">
-            Nichos de Especializacion
+            Nichos de Especialización
           </span>
           <h2 className="text-3xl font-bold text-primary sm:text-4xl">
-            Suministros para empezar, tecnologia y obras para escalar
+            Suministros para empezar, tecnología y obras para escalar
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary lg:text-lg">
-            Desde papeleria y aseo hasta contratos de infraestructura de miles de millones.
+            Desde papelería y aseo hasta contratos de infraestructura de miles de millones.
           </p>
         </motion.div>
 

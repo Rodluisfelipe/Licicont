@@ -38,9 +38,9 @@ const inputClass =
   'w-full rounded-xl border border-border bg-bg-alt px-4 py-3.5 text-sm text-primary placeholder:text-text-light transition-all focus:border-gold focus:ring-2 focus:ring-gold/20 focus:outline-none';
 
 const STEPS = [
-  { title: '¿En qué sector licita?', subtitle: 'Seleccione su sector principal' },
-  { title: '¿Cuál es su empresa?', subtitle: 'Datos de la compañía' },
-  { title: '¿Con quién hablamos?', subtitle: 'Sus datos de contacto' },
+  { title: '¿En qué sector licitas?', subtitle: 'Elige tu sector principal' },
+  { title: '¿Cuál es tu empresa?', subtitle: 'Datos de la compañía' },
+  { title: '¿Con quién hablamos?', subtitle: 'Tus datos de contacto' },
 ];
 
 const WA_PHONE = '573023805967';

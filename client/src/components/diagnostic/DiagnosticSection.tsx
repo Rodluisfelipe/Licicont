@@ -220,7 +220,7 @@ export default function DiagnosticSection() {
     <section
       id="diagnostico"
       ref={sectionRef}
-      className="relative scroll-mt-24 overflow-hidden bg-primary py-24"
+      className="relative scroll-mt-20 overflow-hidden bg-primary py-16 sm:py-20"
     >
       {/* Fondos difusos */}
       <div className="pointer-events-none absolute -top-32 right-0 h-[500px] w-[500px] rounded-full bg-gold/10 blur-3xl" />
