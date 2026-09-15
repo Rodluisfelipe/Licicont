@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'motion/react';
+import Parallax from '@/components/motion/Parallax';
+import RevealText from '@/components/motion/RevealText';
 import { CheckCircle, ChevronDown, Compass, MessageCircle } from 'lucide-react';
 
 /** Credenciales de un vistazo, antes de que nadie lea un párrafo. */
@@ -34,7 +36,7 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
             transition={{ duration: 0.7 }}
             className="relative flex justify-center lg:sticky lg:top-24"
           >
-            <div className="relative w-72 lg:w-80">
+            <Parallax distance={26} className="relative w-72 lg:w-80">
               {/* Gold premium frame */}
               <div className="rounded-xl bg-gradient-to-br from-gold-light via-gold to-gold-dark p-[2px] shadow-lg">
                 <div className="rounded-[11px] bg-white p-[3px]">
@@ -60,7 +62,7 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
                   Especialista en licitaciones públicas y contratación estatal
                 </p>
               </div>
-            </div>
+            </Parallax>
           </motion.div>
 
           {/* Text side */}
@@ -71,8 +73,10 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
           >
             <span className="eyebrow mb-4">Sobre mí</span>
             <h2 className="display-2 text-primary">
-              Más de una década ganando{' '}
-              <span className="text-gold">licitaciones públicas</span>
+              <RevealText text="Más de una década ganando" />{' '}
+              <span className="text-gold">
+                <RevealText text="licitaciones públicas" delay={0.12} />
+              </span>
             </h2>
 
             {/* Credenciales rápidas */}

@@ -1,5 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from 'motion/react';
 import { ArrowLeft, ArrowRight, Clock, History, Loader2, ShieldCheck } from 'lucide-react';
 import { QUESTIONS } from '@/data/diagnostic';
 import { SERVICES, type ServiceId } from '@/data/services';
@@ -64,6 +70,17 @@ const ANALYZING_STEPS = [
 
 export default function DiagnosticSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const reducedMotion = useReducedMotion();
+
+  // El panel entra como una pieza y se abre a todo el ancho al asentarse.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'start 45%'],
+  });
+  const inset = useTransform(scrollYProgress, [0, 1], ['1.75rem', '0rem']);
+  const radius = useTransform(scrollYProgress, [0, 1], ['1.25rem', '0rem']);
+  const textureY = useTransform(scrollYProgress, [0, 1], [-40, 0]);
+
   const [initialState] = useState(readInitialState);
   const [phase, setPhase] = useState<Phase>(initialState.phase);
   const [answers, setAnswers] = useState<Answers>(initialState.answers);
@@ -209,17 +226,25 @@ export default function DiagnosticSection() {
   }, [saved, focusSection]);
 
   return (
-    <section
-      id="diagnostico"
-      ref={sectionRef}
-      className="relative scroll-mt-20 overflow-hidden bg-primary py-16 sm:py-20"
-    >
-      {/* Ambiente: rejilla tenue y luces doradas */}
-      <div className="grid-texture pointer-events-none absolute inset-0" aria-hidden="true" />
-      <div className="pointer-events-none absolute -top-32 right-0 h-[500px] w-[500px] rounded-full bg-gold/10 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 -left-32 h-[400px] w-[400px] rounded-full bg-gold/5 blur-3xl" />
+    <section id="diagnostico" ref={sectionRef} className="scroll-mt-20 bg-bg-alt">
+      <motion.div
+        style={
+          reducedMotion
+            ? undefined
+            : { marginLeft: inset, marginRight: inset, borderRadius: radius }
+        }
+        className="relative overflow-hidden bg-primary py-16 sm:py-20"
+      >
+        {/* Ambiente: rejilla tenue y luces doradas */}
+        <motion.div
+          style={reducedMotion ? undefined : { y: textureY }}
+          className="grid-texture pointer-events-none absolute inset-0"
+          aria-hidden="true"
+        />
+        <div className="pointer-events-none absolute -top-32 right-0 h-[500px] w-[500px] rounded-full bg-gold/10 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-0 -left-32 h-[400px] w-[400px] rounded-full bg-gold/5 blur-3xl" />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+        <div className="relative mx-auto max-w-7xl px-6">
         <AnimatePresence mode="wait">
           {/* ══════════ INTRO ══════════ */}
           {phase === 'intro' && (
@@ -448,8 +473,9 @@ export default function DiagnosticSection() {
               />
             </motion.div>
           )}
-        </AnimatePresence>
-      </div>
+          </AnimatePresence>
+        </div>
+      </motion.div>
     </section>
   );
 }

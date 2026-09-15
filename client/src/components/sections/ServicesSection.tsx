@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'motion/react';
+import RevealText from '@/components/motion/RevealText';
 import {
   Radar,
   FileText,
@@ -104,7 +105,7 @@ export default function ServicesSection() {
         >
           <span className="eyebrow eyebrow-center mb-4">Nichos de Especialización</span>
           <h2 className="display-2 text-primary">
-            Suministros para empezar, tecnología y obras para escalar
+            <RevealText text="Suministros para empezar, tecnología y obras para escalar" />
           </h2>
           <p className="lede mt-4">
             Desde papelería y aseo hasta contratos de infraestructura de miles de millones.

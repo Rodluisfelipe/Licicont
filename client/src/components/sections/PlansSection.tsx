@@ -1,5 +1,15 @@
 import { useRef, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'motion/react';
+import {
+  motion,
+  useInView,
+  AnimatePresence,
+  useScroll,
+  useSpring,
+  useTransform,
+  useReducedMotion,
+} from 'motion/react';
+import RevealText from '@/components/motion/RevealText';
+import { DURATION, EASE_OUT } from '@/lib/easing';
 import {
   Check,
   ChevronDown,
@@ -23,16 +33,38 @@ const DIFF_ICONS: Record<string, LucideIcon> = {
   HandCoins,
 };
 
-function PlanCard({ service, delay }: { service: Service; delay: number }) {
+function PlanCard({
+  service,
+  delay,
+  column,
+}: {
+  service: Service;
+  delay: number;
+  /** Posición en la fila: desfasa la columna para dar profundidad. */
+  column: number;
+}) {
   const [open, setOpen] = useState(false);
   const featured = Boolean(service.featured);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ['start end', 'end start'],
+  });
+  const drift = useSpring(
+    useTransform(scrollYProgress, [0, 1], [column * 26, column * -26]),
+    { stiffness: 110, damping: 30, restDelta: 0.001 }
+  );
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 14 }}
+      ref={cardRef}
+      style={reduced ? undefined : { y: drift }}
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.45, delay }}
+      transition={{ duration: DURATION.base, ease: EASE_OUT, delay }}
       className={`flex flex-col rounded-lg border p-7 transition-all duration-300 ${
         featured
           ? 'border-gold bg-primary text-white shadow-xl shadow-gold/10'
@@ -222,7 +254,7 @@ export default function PlansSection() {
         >
           <span className="eyebrow eyebrow-center mb-4">El menú completo</span>
           <h2 className="display-2 text-primary">
-            Seis formas de trabajar conmigo
+            <RevealText text="Seis formas de trabajar conmigo" />
           </h2>
           <p className="lede mt-4">
             Desde aprender a licitar hasta que yo licite contigo cada mes. Cada servicio
@@ -241,7 +273,12 @@ export default function PlansSection() {
         {/* Grilla de servicios */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service, i) => (
-            <PlanCard key={service.id} service={service} delay={i * 0.06} />
+            <PlanCard
+              key={service.id}
+              service={service}
+              delay={(i % 3) * 0.08}
+              column={i % 3}
+            />
           ))}
         </div>
 

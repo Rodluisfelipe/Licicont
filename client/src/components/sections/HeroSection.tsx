@@ -1,5 +1,13 @@
-import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from 'motion/react';
+import RevealText from '@/components/motion/RevealText';
+import { DURATION, EASE_OUT } from '@/lib/easing';
 import { MessageCircle, TrendingUp, FileCheck, BarChart3, MapPin, Compass } from 'lucide-react';
 
 const ROTATING_WORDS = ['suministros', 'obras civiles', 'tecnología', 'papelería y aseo'];
@@ -23,20 +31,46 @@ function useRotatingWord(words: string[], interval = 2800) {
 
 export default function HeroSection({ onContact }: { onContact: () => void }) {
   const word = useRotatingWord(ROTATING_WORDS);
+  const sectionRef = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+
+  // El hero cede el paso: se hunde y se desenfoca mientras entra lo siguiente.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.72], [1, 0]);
+  const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.97]);
+  const auraY = useTransform(scrollYProgress, [0, 1], [0, -160]);
+  const auraScale = useTransform(scrollYProgress, [0, 1], [1, 1.35]);
+
+  const motionStyle = reduced
+    ? undefined
+    : { y: contentY, opacity: contentOpacity, scale: contentScale };
 
   return (
-    <section className="relative overflow-hidden bg-white pt-24 pb-0 sm:pt-28">
-      {/* Background blurs */}
-      <div className="pointer-events-none absolute top-0 right-0 -z-10 h-[600px] w-[600px] rounded-full bg-gold/5 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 left-0 -z-10 h-[400px] w-[400px] rounded-full bg-primary/5 blur-3xl" />
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-white pt-24 pb-0 sm:pt-28"
+    >
+      {/* Auras de fondo: se alejan más rápido que el contenido */}
+      <motion.div
+        style={reduced ? undefined : { y: auraY, scale: auraScale }}
+        className="pointer-events-none absolute inset-0 -z-10"
+        aria-hidden="true"
+      >
+        <div className="absolute top-0 right-0 h-[600px] w-[600px] rounded-full bg-gold/5 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full bg-primary/5 blur-3xl" />
+      </motion.div>
 
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mx-auto max-w-3xl text-center">
+        <motion.div style={motionStyle} className="mx-auto max-w-3xl text-center">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: DURATION.base, ease: EASE_OUT }}
             className="mb-5"
           >
             <span className="eyebrow eyebrow-center">
@@ -48,13 +82,8 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
           </motion.div>
 
           {/* Headline with rotating word */}
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="display-1 text-primary"
-          >
-            Transformamos
+          <h1 className="display-1 text-primary">
+            <RevealText text="Transformamos" delay={0.08} />
             <br />
             <span className="relative inline-grid h-[1.2em] items-center overflow-hidden">
               {/* Invisible sizer — reserves width of longest word */}
@@ -77,14 +106,14 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
               </AnimatePresence>
             </span>
             <br />
-            en contratos ganados
-          </motion.h1>
+            <RevealText text="en contratos ganados" delay={0.22} />
+          </h1>
 
           {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: DURATION.slow, ease: EASE_OUT, delay: 0.42 }}
             className="lede mx-auto mt-6 max-w-xl"
           >
             Te acompaño a venderle al Estado en SECOP II: papelería, cafetería, aseo,
@@ -96,7 +125,7 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: DURATION.slow, ease: EASE_OUT, delay: 0.52 }}
             className="mt-8 flex flex-wrap items-center justify-center gap-3"
           >
             <button
@@ -121,7 +150,7 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
+            transition={{ duration: DURATION.slow, ease: EASE_OUT, delay: 0.62 }}
             className="mt-5 flex flex-col items-center gap-2"
           >
             <div className="flex items-center gap-2.5 rounded-full border border-border bg-white py-1.5 pr-4 pl-1.5 shadow-xs">
@@ -140,7 +169,7 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
               Respuesta el mismo día · 6 preguntas · 45 segundos · sin registro
             </p>
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* Stats bar */}
         <motion.div

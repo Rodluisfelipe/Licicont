@@ -1,7 +1,15 @@
 import { useRef } from 'react';
-import { motion, useInView } from 'motion/react';
-import { useAnimatedCounter } from '@/hooks/useAnimatedCounter';
+import {
+  motion,
+  useInView,
+  useScroll,
+  useSpring,
+  useTransform,
+  useReducedMotion,
+} from 'motion/react';
 import { TrendingUp, FileCheck, Users, MapPin, BarChart3, Zap } from 'lucide-react';
+import RevealText from '@/components/motion/RevealText';
+import { DURATION, EASE_OUT } from '@/lib/easing';
 
 interface MetricCardProps {
   label: string;
@@ -16,19 +24,30 @@ interface MetricCardProps {
 function MetricCard({ label, value, suffix, prefix = '', decimals = 0, icon, delay }: MetricCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
-  const animatedValue = useAnimatedCounter({
-    end: isInView ? value : 0,
-    duration: 2500,
-    decimals,
-    delay: delay * 150,
+  const reduced = useReducedMotion();
+
+  // La cifra se construye con el gesto: el número sube mientras la tarjeta
+  // cruza la pantalla, no en una animación suelta al aparecer.
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start 95%', 'center 55%'],
   });
+  const smooth = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 28,
+    restDelta: 0.001,
+  });
+  const counted = useTransform(smooth, [0, 1], [0, value]);
+  const display = useTransform(counted, (v) =>
+    decimals > 0 ? v.toFixed(decimals) : Math.round(v).toLocaleString('es-CO')
+  );
 
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 16 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: delay * 0.05 }}
+      transition={{ duration: DURATION.base, ease: EASE_OUT, delay: delay * 0.05 }}
       className="card card-hover p-6 text-center"
     >
       <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-gold/10 text-gold">
@@ -37,7 +56,11 @@ function MetricCard({ label, value, suffix, prefix = '', decimals = 0, icon, del
       <div className="mb-1">
         <span className="text-lg font-semibold text-gold">{prefix}</span>
         <span className="tnum text-3xl font-semibold text-primary lg:text-[2.25rem]">
-          {decimals > 0 ? animatedValue.toFixed(decimals) : animatedValue.toLocaleString('es-CO')}
+          {reduced ? (
+            decimals > 0 ? value.toFixed(decimals) : value.toLocaleString('es-CO')
+          ) : (
+            <motion.span>{display}</motion.span>
+          )}
         </span>
         <span className="ml-0.5 text-lg font-semibold text-gold">{suffix}</span>
       </div>
@@ -71,7 +94,7 @@ export default function TickerSection() {
         >
           <span className="eyebrow eyebrow-center mb-4">Resultados Comprobados</span>
           <h2 className="display-2 text-primary">
-            Números que respaldan mi trabajo
+            <RevealText text="Números que respaldan mi trabajo" />
           </h2>
           <p className="lede mt-4">
             Más de una década ayudando a empresas colombianas a ganar procesos de contratación estatal.
