@@ -137,7 +137,7 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
               type="button"
               onClick={() => setExpanded((v) => !v)}
               aria-expanded={expanded}
-              className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-dark transition-colors hover:text-gold"
+              className="-mx-2 mt-2 inline-flex min-h-[44px] items-center gap-1.5 px-2 text-sm font-semibold text-gold-dark transition-colors hover:text-gold"
             >
               {expanded ? 'Ver menos' : 'Leer mi trayectoria completa'}
               <ChevronDown

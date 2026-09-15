@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, MessageCircle, Compass, Phone } from 'lucide-react';
+import { Menu, X, MessageCircle, Compass, Phone, ChevronRight } from 'lucide-react';
+import { useHaptics } from '@/hooks/useHaptics';
 
 const NAV_LINKS = [
   { label: 'Sobre Mí', href: '#sobre-mi' },
@@ -17,6 +18,7 @@ export default function Navbar({ onContact }: { onContact: () => void }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState('');
+  const { haptic } = useHaptics();
 
   useEffect(() => {
     const onScroll = () => {
@@ -50,15 +52,32 @@ export default function Navbar({ onContact }: { onContact: () => void }) {
     return () => observer.disconnect();
   }, []);
 
+  // Con la hoja abierta, el fondo no debe desplazarse bajo el dedo.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const previous = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    return () => {
+      document.documentElement.style.overflow = previous;
+    };
+  }, [mobileOpen]);
+
   const handleNavClick = (href: string) => {
+    haptic('select');
     setMobileOpen(false);
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const goToDiagnostic = () => {
+    haptic('step');
     setMobileOpen(false);
     document.querySelector('#diagnostico')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const toggleMenu = () => {
+    haptic(mobileOpen ? 'tick' : 'step');
+    setMobileOpen((v) => !v);
   };
 
   return (
@@ -145,13 +164,13 @@ export default function Navbar({ onContact }: { onContact: () => void }) {
           <div className="flex items-center gap-2 md:hidden">
             <button
               onClick={goToDiagnostic}
-              className="btn btn-primary px-3.5 py-2 text-xs"
+              className="btn btn-primary min-h-[40px] px-4 py-2 text-xs"
             >
               Diagnóstico gratis
             </button>
             <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="rounded-lg p-2 text-primary transition-colors hover:bg-bg-alt"
+              onClick={toggleMenu}
+              className="flex h-11 w-11 items-center justify-center rounded-lg text-primary transition-colors active:bg-bg-alt"
               aria-label={mobileOpen ? 'Cerrar menú' : 'Abrir menú'}
               aria-expanded={mobileOpen}
             >
@@ -161,7 +180,7 @@ export default function Navbar({ onContact }: { onContact: () => void }) {
         </div>
       </motion.nav>
 
-      {/* Menú móvil */}
+      {/* Menú móvil: hoja inferior, al alcance del pulgar */}
       <AnimatePresence>
         {mobileOpen && (
           <>
@@ -169,46 +188,87 @@ export default function Navbar({ onContact }: { onContact: () => void }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-40 bg-primary/20 backdrop-blur-sm md:hidden"
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 z-40 bg-primary/40 backdrop-blur-sm md:hidden"
               onClick={() => setMobileOpen(false)}
             />
+
             <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-x-3 top-[68px] z-50 rounded-2xl border border-border bg-white p-4 shadow-xl md:hidden"
+              role="dialog"
+              aria-label="Menú de navegación"
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ type: 'spring', stiffness: 380, damping: 38 }}
+              drag="y"
+              dragConstraints={{ top: 0, bottom: 0 }}
+              dragElastic={{ top: 0, bottom: 0.4 }}
+              onDragEnd={(_, info) => {
+                if (info.offset.y > 110 || info.velocity.y > 640) {
+                  haptic('tick');
+                  setMobileOpen(false);
+                }
+              }}
+              className="pb-safe fixed inset-x-0 bottom-0 z-50 rounded-t-2xl border-t border-border bg-white shadow-2xl md:hidden"
             >
-              <div className="flex flex-col gap-1">
-                {NAV_LINKS.map((link) => (
-                  <button
-                    key={link.href}
-                    onClick={() => handleNavClick(link.href)}
-                    className={`rounded-lg px-4 py-2.5 text-left text-base font-medium transition-colors ${
-                      activeSection === link.href
-                        ? 'bg-gold/10 text-gold-dark'
-                        : 'text-text hover:bg-bg-alt'
-                    }`}
-                  >
-                    {link.label}
-                  </button>
-                ))}
-                <div className="my-2 h-px bg-border" />
-                <button
-                  onClick={() => {
-                    setMobileOpen(false);
-                    onContact();
-                  }}
-                  className="btn btn-whatsapp w-full"
-                >
-                  <MessageCircle className="h-4 w-4" />
-                  Escríbeme por WhatsApp
-                </button>
+              {/* Asa de arrastre */}
+              <div className="flex justify-center pt-3 pb-1">
+                <span className="h-1 w-10 rounded-full bg-border-strong" aria-hidden="true" />
               </div>
+
+              <nav className="px-4 pt-2 pb-4">
+                {NAV_LINKS.map((link) => {
+                  const active = activeSection === link.href;
+                  return (
+                    <button
+                      key={link.href}
+                      onClick={() => handleNavClick(link.href)}
+                      className={`flex min-h-[52px] w-full items-center justify-between rounded-lg px-4 text-left text-[15px] font-medium transition-colors active:bg-bg-alt ${
+                        active ? 'text-gold-dark' : 'text-text'
+                      }`}
+                    >
+                      {link.label}
+                      <ChevronRight
+                        className={`h-4 w-4 ${active ? 'text-gold' : 'text-text-light'}`}
+                      />
+                    </button>
+                  );
+                })}
+
+                <div className="my-3 h-px bg-border" />
+
+                <div className="flex flex-col gap-2">
+                  <button onClick={goToDiagnostic} className="btn btn-primary w-full py-3.5">
+                    <Compass className="h-[18px] w-[18px]" />
+                    Diagnóstico gratis
+                  </button>
+                  <button
+                    onClick={() => {
+                      haptic('select');
+                      setMobileOpen(false);
+                      onContact();
+                    }}
+                    className="btn btn-whatsapp w-full py-3.5"
+                  >
+                    <MessageCircle className="h-[18px] w-[18px]" />
+                    Escríbeme por WhatsApp
+                  </button>
+                  <a
+                    href={WA_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-ghost w-full py-3"
+                  >
+                    <Phone className="h-4 w-4" />
+                    +57 302 380 5967
+                  </a>
+                </div>
+              </nav>
             </motion.div>
           </>
         )}
       </AnimatePresence>
+
     </>
   );
 }

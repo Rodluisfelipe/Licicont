@@ -25,6 +25,7 @@ import { markContacted } from '@/lib/diagnosticStorage';
 import { buildShareUrl } from '@/lib/shareLink';
 import { deliverLead } from '@/lib/leadDelivery';
 import { printDiagnostic } from '@/lib/printDiagnostic';
+import { useHaptics } from '@/hooks/useHaptics';
 import ServiceIcon from './ServiceIcon';
 
 interface Props {
@@ -99,6 +100,7 @@ export default function DiagnosticResult({
   const [lead, setLead] = useState<LeadContact>(initialContact ?? emptyLead);
   const [sent, setSent] = useState(false);
   const [copied, setCopied] = useState(false);
+  const { haptic } = useHaptics();
 
   const canSend = lead.fullName.trim() !== '' && lead.company.trim() !== '' && lead.phone.trim() !== '';
 
@@ -114,7 +116,11 @@ export default function DiagnosticResult({
   };
 
   const handleSend = () => {
-    if (!canSend) return;
+    if (!canSend) {
+      haptic('warn');
+      return;
+    }
+    haptic('success');
 
     // Primero la conversión: el resto ocurre después de abrir WhatsApp.
     window.open(whatsappUrl(message), '_blank', 'noopener,noreferrer');
@@ -160,6 +166,7 @@ export default function DiagnosticResult({
 
     try {
       await navigator.clipboard.writeText(shareUrl);
+      haptic('select');
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2500);
     } catch {
@@ -389,7 +396,10 @@ export default function DiagnosticResult({
 
           <button
             type="button"
-            onClick={onRestart}
+            onClick={() => {
+              haptic('tick');
+              onRestart();
+            }}
             className="btn btn-lg btn-outline-invert"
           >
             <RefreshCw className="h-4 w-4" />
@@ -415,7 +425,10 @@ export default function DiagnosticResult({
         <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-white/10 pt-5">
           <button
             type="button"
-            onClick={() => printDiagnostic(recommendation, lead, shareUrl)}
+            onClick={() => {
+              haptic('tick');
+              printDiagnostic(recommendation, lead, shareUrl);
+            }}
             className="inline-flex items-center gap-2 rounded-md border border-white/12 px-4 py-2 text-xs font-medium text-white/60 transition-colors hover:border-gold/40 hover:text-white"
           >
             <Printer className="h-3.5 w-3.5" />

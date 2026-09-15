@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'motion/react';
 import RevealText from '@/components/motion/RevealText';
+import { useHaptics } from '@/hooks/useHaptics';
 import {
   Radar,
   FileText,
@@ -91,6 +92,7 @@ export default function ServicesSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-60px' });
   const [activeTab, setActiveTab] = useState('suministros');
+  const { haptic } = useHaptics();
   const active = CATEGORIES.find((c) => c.key === activeTab)!;
 
   return (
@@ -117,13 +119,16 @@ export default function ServicesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="mx-auto mb-10 flex max-w-xl flex-wrap justify-center gap-1 rounded-lg border border-border bg-white p-1"
+          className="snap-row mx-auto mb-10 flex max-w-xl gap-1 overflow-x-auto rounded-lg border border-border bg-white p-1"
         >
           {CATEGORIES.map((cat) => (
             <button
               key={cat.key}
-              onClick={() => setActiveTab(cat.key)}
-              className={`flex-1 rounded-md px-4 py-2 text-sm font-medium transition-all duration-300 ${
+              onClick={() => {
+                haptic('tick');
+                setActiveTab(cat.key);
+              }}
+              className={`snap-item flex-1 rounded-md px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-all duration-300 ${
                 activeTab === cat.key
                   ? 'bg-primary text-white shadow-sm'
                   : 'text-text-secondary hover:bg-bg-alt hover:text-primary'

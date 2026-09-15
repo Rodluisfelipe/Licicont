@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Compass, MessageCircle } from 'lucide-react';
+import { useHaptics } from '@/hooks/useHaptics';
 
 const WA_LINK = 'https://wa.me/573023805967';
 
 export default function FloatingCTA({ onContact }: { onContact: () => void }) {
+  const { haptic } = useHaptics();
   const [visible, setVisible] = useState(false);
   const [inDiagnostic, setInDiagnostic] = useState(false);
 
@@ -35,12 +37,13 @@ export default function FloatingCTA({ onContact }: { onContact: () => void }) {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 80, opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed right-0 bottom-0 left-0 z-40 border-t border-border bg-white/90 px-4 py-3 backdrop-blur-lg md:hidden"
+          className="pb-safe fixed right-0 bottom-0 left-0 z-40 border-t border-border bg-white/92 px-4 pt-3 pb-3 backdrop-blur-xl md:hidden"
         >
           <div className="flex items-center gap-2">
             {!inDiagnostic && (
               <button
                 onClick={() => {
+                  haptic('step');
                   const el = document.querySelector('#diagnostico');
                   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }}
@@ -51,7 +54,10 @@ export default function FloatingCTA({ onContact }: { onContact: () => void }) {
               </button>
             )}
             <button
-              onClick={onContact}
+              onClick={() => {
+                haptic('select');
+                onContact();
+              }}
               aria-label="Escríbeme por WhatsApp"
               className={`btn btn-whatsapp ${
                 inDiagnostic ? 'flex-1 py-3.5' : 'h-[46px] w-[46px] shrink-0 gap-0 p-0'

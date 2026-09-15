@@ -16,6 +16,7 @@ import {
   type StoredDiagnostic,
 } from '@/lib/diagnosticStorage';
 import { clearUrl, readAnswersFromUrl, syncUrl } from '@/lib/shareLink';
+import { useHaptics } from '@/hooks/useHaptics';
 import DiagnosticResult from './DiagnosticResult';
 
 type Phase = 'intro' | 'quiz' | 'analyzing' | 'result';
@@ -71,6 +72,7 @@ const ANALYZING_STEPS = [
 export default function DiagnosticSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const reducedMotion = useReducedMotion();
+  const { haptic } = useHaptics();
 
   // El panel entra como una pieza y se abre a todo el ancho al asentarse.
   const { scrollYProgress } = useScroll({
@@ -98,18 +100,31 @@ export default function DiagnosticSection() {
   );
 
   const focusSection = useCallback(() => {
-    sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Tras cambiar de fase la sección cambia de alto: se espera al siguiente
+    // fotograma para no encuadrar contra la maquetación anterior.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
   }, []);
 
   const start = useCallback(
     (presetNecesidad?: string) => {
+      haptic('step');
       setAnswers(presetNecesidad ? { necesidad: presetNecesidad } : {});
       setIndex(0);
       setPhase('quiz');
       focusSection();
     },
-    [focusSection]
+    [focusSection, haptic]
   );
+
+  /** Si el enunciado quedó por encima del borde, se vuelve a encuadrar. */
+  const keepQuestionInView = useCallback(() => {
+    const top = sectionRef.current?.getBoundingClientRect().top ?? 0;
+    if (top < -8) focusSection();
+  }, [focusSection]);
 
   /** Avanza a la siguiente pregunta sin responder, o cierra el cuestionario. */
   const goForward = useCallback(
@@ -120,31 +135,35 @@ export default function DiagnosticSection() {
 
       if (next < QUESTIONS.length) {
         setIndex(next);
+        keepQuestionInView();
         return;
       }
       setAnalyzingStep(0);
       setPhase('analyzing');
     },
-    []
+    [keepQuestionInView]
   );
 
   const answer = useCallback(
     (value: string) => {
       const updated: Answers = { ...answers, [question.id]: value };
       setAnswers(updated);
+      haptic('select');
       // Pausa corta para que se vea la selección antes de pasar.
       window.setTimeout(() => goForward(index, updated), 260);
     },
-    [answers, question, index, goForward]
+    [answers, question, index, goForward, haptic]
   );
 
   const goBack = useCallback(() => {
+    haptic('tick');
     if (index === 0) {
       setPhase('intro');
       return;
     }
     setIndex(index - 1);
-  }, [index]);
+    keepQuestionInView();
+  }, [index, haptic, keepQuestionInView]);
 
   // ── Al llegar por un enlace compartido, la vista aterriza en el diagnóstico ──
   useEffect(() => {
@@ -199,6 +218,7 @@ export default function DiagnosticSection() {
     );
     const doneTimer = window.setTimeout(() => {
       setPhase('result');
+      haptic('success');
       focusSection();
     }, 1900);
 
@@ -206,7 +226,7 @@ export default function DiagnosticSection() {
       window.clearInterval(stepTimer);
       window.clearTimeout(doneTimer);
     };
-  }, [phase, focusSection]);
+  }, [phase, focusSection, haptic]);
 
   const restart = useCallback(() => {
     setAnswers({});
@@ -322,7 +342,7 @@ export default function DiagnosticSection() {
                       key={service.id}
                       type="button"
                       onClick={() => start(VOICE_SHORTCUT[service.id])}
-                      className="rounded-md border border-white/12 bg-white/[0.04] px-4 py-2 text-xs font-medium text-white/70 transition-all hover:border-gold/40 hover:bg-gold/10 hover:text-white"
+                      className="flex min-h-[44px] items-center rounded-md border border-white/12 bg-white/[0.04] px-4 py-2 text-xs font-medium text-white/70 transition-all hover:border-gold/40 hover:bg-gold/10 hover:text-white"
                     >
                       “{service.clientVoice}”
                     </button>
@@ -340,23 +360,41 @@ export default function DiagnosticSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.35 }}
-              className="mx-auto max-w-3xl"
+              className="mx-auto max-w-3xl pb-20 md:pb-0"
             >
-              {/* Progreso */}
-              <div className="mb-8">
-                <div className="mb-2.5 flex items-center justify-between text-xs font-medium text-white/45">
-                  <span>
-                    Pregunta {index + 1} de {QUESTIONS.length}
-                  </span>
-                  <span>{Math.round(progress)}%</span>
+              {/* Progreso: un tramo por pregunta, como en una historia */}
+              <div className="mb-7">
+                <div className="mb-3 flex gap-1.5">
+                  {QUESTIONS.map((q, i) => (
+                    <button
+                      key={q.id}
+                      type="button"
+                      onClick={() => {
+                        if (i > index && !answers[QUESTIONS[i].id]) return;
+                        haptic('tick');
+                        setIndex(i);
+                      }}
+                      aria-label={`Ir a la pregunta ${i + 1}: ${q.short}`}
+                      aria-current={i === index ? 'step' : undefined}
+                      className="group flex h-11 flex-1 items-center"
+                    >
+                      <span
+                        className={`block h-1.5 w-full rounded-full transition-all duration-300 ${
+                          i < index || answers[q.id]
+                            ? 'bg-gold'
+                            : i === index
+                              ? 'bg-gold/70 shadow-[0_0_10px_rgba(176,141,87,0.55)]'
+                              : 'bg-white/20'
+                        }`}
+                      />
+                    </button>
+                  ))}
                 </div>
-                <div className="h-1 overflow-hidden rounded-full bg-white/10">
-                  <motion.div
-                    className="h-full rounded-full bg-gold"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${progress}%` }}
-                    transition={{ duration: 0.35 }}
-                  />
+                <div className="flex items-center justify-between text-xs font-medium text-white/45">
+                  <span className="tnum">
+                    {question.short} · {index + 1}/{QUESTIONS.length}
+                  </span>
+                  <span className="tnum">{Math.round(progress)}%</span>
                 </div>
               </div>
 
@@ -367,6 +405,15 @@ export default function DiagnosticSection() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -28 }}
                   transition={{ duration: 0.28 }}
+                  drag={reducedMotion ? false : 'x'}
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={{ left: 0.02, right: 0.28 }}
+                  dragDirectionLock
+                  onDragEnd={(_, info) => {
+                    // Arrastrar a la derecha vuelve atrás, como en una app nativa.
+                    if (info.offset.x > 90 || info.velocity.x > 520) goBack();
+                  }}
+                  className="touch-pan-y"
                 >
                   <h3 className="display-2 text-white">{question.title}</h3>
                   <p className="mt-3 text-sm text-white/55 sm:text-base">{question.subtitle}</p>
@@ -379,11 +426,12 @@ export default function DiagnosticSection() {
                     {question.options.map((option, i) => {
                       const selected = answers[question.id] === option.value;
                       return (
-                        <button
+                        <motion.button
                           key={option.value}
                           type="button"
                           onClick={() => answer(option.value)}
-                          className={`group flex w-full items-start gap-4 rounded-lg border px-5 py-4 text-left transition-all duration-200 ${
+                          whileTap={reducedMotion ? undefined : { scale: 0.985 }}
+                          className={`group flex min-h-[64px] w-full items-start gap-4 rounded-lg border px-5 py-4 text-left transition-all duration-200 ${
                             selected
                               ? 'border-gold bg-gold/12 shadow-md'
                               : 'border-white/10 bg-white/[0.03] hover:border-gold/40 hover:bg-white/[0.06]'
@@ -412,7 +460,7 @@ export default function DiagnosticSection() {
                           >
                             {i + 1}
                           </span>
-                        </button>
+                        </motion.button>
                       );
                     })}
                   </div>
@@ -431,6 +479,7 @@ export default function DiagnosticSection() {
                 <p className="hidden text-xs text-white/30 sm:block">
                   Tip: usa las teclas 1–{question.options.length} para responder más rápido
                 </p>
+                <p className="text-xs text-white/30 sm:hidden">Desliza para volver</p>
               </div>
             </motion.div>
           )}

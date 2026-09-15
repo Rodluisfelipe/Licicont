@@ -105,6 +105,12 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* En táctil no hay puntero: el resaltado azul del sistema sobra porque cada
+   elemento ya responde con su propio estado :active. */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   font-family: var(--font-sans);
   background-color: var(--color-bg);
@@ -229,7 +235,27 @@ body {
   }
 
   .btn:active {
-    transform: translateY(1px);
+    transform: scale(0.975);
+  }
+
+  /* Sin puntero, el hover no existe: la respuesta la da la pulsación. */
+  @media (hover: none) {
+    /* Alto mínimo cómodo para el pulgar. */
+    .btn {
+      min-height: 44px;
+    }
+
+    .btn:hover:not(:disabled) {
+      box-shadow: inherit;
+    }
+
+    .card-hover:hover {
+      transform: none;
+    }
+
+    .card:active {
+      border-color: rgba(176, 141, 87, 0.4);
+    }
   }
 
   .btn:disabled,
@@ -355,6 +381,31 @@ body {
 }
 
 @layer utilities {
+  /* Zona segura del dispositivo (barra de gestos, notch). */
+  .pb-safe {
+    padding-bottom: max(env(safe-area-inset-bottom), 0px);
+  }
+
+  .mb-safe {
+    margin-bottom: max(env(safe-area-inset-bottom), 0px);
+  }
+
+  /* Carrusel táctil con parada en cada tarjeta. */
+  .snap-row {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .snap-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .snap-item {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
   /* Cifras alineadas y de caja alta */
   .tnum {
     font-variant-numeric: tabular-nums lining-nums;

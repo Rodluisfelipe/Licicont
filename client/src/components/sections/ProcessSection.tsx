@@ -3,7 +3,8 @@ import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'mo
 import { Search, Crosshair, FileCheck, Trophy } from 'lucide-react';
 import RevealText from '@/components/motion/RevealText';
 import { useIsDesktop } from '@/hooks/useMediaQuery';
-import { DURATION, EASE_OUT, SCROLL_SPRING } from '@/lib/easing';
+import SnapCarousel from '@/components/motion/SnapCarousel';
+import { SCROLL_SPRING } from '@/lib/easing';
 
 const STEPS = [
   {
@@ -173,23 +174,17 @@ export default function ProcessSection() {
     return (
       <section id="proceso" ref={sectionRef} className="bg-white py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-12">{header}</div>
-          <div className="grid gap-5 sm:grid-cols-2">
-            {STEPS.map((step, i) => (
-              <motion.div
-                key={step.num}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: DURATION.base, ease: EASE_OUT, delay: i * 0.06 }}
-              >
-                <StepCard step={step} />
-              </motion.div>
-            ))}
-          </div>
-          <div className="mt-5">
-            <ClosingPanel />
-          </div>
+          <div className="mb-10">{header}</div>
+          <SnapCarousel
+            labels={[...STEPS.map((s) => `Ver fase ${s.num}: ${s.title}`), 'Ver el cierre']}
+            desktopClassName="sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0"
+            itemClassName="w-[82vw] sm:w-auto"
+          >
+            {[
+              ...STEPS.map((step) => <StepCard key={step.num} step={step} />),
+              <ClosingPanel key="cierre" />,
+            ]}
+          </SnapCarousel>
         </div>
       </section>
     );

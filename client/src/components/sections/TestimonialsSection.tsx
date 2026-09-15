@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
+import SnapCarousel from '@/components/motion/SnapCarousel';
 import { Quote, Star, ArrowUpRight, TrendingUp } from 'lucide-react';
 
 const CASE_STUDIES = [
@@ -64,18 +65,21 @@ export default function TestimonialsSection() {
           </p>
         </motion.div>
 
-        {/* Cards */}
-        <div className="grid gap-6 md:grid-cols-3">
+        {/* Escritorio: rejilla · Móvil: carrusel */}
+        <SnapCarousel
+          labels={CASE_STUDIES.map((c) => `Ver el caso de ${c.company}`)}
+          desktopClassName="md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0"
+        >
           {CASE_STUDIES.map((c, i) => (
             <motion.div
               key={c.name}
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="group flex flex-col rounded-lg border border-border bg-white shadow-sm transition-all duration-300 hover:border-gold/30 hover:shadow-lg"
+              className="card card-hover group flex w-full flex-col overflow-hidden"
             >
               {/* Metric banner */}
-              <div className="flex items-center justify-between rounded-t-2xl bg-primary px-6 py-3">
+              <div className="flex items-center justify-between bg-primary px-6 py-3">
                 <span className="flex items-center gap-1.5 text-xs font-medium text-white/70">
                   <TrendingUp className="h-3.5 w-3.5 text-gold" />
                   Resultado
@@ -125,7 +129,7 @@ export default function TestimonialsSection() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </SnapCarousel>
       </div>
     </section>
   );

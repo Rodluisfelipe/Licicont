@@ -9,6 +9,8 @@ import {
   useReducedMotion,
 } from 'motion/react';
 import RevealText from '@/components/motion/RevealText';
+import { useHaptics } from '@/hooks/useHaptics';
+import SnapCarousel from '@/components/motion/SnapCarousel';
 import { DURATION, EASE_OUT } from '@/lib/easing';
 import {
   Check,
@@ -47,6 +49,7 @@ function PlanCard({
   const featured = Boolean(service.featured);
   const cardRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
+  const { haptic } = useHaptics();
 
   const { scrollYProgress } = useScroll({
     target: cardRef,
@@ -65,7 +68,7 @@ function PlanCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: DURATION.base, ease: EASE_OUT, delay }}
-      className={`flex flex-col rounded-lg border p-7 transition-all duration-300 ${
+      className={`flex w-full flex-col rounded-lg border p-7 transition-all duration-300 ${
         featured
           ? 'border-gold bg-primary text-white shadow-xl shadow-gold/10'
           : 'border-border bg-white shadow-sm hover:border-gold/30 hover:shadow-lg'
@@ -212,9 +215,12 @@ function PlanCard({
 
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => {
+          haptic('tick');
+          setOpen((v) => !v);
+        }}
         aria-expanded={open}
-        className={`mt-3 mb-6 inline-flex items-center gap-1 self-start text-xs font-semibold transition-colors ${
+        className={`-mx-2 mt-2 mb-5 inline-flex min-h-[44px] items-center gap-1 self-start px-2 text-xs font-semibold transition-colors ${
           featured ? 'text-gold-light hover:text-gold' : 'text-gold-dark hover:text-gold'
         }`}
       >
@@ -241,7 +247,6 @@ function PlanCard({
 export default function PlansSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-60px' });
-
   return (
     <section id="planes" ref={ref} className="scroll-mt-20 bg-bg-alt py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
@@ -270,8 +275,8 @@ export default function PlansSection() {
           </a>
         </motion.div>
 
-        {/* Grilla de servicios */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {/* Escritorio: rejilla · Móvil: carrusel con parada en cada tarjeta */}
+        <SnapCarousel labels={SERVICES.map((s) => `Ver ${s.name}`)}>
           {SERVICES.map((service, i) => (
             <PlanCard
               key={service.id}
@@ -280,7 +285,7 @@ export default function PlansSection() {
               column={i % 3}
             />
           ))}
-        </div>
+        </SnapCarousel>
 
         <p className="mx-auto mt-8 max-w-3xl text-center text-xs leading-relaxed text-text-light">
           Los valores son rangos de referencia. El precio final se cierra según el sector,
@@ -299,21 +304,25 @@ export default function PlansSection() {
             <span className="eyebrow eyebrow-center mb-3">La diferencia</span>
             <h3 className="display-2 text-primary">Por qué Licicont y no otro</h3>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-3 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
             {DIFFERENTIATORS.map((diff) => {
               const Icon = DIFF_ICONS[diff.icon];
               return (
                 <div
                   key={diff.title}
-                  className="card card-hover p-6"
+                  className="card card-hover flex items-start gap-4 p-5 sm:block sm:p-6"
                 >
-                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-gold/10 text-gold">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gold/10 text-gold sm:mb-4 sm:h-11 sm:w-11">
                     <Icon className="h-5 w-5" strokeWidth={1.5} />
                   </span>
-                  <h4 className="mb-2 text-base font-bold text-primary">{diff.title}</h4>
-                  <p className="text-sm leading-relaxed text-text-secondary">
-                    {diff.description}
-                  </p>
+                  <div>
+                    <h4 className="mb-1.5 text-[15px] font-semibold text-primary sm:mb-2 sm:text-base">
+                      {diff.title}
+                    </h4>
+                    <p className="text-sm leading-relaxed text-text-secondary">
+                      {diff.description}
+                    </p>
+                  </div>
                 </div>
               );
             })}
