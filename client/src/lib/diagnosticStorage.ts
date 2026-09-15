@@ -25,6 +25,8 @@ export interface StoredDiagnostic {
 
 /** El almacenamiento puede fallar (modo privado, cookies bloqueadas): nunca debe romper la página. */
 function safeRead(): StoredDiagnostic | null {
+  if (typeof window === 'undefined') return null;
+
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
@@ -37,6 +39,8 @@ function safeRead(): StoredDiagnostic | null {
 }
 
 function safeWrite(value: StoredDiagnostic): void {
+  if (typeof window === 'undefined') return;
+
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
   } catch {

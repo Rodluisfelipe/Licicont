@@ -44,6 +44,8 @@ export function decodeAnswers(encoded: string): Answers {
 
 /** URL absoluta al diagnóstico ya resuelto. */
 export function buildShareUrl(answers: Answers): string {
+  if (typeof window === 'undefined') return '';
+
   const url = new URL(window.location.origin);
   url.searchParams.set(SHARE_PARAM, encodeAnswers(answers));
   url.hash = 'diagnostico';
@@ -52,6 +54,9 @@ export function buildShareUrl(answers: Answers): string {
 
 /** Lee las respuestas de la URL actual, si vienen. */
 export function readAnswersFromUrl(): Answers | null {
+  // Durante el prerenderizado no hay URL del visitante.
+  if (typeof window === 'undefined') return null;
+
   try {
     const encoded = new URLSearchParams(window.location.search).get(SHARE_PARAM);
     if (!encoded) return null;
