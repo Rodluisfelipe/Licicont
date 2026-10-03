@@ -266,7 +266,7 @@ export const DIFFERENTIATORS = [
   {
     title: 'IA con habilidades supervisadas',
     description:
-      'Uso IA en la estructuración de licitaciones mediante Skills (habilidades) debidamente estructuradas y supervisadas, para que tu oferta sea 99% efectiva en la adjudicación.',
+      'Uso IA en la estructuración de licitaciones mediante Skills (habilidades) debidamente estructuradas y supervisadas, para que tu oferta llegue al 99% de cumplimiento de los requisitos del pliego.',
     icon: 'Sparkles',
   },
   {

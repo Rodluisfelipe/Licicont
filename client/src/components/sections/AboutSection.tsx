@@ -128,7 +128,7 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
                 tecnología, ferretería, tiquetes aéreos y obras civiles. Uso{' '}
                 <strong className="text-primary">Inteligencia Artificial</strong> en la estructuración de licitaciones
                 mediante <strong className="text-primary">Skills (habilidades) debidamente estructuradas y supervisadas</strong>,
-                para que tu oferta sea 99% efectiva en la adjudicación. Mi enfoque no es vender cursos grabados:
+                para que tu oferta llegue al 99% de cumplimiento de los requisitos del pliego. Mi enfoque no es vender cursos grabados:
                 es <strong className="text-primary">acompañarte con casos reales, paso a paso</strong>, hasta que ganes.
               </p>
                   </div>
