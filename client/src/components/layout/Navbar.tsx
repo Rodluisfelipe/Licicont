@@ -105,7 +105,7 @@ export default function Navbar({ onContact }: { onContact: () => void }) {
             <img
               src="/logo-full.png"
               alt="LICICONT — Licitaciones y Contratas"
-              className={`w-auto transition-all duration-300 ${scrolled ? 'h-11' : 'h-14'}`}
+              className={`w-auto transition-all duration-300 ${scrolled ? 'h-10 min-[360px]:h-11' : 'h-11 min-[360px]:h-14'}`}
               width="512"
               height="360"
             />
@@ -158,10 +158,10 @@ export default function Navbar({ onContact }: { onContact: () => void }) {
           </div>
 
           {/* Móvil: acción directa + menú */}
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-1 min-[360px]:gap-2 md:hidden">
             <button
               onClick={goToDiagnostic}
-              className="btn btn-primary min-h-[40px] px-4 py-2 text-xs"
+              className="btn btn-primary min-h-[40px] px-3 py-2 text-xs whitespace-nowrap min-[360px]:px-4"
             >
               Diagnóstico gratis
             </button>

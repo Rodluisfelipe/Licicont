@@ -234,6 +234,19 @@ body {
     font-size: 0.9375rem;
   }
 
+  /* Pantallas muy angostas: el texto del botón puede partirse antes que
+     empujar la página de lado. */
+  @media (max-width: 380px) {
+    .btn {
+      max-width: 100%;
+      white-space: normal;
+      text-align: center;
+    }
+    .btn-lg {
+      padding-inline: 1.15rem;
+    }
+  }
+
   .btn:active {
     transform: scale(0.975);
   }

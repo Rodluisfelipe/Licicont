@@ -47,7 +47,7 @@ export default function FloatingCTA({ onContact }: { onContact: () => void }) {
                   const el = document.querySelector('#diagnostico');
                   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }}
-                className="btn btn-primary flex-1 py-3.5"
+                className="btn btn-primary min-w-0 flex-1 py-3.5 max-[359px]:px-3 max-[359px]:text-sm"
               >
                 <Compass className="h-5 w-5" />
                 Descubre tu plan ideal
@@ -60,7 +60,7 @@ export default function FloatingCTA({ onContact }: { onContact: () => void }) {
               }}
               aria-label="Escríbeme por WhatsApp"
               className={`btn btn-whatsapp ${
-                inDiagnostic ? 'flex-1 py-3.5' : 'h-[46px] w-[46px] shrink-0 gap-0 p-0'
+                inDiagnostic ? 'min-w-0 flex-1 py-3.5 max-[359px]:px-3 max-[359px]:text-sm' : 'h-[46px] w-[46px] shrink-0 gap-0 p-0'
               }`}
             >
               <MessageCircle className="h-5 w-5" />
