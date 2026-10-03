@@ -34,7 +34,7 @@ export default function TestimonialsSection() {
   const isInView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
-    <section id="trayectoria" ref={ref} className="scroll-mt-20 bg-white py-16 sm:py-20">
+    <section id="trayectoria" ref={ref} className="bg-white py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <motion.div

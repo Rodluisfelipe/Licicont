@@ -244,7 +244,7 @@ export default function DiagnosticSection() {
   }, [saved, focusSection]);
 
   return (
-    <section id="diagnostico" ref={sectionRef} className="scroll-mt-20 bg-bg-alt">
+    <section id="diagnostico" ref={sectionRef} className="bg-bg-alt">
       <motion.div
         style={
           reducedMotion

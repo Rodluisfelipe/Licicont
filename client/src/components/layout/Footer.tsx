@@ -41,11 +41,11 @@ export default function Footer() {
                 <MapPin className="h-4 w-4 text-gold" />
                 Bogotá D.C., Colombia
               </div>
-              <a href="mailto:licitacionesycontratas@gmail.com" className="flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-gold">
+              <a href="mailto:licitacionesycontratas@gmail.com" className="flex items-center gap-2 py-1 text-sm text-white/60 transition-colors hover:text-gold">
                 <Mail className="h-4 w-4 text-gold" />
                 licitacionesycontratas@gmail.com
               </a>
-              <a href="https://wa.me/573023805967" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-gold">
+              <a href="https://wa.me/573023805967" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 py-1 text-sm text-white/60 transition-colors hover:text-gold">
                 <Phone className="h-4 w-4 text-gold" />
                 +57 302 380 5967
               </a>
@@ -56,12 +56,12 @@ export default function Footer() {
           {Object.entries(LINKS).map(([title, links]) => (
             <div key={title}>
               <h4 className="eyebrow eyebrow-light mb-4">{title}</h4>
-              <ul className="space-y-2">
+              <ul className="space-y-0.5">
                 {links.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-sm text-white/50 transition-colors hover:text-gold"
+                      className="inline-block py-1.5 text-sm text-white/50 transition-colors hover:text-gold"
                     >
                       {link.label}
                     </a>
@@ -85,7 +85,7 @@ export default function Footer() {
               href="https://wa.me/573023805967"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-white/40 transition-colors hover:text-gold"
+              className="inline-block py-2 text-xs text-white/40 transition-colors hover:text-gold"
             >
               WhatsApp
             </a>
@@ -93,7 +93,7 @@ export default function Footer() {
               href="https://www.instagram.com/licicont_?igsh=bHljb3B1aTB3M3p2&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-white/40 transition-colors hover:text-gold"
+              className="inline-block py-2 text-xs text-white/40 transition-colors hover:text-gold"
             >
               Instagram
             </a>
@@ -101,7 +101,7 @@ export default function Footer() {
               href="https://www.tiktok.com/@licicont_"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-white/40 transition-colors hover:text-gold"
+              className="inline-block py-2 text-xs text-white/40 transition-colors hover:text-gold"
             >
               TikTok
             </a>

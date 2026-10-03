@@ -6,7 +6,7 @@ import { CheckCircle, ChevronDown, Compass, MessageCircle } from 'lucide-react';
 
 /** Credenciales de un vistazo, antes de que nadie lea un párrafo. */
 const CREDENTIALS = [
-  { value: '+$200.000M', label: 'en procesos participados' },
+  { value: '+$200.000', label: 'millones COP en procesos' },
   { value: '10 años', label: 'en contratación estatal' },
   { value: '7 nichos', label: 'de especialización' },
 ];
@@ -29,7 +29,7 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
   return (
     <section id="sobre-mi" ref={ref} className="bg-white py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16 [&>*]:min-w-0">
           {/* Photo side */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
@@ -37,7 +37,7 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
             transition={{ duration: 0.7 }}
             className="relative flex justify-center lg:sticky lg:top-24"
           >
-            <Parallax distance={26} className="relative w-72 lg:w-80">
+            <Parallax distance={26} className="relative w-full max-w-72 lg:max-w-80">
               {/* Gold premium frame */}
               <div className="rounded-xl bg-gradient-to-br from-gold-light via-gold to-gold-dark p-[2px] shadow-lg">
                 <div className="rounded-[11px] bg-white p-[3px]">
@@ -81,13 +81,13 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
             </h2>
 
             {/* Credenciales rápidas */}
-            <div className="mt-6 grid grid-cols-3 gap-3">
+            <div className="mt-6 grid grid-cols-1 gap-2 min-[360px]:grid-cols-3 sm:gap-3">
               {CREDENTIALS.map((c) => (
-                <div key={c.label} className="rounded-lg border border-border bg-bg-alt px-3 py-3.5 text-center">
-                  <p className="tnum text-base font-semibold text-gold-dark sm:text-lg">
+                <div key={c.label} className="min-w-0 rounded-lg border border-border bg-bg-alt px-1.5 py-3.5 text-center sm:px-3">
+                  <p className="tnum text-[0.9375rem] leading-tight font-semibold text-gold-dark min-[400px]:text-base sm:text-lg">
                     {c.value}
                   </p>
-                  <p className="mt-1 text-[11px] leading-tight text-text-secondary">{c.label}</p>
+                  <p className="mt-1 text-[11px] leading-tight text-balance text-text-secondary">{c.label}</p>
                 </div>
               ))}
             </div>

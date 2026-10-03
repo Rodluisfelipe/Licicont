@@ -139,7 +139,7 @@ export default function ServicesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="snap-row mx-auto mb-10 flex max-w-3xl gap-1 overflow-x-auto rounded-lg border border-border bg-white p-1"
+          className="mx-auto mb-10 flex max-w-3xl flex-wrap justify-center gap-1 rounded-lg border border-border bg-white p-1"
         >
           {CATEGORIES.map((cat) => (
             <button
@@ -148,7 +148,7 @@ export default function ServicesSection() {
                 haptic('tick');
                 setActiveTab(cat.key);
               }}
-              className={`snap-item flex-1 rounded-md px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-all duration-300 ${
+              className={`min-h-[44px] flex-auto rounded-md px-3 py-2.5 text-sm font-medium whitespace-nowrap transition-all duration-300 sm:flex-1 sm:px-4 ${
                 activeTab === cat.key
                   ? 'bg-primary text-white shadow-sm'
                   : 'text-text-secondary hover:bg-bg-alt hover:text-primary'

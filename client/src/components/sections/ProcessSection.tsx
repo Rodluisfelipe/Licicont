@@ -195,7 +195,9 @@ export default function ProcessSection() {
     <section
       id="proceso"
       ref={sectionRef}
-      className="relative bg-white"
+      // Al llegar desde el menú, la sección queda anclada desde arriba (sin el
+      // margen del menú fijo), así las tarjetas entran completas en pantalla.
+      className="relative -scroll-mt-[76px] bg-white"
       style={{ height: `calc(100vh + ${distance}px)` }}
     >
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden py-16">

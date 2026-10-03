@@ -62,23 +62,23 @@ function MetricCard({ label, value, suffix, prefix = '', compact, icon, delay }:
       initial={{ opacity: 0, y: 16 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: DURATION.base, ease: EASE_OUT, delay: delay * 0.05 }}
-      className="card card-hover p-6 text-center"
+      className="card card-hover min-w-0 px-3 py-5 text-center sm:p-6"
     >
       <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-gold/10 text-gold">
         {icon}
       </div>
       <div className="mb-1">
-        <span className="text-lg font-semibold text-gold">{prefix}</span>
+        <span className={`font-semibold text-gold ${compact ? 'text-base sm:text-lg' : 'text-lg'}`}>{prefix}</span>
         <span
           className={`tnum font-semibold text-primary ${
-            compact ? 'text-2xl lg:text-[1.6rem]' : 'text-3xl lg:text-[2.25rem]'
+            compact ? 'text-xl min-[400px]:text-2xl xl:text-[1.6rem]' : 'text-3xl lg:text-[2.25rem]'
           }`}
         >
           <span ref={numRef}>{format(value)}</span>
         </span>
         <span className="ml-0.5 text-lg font-semibold text-gold">{suffix}</span>
       </div>
-      <p className="text-sm text-text-secondary">{label}</p>
+      <p className="text-[13px] leading-snug text-balance break-words hyphens-auto text-text-secondary sm:text-sm" lang="es">{label}</p>
     </motion.div>
   );
 }
@@ -116,7 +116,7 @@ export default function TickerSection() {
         </motion.div>
 
         {/* Metrics grid */}
-        <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 xl:grid-cols-6">
           {METRICS.map((metric, i) => (
             <MetricCard key={metric.label} {...metric} delay={i} />
           ))}

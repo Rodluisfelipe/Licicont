@@ -10,6 +10,7 @@ import {
 } from 'motion/react';
 import RevealText from '@/components/motion/RevealText';
 import { useHaptics } from '@/hooks/useHaptics';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import SnapCarousel from '@/components/motion/SnapCarousel';
 import { DURATION, EASE_OUT } from '@/lib/easing';
 import {
@@ -84,6 +85,10 @@ function PlanCard({
   const cardRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const { haptic } = useHaptics();
+  // En móvil las tarjetas viven en un carrusel horizontal: sin desfase vertical
+  // ni entrada diferida, que al deslizar se verían como tarjetas vacías o torcidas.
+  const isGrid = useMediaQuery('(min-width: 768px)');
+  const animated = isGrid && !reduced;
 
   const { scrollYProgress } = useScroll({
     target: cardRef,
@@ -97,8 +102,8 @@ function PlanCard({
   return (
     <motion.div
       ref={cardRef}
-      style={reduced ? undefined : { y: drift }}
-      initial={{ opacity: 0, y: 18 }}
+      style={animated ? { y: drift } : undefined}
+      initial={animated ? { opacity: 0, y: 18 } : false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: DURATION.base, ease: EASE_OUT, delay }}
@@ -353,7 +358,7 @@ export default function PlansSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-60px' });
   return (
-    <section id="planes" ref={ref} className="scroll-mt-20 bg-bg-alt py-16 sm:py-20">
+    <section id="planes" ref={ref} className="bg-bg-alt py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         {/* Encabezado */}
         <motion.div
@@ -393,6 +398,7 @@ export default function PlansSection() {
           <SnapCarousel
             labels={SERVICES.map((s) => `Ver ${s.name}`)}
             desktopClassName="md:grid md:grid-cols-2 md:items-start md:gap-6 md:overflow-visible md:px-0"
+            className="items-start"
           >
             {SERVICES.map((service, i) => (
               <PlanCard
