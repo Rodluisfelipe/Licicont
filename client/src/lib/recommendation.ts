@@ -43,21 +43,21 @@ const NEXT_STEPS: Record<ServiceId, string[]> = {
   proceso: [
     'Me envías el número del proceso o lo buscamos juntos',
     'Recibes el análisis con riesgos y señales de direccionamiento',
-    'Si el pliego es ganable, estructuramos y presentamos la oferta',
+    'Si el pliego es ganable, estructuro y presento la oferta',
   ],
   socio: [
     'Sesión de diagnóstico: capacidad, RUP, experiencia acreditable',
-    'Armamos el plan de licitación de los próximos 3 meses',
+    'Armo tu plan de licitación de los próximos 3 meses',
     'Arranco la operación: busco, analizo, estructuro y presento contigo',
   ],
   'alto-valor': [
-    'Validamos tu capacidad real de ejecución y respaldo financiero',
+    'Valido tu capacidad real de ejecución y respaldo financiero',
     'Te presento las oportunidades de alto valor que ya tengo detectadas',
     'Firmamos confidencialidad y estructuro la oferta: honorario de arranque + 1% solo si ganas',
   ],
   rup: [
     'Reviso tu documentación y te digo exactamente qué falta',
-    'Clasificamos tus códigos UNSPSC según los procesos que quieres ganar',
+    'Clasifico tus códigos UNSPSC según los procesos que quieres ganar',
     'Radico el trámite y te acompaño hasta que quede en firme',
   ],
 };

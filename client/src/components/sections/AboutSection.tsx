@@ -12,13 +12,13 @@ const CREDENTIALS = [
 ];
 
 const EXPERTISE = [
-  'Licitar en papeler\u00eda, cafeter\u00eda, aseo y ferreter\u00eda',
-  'Competir en tiquetes a\u00e9reos y turismo',
-  'Ganar contratos de tecnolog\u00eda y software',
-  'Competir en obras civiles e infraestructura',
-  'Analizar pliegos de condiciones',
-  'Estructurar ofertas econ\u00f3micas ganadoras',
-  'Ejecutar y liquidar contratos a satisfacci\u00f3n',
+  'Estructuro y presento ofertas de papelería, cafetería, aseo y ferretería',
+  'Compito por ti en tiquetes aéreos y turismo',
+  'Estructuro ofertas de tecnología y software',
+  'Preparo ofertas de obras civiles e infraestructura',
+  'Analizo pliegos y detecto direccionamiento',
+  'Armo ofertas económicas competitivas',
+  'Te acompaño hasta legalizar el contrato',
 ];
 
 export default function AboutSection({ onContact }: { onContact: () => void }) {
@@ -127,8 +127,8 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
                 Hoy me especializo en <strong className="text-primary">7 nichos clave</strong>: papelería, cafetería, aseo,
                 tecnología, ferretería, tiquetes aéreos y obras civiles. Uso{' '}
                 <strong className="text-primary">Inteligencia Artificial</strong> en la estructuración de licitaciones
-                mediante <strong className="text-primary">Skills (habilidades) debidamente estructuradas y supervisadas</strong>,
-                para que tu oferta llegue al 99% de cumplimiento de los requisitos del pliego. Mi enfoque no es vender cursos grabados:
+                con <strong className="text-primary">habilidades (Skills) estructuradas y supervisadas por mí</strong>:
+                la IA acelera; la revisión final es humana. Mi enfoque no es vender cursos grabados:
                 es <strong className="text-primary">acompañarte con casos reales, paso a paso</strong>, hasta que ganes.
               </p>
                   </div>
@@ -150,7 +150,7 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
 
             {/* What you'll learn */}
             <div className="mt-7 rounded-lg border border-border bg-bg-alt p-6">
-              <p className="eyebrow mb-4">En mis asesorías aprenderás a</p>
+              <p className="eyebrow mb-4">Lo que hago por ti</p>
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {EXPERTISE.map((item) => (
                   <div key={item} className="flex items-start gap-2">

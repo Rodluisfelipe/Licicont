@@ -17,8 +17,10 @@ import {
   ChevronDown,
   Compass,
   HandCoins,
+  Lock,
   MessageCircle,
   ShieldAlert,
+  ShieldCheck,
   Sparkles,
   Target,
   X,
@@ -32,6 +34,7 @@ const DIFF_ICONS: Record<string, LucideIcon> = {
   Target,
   Sparkles,
   ShieldAlert,
+  ShieldCheck,
   HandCoins,
 };
 
@@ -368,6 +371,14 @@ export default function PlansSection() {
             servicio dice qué incluye, qué no y cuánto cuesta.
           </p>
 
+          <p className="mx-auto mt-5 flex max-w-xl items-start gap-2.5 rounded-lg border border-gold/30 bg-white px-4 py-3 text-left text-sm leading-relaxed text-text-secondary">
+            <Lock className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
+            <span>
+              Antes de empezar firmamos acuerdo de confidencialidad y de prestación de
+              servicios. Tu información de costos, precios y proveedores no sale de aquí.
+            </span>
+          </p>
+
           <a
             href="#diagnostico"
             className="btn btn-outline mt-7 text-gold-dark hover:text-primary"
@@ -411,7 +422,7 @@ export default function PlansSection() {
             <span className="eyebrow eyebrow-center mb-3">La diferencia</span>
             <h3 className="display-2 text-primary">Por qué Licicont y no otro</h3>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+          <div className="grid gap-3 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-5">
             {DIFFERENTIATORS.map((diff) => {
               const Icon = DIFF_ICONS[diff.icon];
               return (

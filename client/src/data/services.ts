@@ -255,18 +255,18 @@ export function getService(id: ServiceId): Service {
   return SERVICE_MAP[id];
 }
 
-/** Los 4 diferenciadores del menú de servicios. */
+/** Los diferenciadores del menú de servicios. */
 export const DIFFERENTIATORS = [
   {
-    title: 'Especialista, no generalista',
+    title: 'Conozco tu rubro',
     description:
-      'Foco en 7 nichos: papelería, cafetería, aseo, tecnología, ferretería, tiquetes aéreos y obras civiles. Hablo su idioma técnico y sé qué exige cada pliego.',
+      'Trabajo cuatro familias de procesos: suministros (papelería, aseo, cafetería y ferretería), tecnología, tiquetes aéreos y obras civiles. Conozco los códigos UNSPSC, las fichas técnicas y lo que exige cada pliego.',
     icon: 'Target',
   },
   {
     title: 'IA con habilidades supervisadas',
     description:
-      'Uso IA en la estructuración de licitaciones mediante Skills (habilidades) debidamente estructuradas y supervisadas, para que tu oferta llegue al 99% de cumplimiento de los requisitos del pliego.',
+      'Uso IA con habilidades (Skills) estructuradas y supervisadas por mí para analizar pliegos, armar matrices de cumplimiento y encontrar el producto que cumple la ficha técnica. La IA acelera; la revisión final es humana.',
     icon: 'Sparkles',
   },
   {
@@ -276,9 +276,15 @@ export const DIFFERENTIATORS = [
     icon: 'ShieldAlert',
   },
   {
-    title: 'Comisión por éxito',
+    title: '1% y no 3%',
     description:
-      'Alineo mi pago con tu resultado. La mayoría solo cobra fijo — yo comparto el riesgo y el premio.',
+      'Cobro 1%. Otros cobran 3%. En un contrato de $500 millones son $10 millones de diferencia para ti.',
     icon: 'HandCoins',
+  },
+  {
+    title: 'La defensa va incluida',
+    description:
+      'Subsanaciones, respuestas a requerimientos y observaciones al informe de evaluación hacen parte del servicio hasta la adjudicación. No te cobro aparte por defender tu oferta.',
+    icon: 'ShieldCheck',
   },
 ] as const;

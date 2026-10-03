@@ -24,7 +24,7 @@ const CATEGORIES = [
         icon: <Radar className="h-7 w-7" strokeWidth={1.5} />,
         title: 'Papelería, Cafetería y Aseo',
         description:
-          'Tu puerta de entrada a la contratación pública. Nichos simples, de bajo riesgo, ideales para empezar en SECOP II. Te acompaño desde el primer pliego hasta la adjudicación.',
+          'Tu puerta de entrada a la contratación pública. Procesos frecuentes y de entrada rápida, ideales para empezar en SECOP II. En subasta inversa el margen se gana en el costo, por eso analizo el precio antes de que te presentes. Te acompaño desde el primer pliego hasta la adjudicación.',
       },
       {
         icon: <Wrench className="h-7 w-7" strokeWidth={1.5} />,
@@ -48,7 +48,7 @@ const CATEGORIES = [
         icon: <ShieldCheck className="h-7 w-7" strokeWidth={1.5} />,
         title: 'Propuestas Técnicas Especializadas',
         description:
-          'Estructuramos la narrativa técnica y el cumplimiento de requerimientos funcionales que los evaluadores buscan en licitaciones de TI.',
+          'Estructuro la narrativa técnica y el cumplimiento de requerimientos funcionales que los evaluadores buscan en licitaciones de TI.',
       },
     ],
   },
@@ -102,7 +102,7 @@ const CATEGORIES = [
         icon: <FolderSearch className="h-7 w-7" strokeWidth={1.5} />,
         title: 'Análisis de Precios y Competencia',
         description:
-          'Precios de referencia, históricos de adjudicación y competidores de tu sector. Estructuramos ofertas económicas ganadoras.',
+          'Precios de referencia, históricos de adjudicación y competidores de tu sector. Estructuro ofertas económicas ganadoras.',
       },
     ],
   },

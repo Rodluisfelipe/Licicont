@@ -6,10 +6,10 @@ const FAQS = [
   {
     question: '¿Qué es un Bróker de Licitaciones?',
     answer:
-      'Un bróker de licitaciones es un intermediario especializado que gestiona todo el ciclo de contratación pública por ti: identifica oportunidades en SECOP I y II, prepara las propuestas, realiza la revisión jurídica y acompaña el proceso hasta la adjudicación. Tú te enfocas en ejecutar, yo me encargo de que ganes.',
+      'Un bróker de licitaciones es un intermediario especializado que gestiona todo el ciclo de contratación pública por ti: identifica oportunidades en SECOP I y II, prepara las propuestas, realiza la revisión jurídica y acompaña el proceso hasta la adjudicación. Tú te enfocas en ejecutar; yo me encargo de que tu oferta llegue completa y defendida.',
   },
   {
-    question: '¿Qué tipo de empresas pueden contratar sus servicios?',
+    question: '¿Qué tipo de empresas pueden contratar tus servicios?',
     answer:
       'Trabajo con MiPymes, medianas empresas y contratistas enfocados en 7 nichos clave: papelería, cafetería, aseo, tecnología, ferretería, tiquetes aéreos y obras civiles. Si tu empresa vende suministros o ejecuta proyectos de infraestructura o TI, puedo ayudarte a ganar contratos con el Estado.',
   },
@@ -24,14 +24,14 @@ const FAQS = [
       'Los contratos de suministros como papelería, cafetería y aseo son la puerta de entrada perfecta a la contratación estatal. Son procesos de menor cuantía, con requisitos más simples y competencia manejable. Te permiten acumular experiencia en SECOP y escalar a contratos de tecnología u obras civiles donde están las comisiones grandes.',
   },
   {
-    question: '¿En qué regiones de Colombia operan?',
+    question: '¿En qué regiones de Colombia trabajas?',
     answer:
       'Tengo cobertura en los 32 departamentos de Colombia. Monitoreo procesos de alcaldías, gobernaciones, ministerios, institutos y entidades descentralizadas de todo el territorio nacional a través de SECOP I y II.',
   },
   {
     question: '¿Cómo empiezo a trabajar con LICICONT?',
     answer:
-      'Escríbeme por WhatsApp al +57 302 380 5967. Te contactaré para una reunión de diagnóstico gratuita donde evaluaremos juntos tu potencial en contratación estatal y diseñaremos una estrategia a tu medida.',
+      'Escríbeme por WhatsApp al +57 302 380 5967. Te contactaré para una reunión de diagnóstico gratuita donde evaluaremos juntos tu potencial en contratación estatal y diseñaré una estrategia a tu medida.',
   },
 ];
 
@@ -88,7 +88,7 @@ export default function FAQSection() {
         >
           <span className="eyebrow eyebrow-center mb-4">Preguntas Frecuentes</span>
           <h2 className="display-2 text-primary">
-            ¿Tiene preguntas? Tenemos respuestas
+            ¿Tienes preguntas? Aquí están las respuestas
           </h2>
         </motion.div>
 

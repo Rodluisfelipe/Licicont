@@ -20,7 +20,7 @@ const ROTATING_WORDS = [
 ];
 
 const STATS = [
-  { value: '+$200K', label: 'Millones COP en procesos', icon: <BarChart3 className="h-5 w-5" /> },
+  { value: '+$200.000', label: 'millones COP en procesos', icon: <BarChart3 className="h-5 w-5" /> },
   { value: '+10', label: 'Años de experiencia', icon: <TrendingUp className="h-5 w-5" /> },
   { value: '+100', label: 'Procesos participados', icon: <FileCheck className="h-5 w-5" /> },
   { value: '32', label: 'Departamentos cubiertos', icon: <MapPin className="h-5 w-5" /> },
@@ -90,7 +90,7 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
 
           {/* Headline with rotating word */}
           <h1 className="display-1 text-primary">
-            <RevealText text="Transformamos" delay={0.08} />
+            <RevealText text="Transformo" delay={0.08} />
             <br />
             <span className="relative inline-grid h-[1.2em] items-center overflow-hidden">
               {/* Invisible sizer — reserves width of longest word */}

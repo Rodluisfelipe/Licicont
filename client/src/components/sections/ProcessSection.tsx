@@ -12,7 +12,7 @@ const STEPS = [
     icon: <Search className="h-7 w-7" strokeWidth={1.5} />,
     title: 'Diagnóstico',
     description:
-      'Evaluamos tu empresa: experiencia, RUP, capacidad financiera, equipo y sectores de interés. Definimos tu perfil competitivo.',
+      'Evalúo tu empresa: experiencia, RUP, capacidad financiera, equipo y sectores de interés. Definimos juntos tu perfil competitivo.',
     tags: ['Análisis de capacidad', 'Revisión RUP', 'Perfil competitivo'],
   },
   {
@@ -20,7 +20,7 @@ const STEPS = [
     icon: <Crosshair className="h-7 w-7" strokeWidth={1.5} />,
     title: 'Inteligencia',
     description:
-      'Identificamos licitaciones alineadas con tu perfil. Analizamos competencia y precios de referencia. Decisión conjunta: Go o No-Go.',
+      'Identifico licitaciones alineadas con tu perfil. Analizo competencia y precios de referencia. Decisión conjunta: participar o no.',
     tags: ['Monitoreo SECOP', 'Análisis Go/No-Go', 'Benchmark precios'],
   },
   {
@@ -28,7 +28,7 @@ const STEPS = [
     icon: <FileCheck className="h-7 w-7" strokeWidth={1.5} />,
     title: 'Preparación',
     description:
-      'Estructuramos la propuesta técnica, económica y documental. Revisión jurídica rigurosa. Cumplimiento al 100% antes de radicar.',
+      'Estructuro la propuesta técnica, económica y documental. Revisión jurídica rigurosa. Cumplimiento al 100% antes de radicar.',
     tags: ['Propuesta técnica', 'Oferta económica', 'Revisión legal'],
   },
   {
@@ -36,7 +36,7 @@ const STEPS = [
     icon: <Trophy className="h-7 w-7" strokeWidth={1.5} />,
     title: 'Adjudicación',
     description:
-      'Acompañamos post-entrega: subsanaciones, aclaraciones, audiencias. Defendemos tu propuesta hasta lograr la adjudicación.',
+      'Te acompaño después de la entrega: subsanaciones, aclaraciones y audiencias. Defiendo tu propuesta hasta la adjudicación.',
     tags: ['Subsanaciones', 'Seguimiento', 'Defensa evaluadores'],
   },
 ];

@@ -7,7 +7,7 @@ const LINKS: Record<string, { label: string; href: string }[]> = {
   'Empieza aquí': [
     { label: 'Diagnóstico gratuito', href: '#diagnostico' },
     { label: 'Cómo trabajo', href: '#proceso' },
-    { label: 'Casos de éxito', href: '#resultados' },
+    { label: 'Trayectoria', href: '#trayectoria' },
     { label: 'Preguntas frecuentes', href: '#faq' },
   ],
 };

@@ -11,9 +11,10 @@ import {
 } from 'motion/react';
 
 const ENTITIES = [
+  'Findeter', 'Fiscalía General de la Nación', 'EAAB', 'UPTC', 'Gobernación de Cundinamarca',
   'MinTIC', 'INVÍAS', 'ANI', 'SENA', 'MinSalud',
   'Ecopetrol', 'MinDefensa', 'MinEducación', 'DIAN', 'ICBF',
-  'IDU Bogotá', 'Gobernación Antioquia', 'MinAmbiente', 'SECOP',
+  'IDU Bogotá', 'Gobernación Antioquia', 'MinAmbiente',
 ];
 
 /** Mantiene un valor dentro del rango [min, max) para el bucle infinito. */
@@ -62,7 +63,7 @@ export default function LogosSection() {
         viewport={{ once: true }}
         className="mb-6 text-center text-xs font-medium tracking-widest text-text-light uppercase"
       >
-        Hemos participado en procesos con entidades como
+        He participado en procesos con entidades como
       </motion.p>
 
       <div className="relative">
