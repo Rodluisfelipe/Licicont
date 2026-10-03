@@ -260,13 +260,13 @@ export const DIFFERENTIATORS = [
   {
     title: 'Especialista, no generalista',
     description:
-      'Foco en empresas de tecnología y dotación: hablo su idioma técnico y encuentro el producto que cumple la ficha.',
+      'Foco en 7 nichos: papelería, cafetería, aseo, tecnología, ferretería, tiquetes aéreos y obras civiles. Hablo su idioma técnico y sé qué exige cada pliego.',
     icon: 'Target',
   },
   {
-    title: 'Potenciado con IA propia',
+    title: 'IA con habilidades supervisadas',
     description:
-      'Herramientas propias que aceleran el análisis, la identificación de productos y las matrices de cumplimiento.',
+      'Uso IA en la estructuración de licitaciones mediante Skills (habilidades) debidamente estructuradas y supervisadas, para que tu oferta sea 99% efectiva en la adjudicación.',
     icon: 'Sparkles',
   },
   {

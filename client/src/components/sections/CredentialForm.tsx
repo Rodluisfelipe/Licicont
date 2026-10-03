@@ -12,6 +12,8 @@ const SECTORS = [
   'Cafetería & Alimentos',
   'Aseo & Servicios Generales',
   'Tecnología & Software',
+  'Ferretería & Materiales',
+  'Tiquetes Aéreos & Turismo',
   'Obras Civiles & Infraestructura',
   'Consultoría & Servicios Profesionales',
   'Salud & Farmacéutica',

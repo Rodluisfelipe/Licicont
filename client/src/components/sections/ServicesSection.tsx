@@ -4,11 +4,13 @@ import RevealText from '@/components/motion/RevealText';
 import { useHaptics } from '@/hooks/useHaptics';
 import {
   Radar,
+  Wrench,
+  Plane,
+  BadgeCheck,
   FileText,
   Scale,
   Users,
   BarChart3,
-  GraduationCap,
   FolderSearch,
   ShieldCheck,
 } from 'lucide-react';
@@ -25,10 +27,10 @@ const CATEGORIES = [
           'Tu puerta de entrada a la contratación pública. Nichos simples, de bajo riesgo, ideales para empezar en SECOP II. Te acompaño desde el primer pliego hasta la adjudicación.',
       },
       {
-        icon: <FolderSearch className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Análisis de Precios y Competencia',
+        icon: <Wrench className="h-7 w-7" strokeWidth={1.5} />,
+        title: 'Ferretería y Materiales',
         description:
-          'Inteligencia sobre precios de referencia, históricos de adjudicación y competidores en suministros. Estructuramos ofertas económicas ganadoras.',
+          'Herramientas, materiales de construcción, eléctricos e iluminación (UNSPSC segmentos 27, 30, 31 y 39). Procesos frecuentes en alcaldías, gobernaciones y entidades nacionales.',
       },
     ],
   },
@@ -47,6 +49,24 @@ const CATEGORIES = [
         title: 'Propuestas Técnicas Especializadas',
         description:
           'Estructuramos la narrativa técnica y el cumplimiento de requerimientos funcionales que los evaluadores buscan en licitaciones de TI.',
+      },
+    ],
+  },
+  {
+    key: 'tiquetes',
+    label: 'Tiquetes Aéreos',
+    services: [
+      {
+        icon: <Plane className="h-7 w-7" strokeWidth={1.5} />,
+        title: 'Tiquetes Aéreos y Turismo',
+        description:
+          'Suministro de tiquetes aéreos y servicios turísticos para entidades públicas (UNSPSC 78111500 y 90121500). Contratos recurrentes con ejecución por demanda.',
+      },
+      {
+        icon: <BadgeCheck className="h-7 w-7" strokeWidth={1.5} />,
+        title: 'Requisitos del Sector',
+        description:
+          'Estos pliegos suelen exigir afiliación IATA, GDS, Registro Nacional de Turismo y certificaciones de aerolíneas. Verifico que cumplas antes de presentarte.',
       },
     ],
   },
@@ -79,10 +99,10 @@ const CATEGORIES = [
           'Análisis cuantitativo de cada licitación: probabilidad de éxito, competencia esperada y ROI estimado. Solo licitas donde puedes ganar.',
       },
       {
-        icon: <GraduationCap className="h-7 w-7" strokeWidth={1.5} />,
-        title: 'Mentoría y Capacitación',
+        icon: <FolderSearch className="h-7 w-7" strokeWidth={1.5} />,
+        title: 'Análisis de Precios y Competencia',
         description:
-          'Acompañamiento personalizado con casos reales. Te enseño paso a paso a identificar, analizar, estructurar y ganar licitaciones en SECOP II.',
+          'Precios de referencia, históricos de adjudicación y competidores de tu sector. Estructuramos ofertas económicas ganadoras.',
       },
     ],
   },
@@ -110,7 +130,7 @@ export default function ServicesSection() {
             <RevealText text="Suministros para empezar, tecnología y obras para escalar" />
           </h2>
           <p className="lede mt-4">
-            Desde papelería y aseo hasta contratos de infraestructura de miles de millones.
+            Desde papelería, aseo, ferretería y tiquetes aéreos hasta contratos de infraestructura de miles de millones.
           </p>
         </motion.div>
 
@@ -119,7 +139,7 @@ export default function ServicesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="snap-row mx-auto mb-10 flex max-w-xl gap-1 overflow-x-auto rounded-lg border border-border bg-white p-1"
+          className="snap-row mx-auto mb-10 flex max-w-3xl gap-1 overflow-x-auto rounded-lg border border-border bg-white p-1"
         >
           {CATEGORIES.map((cat) => (
             <button

@@ -8,11 +8,12 @@ import { CheckCircle, ChevronDown, Compass, MessageCircle } from 'lucide-react';
 const CREDENTIALS = [
   { value: '+$200.000M', label: 'en procesos participados' },
   { value: '10 años', label: 'en contratación estatal' },
-  { value: '5 nichos', label: 'de especialización' },
+  { value: '7 nichos', label: 'de especialización' },
 ];
 
 const EXPERTISE = [
-  'Licitar en papeler\u00eda, cafeter\u00eda y aseo',
+  'Licitar en papeler\u00eda, cafeter\u00eda, aseo y ferreter\u00eda',
+  'Competir en tiquetes a\u00e9reos y turismo',
   'Ganar contratos de tecnolog\u00eda y software',
   'Competir en obras civiles e infraestructura',
   'Analizar pliegos de condiciones',
@@ -123,9 +124,11 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
                 perfecta para empresas que quieren empezar en SECOP de forma segura.
               </p>
               <p>
-                Hoy me especializo en <strong className="text-primary">5 nichos clave</strong>: papelería, cafetería, aseo,
-                tecnología y obras civiles. Integro <strong className="text-primary">Inteligencia Artificial</strong>{' '}
-                al análisis de pliegos y la estructuración de propuestas. Mi enfoque no es vender cursos grabados:
+                Hoy me especializo en <strong className="text-primary">7 nichos clave</strong>: papelería, cafetería, aseo,
+                tecnología, ferretería, tiquetes aéreos y obras civiles. Uso{' '}
+                <strong className="text-primary">Inteligencia Artificial</strong> en la estructuración de licitaciones
+                mediante <strong className="text-primary">Skills (habilidades) debidamente estructuradas y supervisadas</strong>,
+                para que tu oferta sea 99% efectiva en la adjudicación. Mi enfoque no es vender cursos grabados:
                 es <strong className="text-primary">acompañarte con casos reales, paso a paso</strong>, hasta que ganes.
               </p>
                   </div>

@@ -11,7 +11,7 @@ const FAQS = [
   {
     question: '¿Qué tipo de empresas pueden contratar sus servicios?',
     answer:
-      'Trabajo con MiPymes, medianas empresas y contratistas enfocados en 5 nichos clave: papelería, cafetería, aseo, tecnología y obras civiles. Si tu empresa vende suministros o ejecuta proyectos de infraestructura o TI, puedo ayudarte a ganar contratos con el Estado.',
+      'Trabajo con MiPymes, medianas empresas y contratistas enfocados en 7 nichos clave: papelería, cafetería, aseo, tecnología, ferretería, tiquetes aéreos y obras civiles. Si tu empresa vende suministros o ejecuta proyectos de infraestructura o TI, puedo ayudarte a ganar contratos con el Estado.',
   },
   {
     question: '¿Cuánto cuesta el servicio?',
