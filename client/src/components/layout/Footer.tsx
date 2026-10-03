@@ -21,19 +21,16 @@ export default function Footer() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="mb-4 flex items-center gap-3">
+            <div className="mb-5 inline-flex rounded-lg bg-white px-4 py-3">
               <img
-                src="/logo-mark.png"
-                alt="LICICONT"
-                className="h-11 w-11 rounded-full object-cover ring-1 ring-white/20"
+                src="/logo-full.png"
+                alt="LICICONT — Licitaciones y Contratas"
+                className="h-20 w-auto"
                 loading="lazy"
                 decoding="async"
-                width="44"
-                height="44"
+                width="512"
+                height="360"
               />
-              <span className="text-[15px] font-semibold tracking-[0.16em] text-white">
-                LICICONT
-              </span>
             </div>
             <p className="mb-5 max-w-xs text-sm leading-relaxed text-white/60">
               Asesoría especializada en licitaciones públicas y contratación estatal en Colombia. 

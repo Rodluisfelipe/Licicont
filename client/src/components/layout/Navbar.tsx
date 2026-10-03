@@ -103,15 +103,12 @@ export default function Navbar({ onContact }: { onContact: () => void }) {
           {/* Logo */}
           <a href="/" className="flex shrink-0 items-center gap-2.5 no-underline" aria-label="LICICONT — inicio">
             <img
-              src="/logo-mark.png"
-              alt="LICICONT — Asesoría en Licitaciones Públicas Colombia"
-              className={`w-auto transition-all duration-300 ${scrolled ? 'h-9' : 'h-11'}`}
-              width="44"
-              height="44"
+              src="/logo-full.png"
+              alt="LICICONT — Licitaciones y Contratas"
+              className={`w-auto transition-all duration-300 ${scrolled ? 'h-11' : 'h-14'}`}
+              width="512"
+              height="360"
             />
-            <span className="hidden text-[15px] font-semibold tracking-[0.14em] text-primary sm:block">
-              LICICONT
-            </span>
           </a>
 
           {/* Navegación */}
