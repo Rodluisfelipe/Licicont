@@ -48,7 +48,7 @@ export default function AboutSection({ onContact }: { onContact: () => void }) {
                       loading="lazy"
                       decoding="async"
                       width="320"
-                      height="400"
+                      height="320"
                     />
                   </div>
                 </div>

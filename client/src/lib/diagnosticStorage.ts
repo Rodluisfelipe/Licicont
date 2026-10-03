@@ -6,7 +6,9 @@
  * El canal que realmente entrega el lead sigue siendo WhatsApp.
  */
 
-import type { Answers } from '@/lib/recommendation';
+import { isComplete, type Answers } from '@/lib/recommendation';
+import { decodeAnswers, encodeAnswers } from '@/lib/shareLink';
+import { SERVICE_MAP } from '@/data/services';
 import type { LeadContact } from '@/lib/whatsapp';
 
 const STORAGE_KEY = 'licicont:diagnostico:v1';
@@ -32,7 +34,15 @@ function safeRead(): StoredDiagnostic | null {
     if (!raw) return null;
     const parsed = JSON.parse(raw) as StoredDiagnostic;
     if (!parsed || typeof parsed !== 'object' || !parsed.answers) return null;
-    return parsed;
+
+    // Un diagnóstico hecho con un menú anterior (servicios u opciones que ya no
+    // existen) no se puede retomar: se conserva el contacto y se descarta el plan.
+    const answers = decodeAnswers(encodeAnswers(parsed.answers));
+    const knownService = parsed.serviceId ? parsed.serviceId in SERVICE_MAP : true;
+    if (!isComplete(answers) || !knownService) {
+      return { ...parsed, answers: {}, serviceId: undefined, serviceName: undefined };
+    }
+    return { ...parsed, answers };
   } catch {
     return null;
   }

@@ -1,6 +1,4 @@
 import {
-  GraduationCap,
-  Radar,
   FileSearch,
   Handshake,
   Trophy,
@@ -10,8 +8,6 @@ import {
 import type { ServiceIcon as ServiceIconName } from '@/data/services';
 
 const ICONS: Record<ServiceIconName, LucideIcon> = {
-  GraduationCap,
-  Radar,
   FileSearch,
   Handshake,
   Trophy,

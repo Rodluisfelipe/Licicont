@@ -410,7 +410,7 @@ export default function DiagnosticResult({
             href="#planes"
             className="btn btn-lg text-gold-light hover:text-gold"
           >
-            Ver los 6 servicios
+            Ver los 4 servicios
             <ArrowRight className="h-4 w-4" />
           </a>
         </div>

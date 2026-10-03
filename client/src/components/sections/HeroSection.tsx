@@ -10,7 +10,14 @@ import RevealText from '@/components/motion/RevealText';
 import { DURATION, EASE_OUT } from '@/lib/easing';
 import { MessageCircle, TrendingUp, FileCheck, BarChart3, MapPin, Compass } from 'lucide-react';
 
-const ROTATING_WORDS = ['suministros', 'obras civiles', 'tecnología', 'papelería y aseo'];
+const ROTATING_WORDS = [
+  'suministros',
+  'obras civiles',
+  'tecnología',
+  'papelería y aseo',
+  'ferretería',
+  'tiquetes aéreos',
+];
 
 const STATS = [
   { value: '+$200K', label: 'Millones COP en procesos', icon: <BarChart3 className="h-5 w-5" /> },
@@ -74,9 +81,9 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
             className="mb-5"
           >
             <span className="eyebrow eyebrow-center">
-              <span className="sm:hidden">Suministros · Obras · Tecnología</span>
+              <span className="sm:hidden">Suministros · Obras · Tecnología · Tiquetes</span>
               <span className="hidden sm:inline">
-                Especialista en suministros, obras civiles y tecnología
+                Suministros, obras civiles, tecnología, ferretería y tiquetes aéreos
               </span>
             </span>
           </motion.div>
@@ -110,16 +117,21 @@ export default function HeroSection({ onContact }: { onContact: () => void }) {
           </h1>
 
           {/* Subtitle */}
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: DURATION.slow, ease: EASE_OUT, delay: 0.42 }}
-            className="lede mx-auto mt-6 max-w-xl"
+            className="mx-auto mt-6 max-w-xl"
           >
-            Te acompaño a venderle al Estado en SECOP II: papelería, cafetería, aseo,
-            tecnología y obras civiles. +10 años, análisis financiero e IA propia — y
-            cobro por resultado cuando ganas.
-          </motion.p>
+            <p className="text-lg font-semibold text-primary sm:text-xl">
+              Le vendo al Estado por ti — y cobro 1%, no 3%.
+            </p>
+            <p className="lede mt-3">
+              Estructuro y presento tus ofertas en SECOP II: papelería, aseo, cafetería,
+              tecnología, ferretería, tiquetes aéreos y obras civiles. +10 años y análisis
+              financiero propio. La comisión solo la pagas cuando ganas.
+            </p>
+          </motion.div>
 
           {/* CTAs */}
           <motion.div

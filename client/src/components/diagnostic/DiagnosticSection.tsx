@@ -22,12 +22,10 @@ import DiagnosticResult from './DiagnosticResult';
 type Phase = 'intro' | 'quiz' | 'analyzing' | 'result';
 
 /**
- * Atajos del menú: cada frase del cliente ("Quiero aprender a licitar") responde
+ * Atajos del menú: cada frase del cliente ("Necesito mi RUP en regla") responde
  * de entrada la pregunta de necesidad inmediata y arranca el cuestionario.
  */
 const VOICE_SHORTCUT: Record<ServiceId, string> = {
-  formacion: 'aprender',
-  radar: 'ver-oportunidades',
   proceso: 'un-proceso',
   socio: 'aliado',
   'alto-valor': 'oportunidad-grande',
@@ -64,7 +62,7 @@ function readInitialState(): InitialState {
 
 const ANALYZING_STEPS = [
   'Leyendo tu perfil de contratación…',
-  'Cruzando tus respuestas con los 6 servicios…',
+  'Cruzando tus respuestas con los 4 servicios…',
   'Ajustando el modelo de cobro a tu caso…',
   'Preparando tu ruta de arranque…',
 ];
@@ -281,7 +279,7 @@ export default function DiagnosticSection() {
               </span>
 
               <h2 className="display-1 text-white">
-                ¿Cuál de mis <span className="text-gold-light">6 servicios</span> es el
+                ¿Cuál de mis <span className="text-gold-light">4 servicios</span> es el
                 tuyo?
               </h2>
 

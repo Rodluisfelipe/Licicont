@@ -36,22 +36,10 @@ const TIE_BREAK: ServiceId[] = [
   'socio',
   'alto-valor',
   'proceso',
-  'radar',
-  'formacion',
   'rup',
 ];
 
 const NEXT_STEPS: Record<ServiceId, string[]> = {
-  formacion: [
-    'Agendamos una llamada de 15 minutos para ubicar tu punto de partida',
-    'Te reservo cupo en el próximo grupo (son reducidos y en vivo)',
-    'Sales con tu primera búsqueda en SECOP II hecha por ti mismo',
-  ],
-  radar: [
-    'Definimos tu perfil de afinidad: sector, ubicación, rango de valor',
-    'Configuro la vigilancia y recibes el primer barrido de oportunidades',
-    'Cada mes revisamos juntos qué procesos vale la pena atacar',
-  ],
   proceso: [
     'Me envías el número del proceso o lo buscamos juntos',
     'Recibes el análisis con riesgos y señales de direccionamiento',
@@ -60,12 +48,12 @@ const NEXT_STEPS: Record<ServiceId, string[]> = {
   socio: [
     'Sesión de diagnóstico: capacidad, RUP, experiencia acreditable',
     'Armamos el plan de licitación de los próximos 3 meses',
-    'Arranco la operación: vigilo, analizo, estructuro y presento contigo',
+    'Arranco la operación: busco, analizo, estructuro y presento contigo',
   ],
   'alto-valor': [
     'Validamos tu capacidad real de ejecución y respaldo financiero',
     'Te presento las oportunidades de alto valor que ya tengo detectadas',
-    'Negociamos la comisión según el tamaño del proceso y arrancamos',
+    'Firmamos confidencialidad y estructuro la oferta: honorario de arranque + 1% solo si ganas',
   ],
   rup: [
     'Reviso tu documentación y te digo exactamente qué falta',

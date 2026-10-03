@@ -35,6 +35,37 @@ const DIFF_ICONS: Record<string, LucideIcon> = {
   HandCoins,
 };
 
+function DetailList({
+  title,
+  items,
+  featured,
+}: {
+  title: string;
+  items: string[];
+  featured: boolean;
+}) {
+  return (
+    <>
+      <p className={`mt-5 text-sm font-semibold ${featured ? 'text-white' : 'text-primary'}`}>
+        {title}
+      </p>
+      <ul className="mt-2 space-y-2">
+        {items.map((item) => (
+          <li
+            key={item}
+            className={`flex gap-2.5 text-sm leading-relaxed ${
+              featured ? 'text-white/75' : 'text-text-secondary'
+            }`}
+          >
+            <span className="mt-[0.6em] h-1 w-1 shrink-0 rounded-full bg-gold" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
 function PlanCard({
   service,
   delay,
@@ -139,6 +170,13 @@ function PlanCard({
       </div>
 
       {/* Qué incluye */}
+      <p
+        className={`mb-2 text-[11px] font-semibold tracking-[0.12em] uppercase ${
+          featured ? 'text-white/50' : 'text-text-light'
+        }`}
+      >
+        {service.includesTitle ?? 'Incluye'}
+      </p>
       <ul className="space-y-2">
         {service.includes.slice(0, 3).map((item) => (
           <li
@@ -177,20 +215,82 @@ function PlanCard({
               ))}
             </ul>
 
-            {service.notIncludes.length > 0 && (
-              <ul className="mt-3 space-y-2">
-                {service.notIncludes.map((item) => (
-                  <li
-                    key={item}
-                    className={`flex gap-2.5 text-sm leading-relaxed ${
-                      featured ? 'text-white/40' : 'text-text-light'
+            {service.priceTables?.map((table) => (
+              <div key={table.title} className="mt-5">
+                <p className={`text-sm font-semibold ${featured ? 'text-white' : 'text-primary'}`}>
+                  {table.title}
+                </p>
+                {table.note && (
+                  <p
+                    className={`mt-1 text-xs leading-relaxed ${
+                      featured ? 'text-white/60' : 'text-text-secondary'
                     }`}
                   >
-                    <X className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={2} />
-                    <span>{item}</span>
-                  </li>
+                    {table.note}
+                  </p>
+                )}
+                <dl
+                  className={`mt-2.5 divide-y rounded-lg border text-xs ${
+                    featured ? 'divide-white/10 border-white/15' : 'divide-border border-border'
+                  }`}
+                >
+                  {table.rows.map((row) => (
+                    <div key={row.label} className="flex items-baseline justify-between gap-3 px-3 py-2">
+                      <dt className={featured ? 'text-white/70' : 'text-text-secondary'}>
+                        {row.label}
+                      </dt>
+                      <dd
+                        className={`tnum shrink-0 font-semibold ${
+                          featured ? 'text-gold-light' : 'text-primary'
+                        }`}
+                      >
+                        {row.price}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+                {table.footnotes?.map((note) => (
+                  <p
+                    key={note}
+                    className={`mt-1.5 text-xs leading-relaxed ${
+                      featured ? 'text-white/55' : 'text-text-light'
+                    }`}
+                  >
+                    {note}
+                  </p>
                 ))}
-              </ul>
+              </div>
+            ))}
+
+            {service.extra && (
+              <DetailList title={service.extra.title} items={service.extra.items} featured={featured} />
+            )}
+
+            {service.conditions && (
+              <DetailList title="Condiciones" items={service.conditions} featured={featured} />
+            )}
+
+            {service.notIncludes.length > 0 && (
+              <>
+                <p
+                  className={`mt-5 text-sm font-semibold ${featured ? 'text-white' : 'text-primary'}`}
+                >
+                  No incluye
+                </p>
+                <ul className="mt-2 space-y-2">
+                  {service.notIncludes.map((item) => (
+                    <li
+                      key={item}
+                      className={`flex gap-2.5 text-sm leading-relaxed ${
+                        featured ? 'text-white/40' : 'text-text-light'
+                      }`}
+                    >
+                      <X className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={2} />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </>
             )}
 
             <div
@@ -198,7 +298,9 @@ function PlanCard({
                 featured ? 'text-white/60' : 'text-text-secondary'
               }`}
             >
-              <span className="font-semibold text-gold-dark">Modelo de cobro: </span>
+              <span className="font-semibold text-gold-dark">
+                {service.id === 'proceso' ? 'Forma de pago: ' : 'Modelo de cobro: '}
+              </span>
               {service.pricingModel}
             </div>
             <p
@@ -259,11 +361,11 @@ export default function PlansSection() {
         >
           <span className="eyebrow eyebrow-center mb-4">El menú completo</span>
           <h2 className="display-2 text-primary">
-            <RevealText text="Seis formas de trabajar conmigo" />
+            <RevealText text="Cuatro formas de trabajar conmigo" />
           </h2>
           <p className="lede mt-4">
-            Desde aprender a licitar hasta que yo licite contigo cada mes. Cada servicio
-            dice qué incluye, qué no y cuánto cuesta.
+            Desde dejar tu RUP en regla hasta que yo licite contigo cada mes. Cada
+            servicio dice qué incluye, qué no y cuánto cuesta.
           </p>
 
           <a
@@ -276,20 +378,25 @@ export default function PlansSection() {
         </motion.div>
 
         {/* Escritorio: rejilla · Móvil: carrusel con parada en cada tarjeta */}
-        <SnapCarousel labels={SERVICES.map((s) => `Ver ${s.name}`)}>
-          {SERVICES.map((service, i) => (
-            <PlanCard
-              key={service.id}
-              service={service}
-              delay={(i % 3) * 0.08}
-              column={i % 3}
-            />
-          ))}
-        </SnapCarousel>
+        <div className="mx-auto max-w-5xl">
+          <SnapCarousel
+            labels={SERVICES.map((s) => `Ver ${s.name}`)}
+            desktopClassName="md:grid md:grid-cols-2 md:items-start md:gap-6 md:overflow-visible md:px-0"
+          >
+            {SERVICES.map((service, i) => (
+              <PlanCard
+                key={service.id}
+                service={service}
+                delay={(i % 2) * 0.08}
+                column={i % 2}
+              />
+            ))}
+          </SnapCarousel>
+        </div>
 
         <p className="mx-auto mt-8 max-w-3xl text-center text-xs leading-relaxed text-text-light">
-          Los valores son rangos de referencia. El precio final se cierra según el sector,
-          el tamaño del proceso y el alcance que necesites.
+          Valores en pesos colombianos. Abre “Ver detalle completo” en cada servicio para
+          ver precios por modalidad, condiciones y lo que no incluye.
         </p>
 
         {/* Diferenciadores */}

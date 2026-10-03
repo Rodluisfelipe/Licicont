@@ -23,7 +23,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="mb-4 flex items-center gap-3">
               <img
-                src="/logo.jpeg"
+                src="/logo-mark.png"
                 alt="LICICONT"
                 className="h-11 w-11 rounded-full object-cover ring-1 ring-white/20"
                 loading="lazy"
